@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Best Work Solution | Elite Virtual Assistant Agency</title>
+<meta name="description" content="Best Work Solution provides elite virtual assistant services. Hire top-tier remote professionals today."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+/* ── RESET & BASE ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#060610;color:#fff;overflow-x:hidden;line-height:1.6}
+::selection{background:#E91E8C;color:#fff}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#060610}
+::-webkit-scrollbar-thumb{background:#E91E8C;border-radius:99px}
+
+/* ── DESIGN TOKENS ── */
+:root{
+  --pink:#E91E8C;--pink-l:#FF6BB5;--pink-p:#FFD6EC;
+  --red:#C0143C;--red-d:#8B0E2B;
+  --bg:#060610;--bg2:#0C0C1E;--bg3:#121228;--bg4:#1A1A35;
+  --glass:rgba(255,255,255,0.03);
+  --glass-b:rgba(255,255,255,0.07);
+  --glass-hover:rgba(255,255,255,0.06);
+  --text:#FFFFFF;--text-m:#9090B8;--text-f:#4A4A6A;
+  --grad:linear-gradient(135deg,#E91E8C,#C0143C);
+  --grad-soft:linear-gradient(135deg,rgba(233,30,140,0.15),rgba(192,20,60,0.08));
+  --shadow-pink:0 0 80px rgba(233,30,140,0.2);
+  --shadow-card:0 20px 60px rgba(0,0,0,0.5);
+  --r:14px;--r-lg:22px;--r-xl:32px;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+
+/* ── UTILITY ── */
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 28px}
+.section{padding:110px 0}
+.gradient-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.15;margin-bottom:16px}
+.section-sub{color:var(--text-m);font-size:1rem;max-width:540px;line-height:1.8}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(233,30,140,0.08);border:1px solid rgba(233,30,140,0.25);color:var(--pink-l);font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:18px}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 30px;border-radius:99px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s var(--ease);border:none;outline:none;position:relative;overflow:hidden}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 4px 30px rgba(233,30,140,0.4)}
+.btn-primary::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#FF6BB5,#E91E8C);opacity:0;transition:opacity 0.3s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(233,30,140,0.6)}
+.btn-primary:hover::after{opacity:1}
+.btn-primary>*{position:relative;z-index:1}
+.btn-ghost{background:var(--glass);border:1px solid var(--glass-b);color:var(--text);backdrop-filter:blur(12px)}
+.btn-ghost:hover{border-color:rgba(233,30,140,0.4);background:rgba(233,30,140,0.08);transform:translateY(-2px)}
+
+/* ══════════════════════════════════════════════
+   PAGE 1 — LANDING
+══════════════════════════════════════════════ */
+#page-landing{
+  position:fixed;inset:0;z-index:500;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+#page-landing.exit{pointer-events:none}
+
+/* Aurora canvas sits behind everything */
+#aurora-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+
+/* noise */
+#page-landing::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:0.6}
+
+.landing-ui{position:relative;z-index:2;text-align:center;padding:0 20px}
+
+.landing-logo{
+  width:76px;height:76px;border-radius:18px;overflow:hidden;
+  margin:0 auto 22px;
+  border:1px solid rgba(233,30,140,0.35);
+  box-shadow:0 0 40px rgba(233,30,140,0.3);
+  animation:pop-in 0.8s 0.2s var(--ease) both;
+}
+.landing-logo img{width:100%;height:100%;object-fit:cover}
+.landing-logo-fallback{width:100%;height:100%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;font-size:1.5rem}
+
+.landing-eyebrow{
+  font-size:0.68rem;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;
+  color:rgba(255,107,181,0.85);margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  animation:fade-up 0.8s 0.4s var(--ease) both;
+}
+.landing-eyebrow::before,.landing-eyebrow::after{content:'';display:block;width:28px;height:1px;background:rgba(233,30,140,0.45)}
+
+.landing-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem,6vw,4.2rem);
+  font-weight:900;line-height:1.08;letter-spacing:-0.02em;
+  margin-bottom:16px;
+  animation:fade-up 0.9s 0.5s var(--ease) both;
+}
+.landing-title em{font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.landing-sub{
+  font-size:1rem;color:rgba(144,144,184,0.9);line-height:1.75;
+  max-width:420px;margin:0 auto 40px;
+  animation:fade-up 0.9s 0.65s var(--ease) both;
+}
+
+.landing-actions{
+  display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;
+  animation:fade-up 0.9s 0.8s var(--ease) both;
+}
+
+.landing-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-f);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:fade-up 1s 1.2s var(--ease) both;
+}
+.mouse-icon{width:20px;height:32px;border:1.5px solid var(--text-f);border-radius:99px;display:flex;align-items:flex-start;justify-content:center;padding-top:5px}
+.mouse-dot{width:2.5px;height:5px;background:var(--pink);border-radius:99px;animation:scroll-dot 1.6s ease-in-out infinite}
+@keyframes scroll-dot{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(6px);opacity:0.3}}
+
+/* landing stats row */
+.landing-stats{
+  display:flex;gap:36px;justify-content:center;margin-top:44px;
+  animation:fade-up 0.9s 0.95s var(--ease) both;
+}
+.l-stat{text-align:center}
+.l-stat-n{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.l-stat-l{font-size:0.7rem;color:var(--text-f);letter-spacing:0.08em;margin-top:3px}
+
+/* ── WIPE CANVAS ── */
+#wipe-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:600;pointer-events:none;display:none}
+
+/* ── ANIMATIONS ── */
+@keyframes pop-in{from{opacity:0;transform:scale(0.8) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══════════════════════════════════════════════
+   PAGE 2 — MAIN SITE
+══════════════════════════════════════════════ */
+#page-main{opacity:0;transform:translateY(20px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease);pointer-events:none}
+#page-main.visible{opacity:1;transform:translateY(0);pointer-events:all}
+
+/* Three.js particle canvas */
+#particles-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+/* floating orbs */
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.12;animation:orb-float linear infinite}
+.orb-1{width:700px;height:700px;background:radial-gradient(circle,var(--pink),transparent 70%);top:-300px;left:-200px;animation-duration:22s}
+.orb-2{width:600px;height:600px;background:radial-gradient(circle,var(--red),transparent 70%);bottom:0;right:-150px;animation-duration:28s;animation-delay:-8s}
+.orb-3{width:450px;height:450px;background:radial-gradient(circle,#6B21A8,transparent 70%);top:40%;left:40%;animation-duration:35s;animation-delay:-14s}
+@keyframes orb-float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-40px) scale(1.06)}66%{transform:translate(-30px,25px) scale(0.94)}}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:0.5}
+header,main,footer,#page-main{position:relative;z-index:2}
+
+/* ── NAVBAR ── */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:999;transition:all 0.4s var(--ease)}
+.navbar.scrolled{background:rgba(6,6,16,0.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--glass-b);box-shadow:0 4px 40px rgba(0,0,0,0.4)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+.nav-logo{display:flex;align-items:center;gap:11px}
+.nav-logo-img{width:36px;height:36px;border-radius:8px;object-fit:cover;border:1px solid rgba(233,30,140,0.3)}
+.nav-logo-text .logo-main{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-logo-text .logo-sub{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-f);margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-family:'Space Grotesk',sans-serif;font-size:0.85rem;font-weight:500;color:var(--text-m);letter-spacing:0.02em;transition:color 0.3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--grad);border-radius:99px;transition:width 0.3s var(--ease)}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:99px;transition:all 0.3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(6,6,16,0.97);backdrop-filter:blur(20px);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:36px}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Playfair Display',serif;font-size:1.9rem;color:#fff;transition:color 0.3s}
+.mobile-menu a:hover{color:var(--pink)}
+.mobile-close{position:absolute;top:22px;right:22px;font-size:1.4rem;color:var(--text-m);cursor:pointer;transition:color 0.3s}
+.mobile-close:hover{color:var(--pink)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:70px;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.hero-eyebrow .line{width:36px;height:1px;background:var(--grad)}
+.hero-eyebrow span{font-family:'Space Grotesk',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink-l)}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.2rem);font-weight:900;line-height:1.06;margin-bottom:24px;letter-spacing:-0.02em}
+.hero-title em{font-style:italic;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{color:var(--text-m);font-size:1.05rem;line-height:1.8;max-width:460px;margin-bottom:36px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px}
+.hero-stats{display:flex;gap:36px}
+.stat-number{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.stat-label{font-size:0.75rem;color:var(--text-f);margin-top:3px;letter-spacing:0.05em}
+.hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+.hero-photo-wrap{position:relative;width:340px}
+.hero-photo-frame{border-radius:var(--r-xl);overflow:hidden;border:1px solid rgba(233,30,140,0.25);box-shadow:0 0 100px rgba(233,30,140,0.18),var(--shadow-card);position:relative}
+.hero-photo-frame img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.hero-photo-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,16,0.65) 0%,transparent 55%);pointer-events:none}
+.hero-photo-tag{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(6,6,16,0.8);border:1px solid rgba(233,30,140,0.25);backdrop-filter:blur(16px);border-radius:12px;padding:11px 20px;text-align:center;white-space:nowrap;z-index:2}
+.hero-photo-tag .tag-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700}
+.hero-photo-tag .tag-role{font-size:0.65rem;color:var(--pink-l);letter-spacing:0.1em;text-transform:uppercase;margin-top:2px}
+.float-badge{position:absolute;background:rgba(12,12,30,0.85);border:1px solid var(--glass-b);backdrop-filter:blur(12px);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:9px;font-size:0.75rem;font-weight:600;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.4);animation:float-y 3s ease-in-out infinite}
+.float-badge i{color:var(--pink)}
+.fb-1{top:6%;right:-12%;animation-delay:0s}
+.fb-2{bottom:24%;left:-12%;animation-delay:1.5s}
+@keyframes float-y{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ── TICKER ── */
+.ticker{padding:24px 0;border-top:1px solid var(--glass-b);border-bottom:1px solid var(--glass-b);background:var(--bg2);overflow:hidden}
+.ticker-track{display:flex;gap:56px;animation:ticker-scroll 32s linear infinite;width:max-content}
+.ticker-item{display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-f);letter-spacing:0.1em;text-transform:uppercase}
+.ticker-item i{color:var(--pink);font-size:0.9rem}
+.ticker-dot{width:4px;height:4px;background:var(--red);border-radius:50%}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-img-bg{width:100%;aspect-ratio:4/5;background:var(--bg3);border-radius:var(--r-xl);border:1px solid var(--glass-b);overflow:hidden;position:relative}
+.about-img-bg img{width:100%;height:100%;object-fit:cover;object-position:top}
+.about-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(6,6,16,0.65) 100%);pointer-events:none}
+.about-visual{position:relative}
+.about-badge{position:absolute;bottom:-20px;right:-20px;background:var(--bg3);border:1px solid rgba(233,30,140,0.25);border-radius:var(--r);padding:18px 22px;box-shadow:var(--shadow-card)}
+.about-badge-number{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.about-badge-text{font-size:0.72rem;color:var(--text-m);margin-top:4px}
+.about-pillars{display:flex;flex-direction:column;gap:22px;margin-top:32px}
+.pillar{display:flex;gap:14px;align-items:flex-start}
+.pillar-icon{width:42px;height:42px;min-width:42px;border-radius:11px;background:rgba(233,30,140,0.08);border:1px solid rgba(233,30,140,0.18);display:flex;align-items:center;justify-content:center;color:var(--pink);font-size:0.95rem}
+.pillar h4{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.9rem;margin-bottom:3px}
+.pillar p{font-size:0.82rem;color:var(--text-m);line-height:1.6}
+
+/* ── SERVICES ── */
+.services-section{background:var(--bg2)}
+.services-header{text-align:center;margin-bottom:56px}
+.services-header .section-sub{margin:0 auto}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.service-card{
+  background:var(--glass);
+  border:1px solid var(--glass-b);
+  border-radius:var(--r-lg);
+  padding:32px 28px;
+  position:relative;overflow:hidden;
+  transition:all 0.4s var(--ease);
+  backdrop-filter:blur(8px);
+}
+.service-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(233,30,140,0.06),rgba(192,20,60,0.04));opacity:0;transition:opacity 0.4s}
+.service-card:hover{border-color:rgba(233,30,140,0.35);transform:translateY(-6px);box-shadow:0 24px 60px rgba(233,30,140,0.12)}
+.service-card:hover::before{opacity:1}
+.service-card-inner{position:relative;z-index:1}
+.service-num{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0.1;position:absolute;top:16px;right:20px;line-height:1}
+.service-icon{width:52px;height:52px;border-radius:13px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:20px;box-shadow:0 4px 20px rgba(233,30,140,0.35)}
+.service-card h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:10px}
+.service-card p{font-size:0.86rem;color:var(--text-m);line-height:1.7;margin-bottom:20px}
+.service-tags{display:flex;flex-wrap:wrap;gap:5px}
+.service-tag{font-size:0.65rem;font-weight:700;padding:3px 9px;background:rgba(233,30,140,0.08);border:1px solid rgba(233,30,140,0.18);border-radius:99px;color:var(--pink-l);letter-spacing:0.04em}
+.services-divider{grid-column:1/-1;display:flex;align-items:center;gap:14px;margin:10px 0}
+.services-divider span{font-family:'Space Grotesk',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-f);white-space:nowrap}
+.services-divider::before,.services-divider::after{content:'';flex:1;height:1px;background:var(--glass-b)}
+
+/* ── WHY US ── */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.why-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.why-card{background:var(--bg3);border:1px solid var(--glass-b);border-radius:var(--r);padding:24px 20px;transition:all 0.3s var(--ease)}
+.why-card:hover{border-color:rgba(233,30,140,0.3);box-shadow:0 8px 30px rgba(233,30,140,0.08);transform:translateY(-3px)}
+.why-card-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:14px}
+.why-card h4{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:7px}
+.why-card p{font-size:0.8rem;color:var(--text-m);line-height:1.65}
+.why-big-card{grid-column:span 2;background:linear-gradient(135deg,rgba(233,30,140,0.08),rgba(192,20,60,0.05));border-color:rgba(233,30,140,0.2)}
+.why-big-card .why-card-icon{background:var(--grad);color:#fff;box-shadow:0 4px 20px rgba(233,30,140,0.35)}
+.progress-bars{display:flex;flex-direction:column;gap:18px;margin-top:14px}
+.progress-meta{display:flex;justify-content:space-between;margin-bottom:7px}
+.progress-name{font-size:0.82rem;font-weight:500}
+.progress-pct{font-size:0.82rem;font-weight:700;color:var(--pink-l)}
+.progress-track{height:5px;background:var(--bg4);border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;border-radius:99px;background:var(--grad);transform-origin:left;transform:scaleX(0);animation:fill-bar 1.6s var(--ease) forwards}
+@keyframes fill-bar{to{transform:scaleX(1)}}
+
+/* ── TESTIMONIALS ── */
+.testi-section{background:var(--bg2)}
+.testi-header{text-align:center;margin-bottom:56px}
+.testi-header .section-sub{margin:0 auto}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi-card{
+  background:var(--glass);border:1px solid var(--glass-b);
+  border-radius:var(--r-lg);padding:28px;
+  transition:all 0.3s var(--ease);position:relative;overflow:hidden;
+  backdrop-filter:blur(8px);
+}
+.testi-card::before{content:'\201C';position:absolute;top:12px;right:20px;font-family:'Playfair Display',serif;font-size:4.5rem;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0.18;pointer-events:none}
+.testi-card:hover{border-color:rgba(233,30,140,0.3);transform:translateY(-4px);box-shadow:0 16px 50px rgba(233,30,140,0.1)}
+.testi-stars{display:flex;gap:3px;margin-bottom:14px}
+.testi-stars i{color:var(--pink);font-size:0.8rem}
+.testi-text{font-size:0.86rem;color:var(--text-m);line-height:1.75;margin-bottom:22px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:11px}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;color:#fff;flex-shrink:0}
+.testi-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.86rem}
+.testi-role{font-size:0.7rem;color:var(--text-f);margin-top:1px}
+
+/* ── FAQ ── */
+.faq-section{background:var(--bg)}
+.faq-header{text-align:center;margin-bottom:56px}
+.faq-header .section-sub{margin:0 auto}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:880px;margin:0 auto}
+.faq-item{background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--r);overflow:hidden;transition:border-color 0.3s}
+.faq-item.open{border-color:rgba(233,30,140,0.28)}
+.faq-question{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px 22px;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.9rem;transition:color 0.3s}
+.faq-question:hover{color:var(--pink-l)}
+.faq-icon{width:26px;height:26px;min-width:26px;border-radius:50%;background:rgba(233,30,140,0.08);border:1px solid rgba(233,30,140,0.18);display:flex;align-items:center;justify-content:center;color:var(--pink);font-size:0.65rem;transition:all 0.3s}
+.faq-item.open .faq-icon{background:var(--grad);border-color:transparent;color:#fff;transform:rotate(45deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;padding:0 22px;font-size:0.84rem;color:var(--text-m);line-height:1.75}
+.faq-item.open .faq-answer{max-height:200px;padding:0 22px 20px}
+
+/* ── CONTACT ── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start}
+.contact-details{display:flex;flex-direction:column;gap:18px}
+.contact-detail{display:flex;align-items:center;gap:14px}
+.contact-detail-icon{width:44px;height:44px;min-width:44px;border-radius:11px;background:rgba(233,30,140,0.08);border:1px solid rgba(233,30,140,0.18);display:flex;align-items:center;justify-content:center;color:var(--pink);font-size:1rem}
+.contact-detail-label{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-f);margin-bottom:2px}
+.contact-detail-value{font-weight:500;font-size:0.9rem}
+.contact-socials{display:flex;gap:10px;margin-top:32px}
+.social-link{width:42px;height:42px;border-radius:10px;background:var(--glass);border:1px solid var(--glass-b);display:flex;align-items:center;justify-content:center;color:var(--text-m);font-size:0.95rem;transition:all 0.3s}
+.social-link:hover{background:var(--grad);border-color:transparent;color:#fff;transform:translateY(-2px);box-shadow:0 4px 20px rgba(233,30,140,0.35)}
+.contact-form-wrap{background:var(--bg3);border:1px solid var(--glass-b);border-radius:var(--r-xl);padding:36px;backdrop-filter:blur(12px)}
+.contact-form-wrap h3{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.contact-form-wrap>p{font-size:0.84rem;color:var(--text-m);margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.form-group label{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-m)}
+.form-group input,.form-group select,.form-group textarea{background:var(--bg4);border:1.5px solid var(--glass-b);border-radius:10px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:0.88rem;color:#fff;transition:all 0.3s;outline:none;width:100%}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-f)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px rgba(233,30,140,0.1)}
+.form-group select option{background:var(--bg3)}
+.form-group textarea{resize:vertical;min-height:110px}
+.form-submit{width:100%;justify-content:center;font-size:0.95rem;padding:14px;border-radius:11px}
+.form-note{text-align:center;font-size:0.7rem;color:var(--text-f);margin-top:10px}
+.form-note i{color:var(--pink);margin-right:4px}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--bg3);border:1px solid rgba(233,30,140,0.35);border-radius:var(--r);padding:14px 22px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 40px rgba(0,0,0,0.5);z-index:9999;transform:translateY(130%);transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);max-width:360px}
+.toast.show{transform:translateY(0)}
+.toast-icon{width:38px;height:38px;min-width:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem}
+.toast.success .toast-icon{background:rgba(233,30,140,0.12);color:var(--pink)}
+.toast.error   .toast-icon{background:rgba(255,60,60,0.12);color:#ff4444}
+.toast-title{font-weight:700;font-size:0.85rem;margin-bottom:2px}
+.toast-msg{font-size:0.75rem;color:var(--text-m)}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid var(--glass-b);padding:56px 0 24px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.footer-brand .logo-main{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:3px}
+.footer-brand .logo-sub{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--text-f);margin-bottom:14px}
+.footer-brand p{font-size:0.82rem;color:var(--text-f);line-height:1.7;max-width:240px}
+.footer-logo-img{width:44px;height:44px;border-radius:10px;object-fit:cover;margin-bottom:10px;border:1px solid rgba(233,30,140,0.18)}
+.footer-socials{display:flex;gap:8px;margin-top:18px}
+.footer-col h5{font-family:'Space Grotesk',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-m);margin-bottom:18px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.footer-col ul a{font-size:0.84rem;color:var(--text-f);transition:all 0.3s}
+.footer-col ul a:hover{color:var(--pink-l);padding-left:4px}
+.footer-bottom{border-top:1px solid var(--glass-b);padding-top:22px;display:flex;align-items:center;justify-content:space-between}
+.footer-copy{font-size:0.76rem;color:var(--text-f)}
+.footer-copy span{color:var(--pink)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal a{font-size:0.76rem;color:var(--text-f);transition:color 0.3s}
+.footer-legal a:hover{color:var(--pink-l)}
+
+/* ── BACK TO TOP ── */
+.back-top{position:fixed;bottom:28px;left:28px;width:42px;height:42px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem;cursor:pointer;opacity:0;pointer-events:none;transition:all 0.3s;box-shadow:0 4px 20px rgba(233,30,140,0.4);z-index:999;border:none}
+.back-top.visible{opacity:1;pointer-events:all}
+.back-top:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(233,30,140,0.55)}
+
+/* ── CURSOR GLOW ── */
+.cursor-glow{position:fixed;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(233,30,140,0.05) 0%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:0;transition:left 0.08s,top 0.08s}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-l{opacity:0;transform:translateX(-36px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+.reveal-r{opacity:0;transform:translateX(36px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+.reveal-l.visible,.reveal-r.visible{opacity:1;transform:translateX(0)}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}
+.d4{transition-delay:0.4s}.d5{transition-delay:0.5s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .section{padding:72px 0}
+  .hero-grid,.about-grid,.why-grid,.contact-wrap{grid-template-columns:1fr;gap:44px}
+  .hero-visual{display:none}
+  .nav-links,.navbar .btn{display:none}
+  .hamburger{display:flex}
+  .services-grid,.why-cards,.testi-grid,.faq-grid,.form-row{grid-template-columns:1fr}
+  .why-big-card{grid-column:span 1}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .footer-bottom{flex-direction:column;gap:10px;text-align:center}
+  .hero-stats{gap:20px}
+  .about-badge{right:0;bottom:-10px}
+  .contact-form-wrap{padding:24px 18px}
+  .landing-stats{gap:24px}
+}
+@media(max-width:480px){
+  .hero-actions,.landing-actions{flex-direction:column}
+  .hero-actions .btn,.landing-actions .btn{width:100%;justify-content:center}
+  .hero-stats{flex-wrap:wrap}
+  .toast{left:14px;right:14px;bottom:14px}
+}
+</style>
+</head>
+<body>
+
+<!-- ████████ PAGE 1 — AURORA LANDING ████████ -->
+<div id="page-landing">
+  <canvas id="aurora-canvas"></canvas>
+  <div class="landing-ui">
+    <div class="landing-logo">
+      <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Logo%20Square.png"
+           alt="BWS Logo" crossorigin="anonymous"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <div class="landing-logo-fallback" style="display:none">BWS</div>
+    </div>
+    <div class="landing-eyebrow">Virtual Assistant Agency</div>
+    <h1 class="landing-title">Best Work<br/><em>Solution</em></h1>
+    <p class="landing-sub">Elite remote talent. Seamless support. Measurable growth — built for ambitious businesses that refuse to settle.</p>
+    <div class="landing-actions">
+      <button class="btn btn-primary" id="enterBtn">
+        <i class="fas fa-rocket"></i><span>Enter the Experience</span>
+      </button>
+      <button class="btn btn-ghost" id="learnBtn">
+        <span>Learn More</span><i class="fas fa-arrow-down"></i>
+      </button>
+    </div>
+    <div class="landing-stats">
+      <div class="l-stat"><div class="l-stat-n">200+</div><div class="l-stat-l">Clients Served</div></div>
+      <div class="l-stat"><div class="l-stat-n">98%</div><div class="l-stat-l">Satisfaction</div></div>
+      <div class="l-stat"><div class="l-stat-n">5+</div><div class="l-stat-l">Years</div></div>
+      <div class="l-stat"><div class="l-stat-n">500+</div><div class="l-stat-l">VAs Placed</div></div>
+    </div>
+  </div>
+  <div class="landing-hint">
+    <div class="mouse-icon"><div class="mouse-dot"></div></div>
+    <span>Move to interact</span>
+  </div>
+</div>
+
+<!-- Liquid wipe canvas -->
+<canvas id="wipe-canvas"></canvas>
+
+<!-- ████████ PAGE 2 — MAIN SITE ████████ -->
+<div id="page-main">
+
+<!-- Three.js particles -->
+<canvas id="particles-canvas"></canvas>
+<!-- Orbs -->
+<div class="orbs" aria-hidden="true">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+</div>
+
+<!-- Cursor glow -->
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="alert">
+  <div class="toast-icon"><i id="toastIcon" class="fas fa-check"></i></div>
+  <div><div class="toast-title" id="toastTitle"></div><div class="toast-msg" id="toastMsg"></div></div>
+</div>
+
+<!-- Back to top -->
+<button class="back-top" id="backTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<!-- NAVBAR -->
+<header>
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#home" class="nav-logo">
+          <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Logo%20Square.png"
+               alt="BWS" class="nav-logo-img" crossorigin="anonymous"
+               onerror="this.style.display='none'"/>
+          <div class="nav-logo-text">
+            <span class="logo-main">Best Work Solution</span>
+            <span class="logo-sub">Virtual Assistant Agency</span>
+          </div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why-us">Why Us</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" style="margin-left:16px">
+          <i class="fas fa-paper-plane"></i><span>Get Started</span>
+        </a>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="mobile-close" id="mobileClose"><i class="fas fa-times"></i></span>
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#services" onclick="closeMobile()">Services</a>
+    <a href="#why-us" onclick="closeMobile()">Why Us</a>
+    <a href="#testimonials" onclick="closeMobile()">Reviews</a>
+    <a href="#faq" onclick="closeMobile()">FAQ</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+    <a href="#contact" class="btn btn-primary" onclick="closeMobile()"><i class="fas fa-paper-plane"></i><span>Get Started</span></a>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero section" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="reveal-l">
+        <div class="hero-eyebrow"><div class="line"></div><span>Elite Virtual Assistant Agency</span></div>
+        <h1 class="hero-title">Grow Your Business With <em>World-Class</em> Remote Talent</h1>
+        <p class="hero-desc">We connect ambitious businesses with highly trained virtual assistants — so you can focus on what matters most while we handle the rest.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary"><i class="fas fa-rocket"></i><span>Hire a VA Today</span></a>
+          <a href="#services" class="btn btn-ghost"><span>Explore Services</span><i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-number">200+</div><div class="stat-label">Clients Served</div></div>
+          <div><div class="stat-number">98%</div><div class="stat-label">Satisfaction Rate</div></div>
+          <div><div class="stat-number">5+</div><div class="stat-label">Years of Excellence</div></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal-r">
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-frame">
+            <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Jave_s%20Picture.png"
+                 alt="Jave — Founder" crossorigin="anonymous"
+                 onerror="this.parentElement.style.background='var(--bg3)'"/>
+          </div>
+          <div class="hero-photo-tag">
+            <div class="tag-name">Jave</div>
+            <div class="tag-role">Founder & CEO · Best Work Solution</div>
+          </div>
+          <div class="float-badge fb-1"><i class="fas fa-shield-halved"></i> Vetted Professionals</div>
+          <div class="float-badge fb-2"><i class="fas fa-star"></i> 5-Star Rated Agency</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-item"><i class="fas fa-briefcase"></i> Administrative Support</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-hashtag"></i> Social Media Management</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-headset"></i> Customer Service</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-calendar-check"></i> Calendar & Email Management</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-store"></i> E-Commerce Support</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-calculator"></i> Bookkeeping</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-palette"></i> Web Design</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-filter"></i> Funnel Creation</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-robot"></i> Automations</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-briefcase"></i> Administrative Support</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-hashtag"></i> Social Media Management</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-headset"></i> Customer Service</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-calendar-check"></i> Calendar & Email Management</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-store"></i> E-Commerce Support</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-calculator"></i> Bookkeeping</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-palette"></i> Web Design</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-filter"></i> Funnel Creation</div><div class="ticker-dot"></div>
+    <div class="ticker-item"><i class="fas fa-robot"></i> Automations</div><div class="ticker-dot"></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal-l">
+        <div class="about-img-bg">
+          <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Jave_s%20Picture.png"
+               alt="Jave — Founder" crossorigin="anonymous"
+               onerror="this.style.display='none'"/>
+          <div class="about-img-overlay"></div>
+        </div>
+        <div class="about-badge"><div class="about-badge-number">500+</div><div class="about-badge-text">VAs Placed Worldwide</div></div>
+      </div>
+      <div class="reveal-r">
+        <div class="badge"><i class="fas fa-sparkles"></i> Our Story</div>
+        <h2 class="section-title">More Than an Agency.<br/><span class="gradient-text">A Career Partner.</span></h2>
+        <p class="section-sub">Best Work Solution was built on a single belief: that talented people deserve meaningful opportunities, and businesses deserve exceptional support. We bridge that gap — matching skilled virtual assistants with clients who value their work.</p>
+        <p class="section-sub" style="margin-top:14px">From day one, our founder set out to create not just a staffing agency, but a community where every VA is empowered to grow and every client experiences a seamless, professional partnership.</p>
+        <div class="about-pillars">
+          <div class="pillar"><div class="pillar-icon"><i class="fas fa-gem"></i></div><div><h4>Handpicked Talent</h4><p>Every VA undergoes rigorous screening and training before joining our roster.</p></div></div>
+          <div class="pillar"><div class="pillar-icon"><i class="fas fa-handshake"></i></div><div><h4>Dedicated Partnership</h4><p>We work alongside you — not just for you. Your success is our success.</p></div></div>
+          <div class="pillar"><div class="pillar-icon"><i class="fas fa-globe"></i></div><div><h4>Global Reach, Local Care</h4><p>We serve clients worldwide while maintaining the personal touch of a boutique agency.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section services-section" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="badge reveal"><i class="fas fa-layer-group"></i> What We Offer</div>
+      <h2 class="section-title reveal d1">Comprehensive VA Services<br/><span class="gradient-text">Tailored to Your Needs</span></h2>
+      <p class="section-sub reveal d2">From administrative operations to digital presence — our VAs are trained, tested, and ready to make your business thrive.</p>
+    </div>
+    <div class="services-grid">
+      <div class="services-divider reveal"><span>Core VA Services</span></div>
+      <div class="service-card reveal d1"><div class="service-num">01</div><div class="service-card-inner"><div class="service-icon"><i class="fas fa-briefcase"></i></div><h3>Administrative & Executive VA</h3><p>Streamline operations with a dedicated assistant managing your daily workflow with precision.</p><div class="service-tags"><span class="service-tag">Scheduling</span><span class="service-tag">Reporting</span><span class="service-tag">Research</span><span class="service-tag">Document Prep</span></div></div></div>
+      <div class="service-card reveal d2"><div class="service-num">02</div><div class="service-card-inner"><div class="service-icon"><i class="fas fa-hashtag"></i></div><h3>Social Media Management</h3><p>Grow your online presence with strategic content creation and performance-driven campaigns.</p><div class="service-tags"><span class="service-tag">Content Creation</span><span class="service-tag">Scheduling</span><span class="service-tag">Analytics</span><span class="service-tag">Engagement</span></div></div></div>
+      <div class="service-card reveal d3"><div class="service-num">03</div><div class="service-card-inner"><div class="service-icon"><i class="fas fa-headset"></i></div><h3>Customer Service & Support</h3><p>Deliver exceptional customer experiences with trained specialists representing your brand.</p><div class="service-tags"><span class="service-tag">Live Chat</span><span class="service-tag">Email Support</span><span class="service-tag">Ticketing</span><span class="service-tag">CRM</span></div></div></div>
+      <div class="service-card reveal d1"><div class="service-num">04</div><div class="service-card-inner"><div class="service-icon"><i class="fas fa-calendar-check"></i></div><h3>Email & Calendar Management</h3><p>Never miss a meeting again. Your VA keeps your inbox and schedule under complete control.</p><div class="service-tags"><span class="service-tag">Inbox Zero</span><span class="service-tag">Meetings</span><span class="service-tag">Follow-ups</span><span class="service-tag">Travel Planning</span></div></div></div>
+      <div class="service-card reveal d2"><div class="service-num">05</div><div class="service-card-inner"><div class="service-icon"><i class="fas fa-store"></i></div><h3>E-Commerce Support</h3><p>Manage your online store efficiently — from listings and orders to inquiries and inventory.</p><div class="service-tags"><span class="service-tag">Product Listings</span><span class="service-tag">Order Management</span><span class="service-tag">Shopify</span><span class="service-tag">Amazon</span></div></div></div>
+      <div class="service-card reveal d3"><div class="service-num">06</div><div class="service-card-inner"><div class="service-icon"><i class="fas fa-calculator"></i></div><h3>Bookkeeping & Finance</h3><p>Keep financials in order with reliable support — from expense tracking to invoicing.</p><div class="service-tags"><span class="service-tag">QuickBooks</span><span class="service-tag">Invoicing</span><span class="service-tag">Reconciliation</span><span class="service-tag">Payroll</span></div></div></div>
+      <div class="services-divider reveal" style="margin-top:18px"><span>Digital & Tech Services</span></div>
+      <div class="service-card reveal d1"><div class="service-num">07</div><div class="service-card-inner"><div class="service-icon"><i class="fas fa-palette"></i></div><h3>Web Design</h3><p>Beautiful, conversion-focused websites that turn visitors into clients — fully responsive and on-brand.</p><div class="service-tags"><span class="service-tag">WordPress</span><span class="service-tag">Wix</span><span class="service-tag">UI/UX</span><span class="service-tag">Responsive Design</span></div></div></div>
+      <div class="service-card reveal d2"><div class="service-num">08</div><div class="service-card-inner"><div class="service-icon"><i class="fas fa-filter"></i></div><h3>Funnel Creation</h3><p>High-converting sales funnels designed, written, and built to guide prospects from curiosity to purchase.</p><div class="service-tags"><span class="service-tag">ClickFunnels</span><span class="service-tag">GoHighLevel</span><span class="service-tag">Lead Capture</span><span class="service-tag">Upsells</span></div></div></div>
+      <div class="service-card reveal d3"><div class="service-num">09</div><div class="service-card-inner"><div class="service-icon"><i class="fas fa-robot"></i></div><h3>Automations</h3><p>Let your business run on autopilot with smart workflows that save you hours every single week.</p><div class="service-tags"><span class="service-tag">Zapier</span><span class="service-tag">Make</span><span class="service-tag">CRM Automation</span><span class="service-tag">Email Flows</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section" id="why-us">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <div class="badge reveal"><i class="fas fa-award"></i> Why Choose Us</div>
+        <h2 class="section-title reveal d1">The Best Work Solution <span class="gradient-text">Difference</span></h2>
+        <p class="section-sub reveal d2">We don't just fill positions — we build long-term partnerships on trust, quality, and measurable results.</p>
+        <div class="progress-bars reveal d3" style="margin-top:32px">
+          <div><div class="progress-meta"><span class="progress-name">Client Satisfaction</span><span class="progress-pct">98%</span></div><div class="progress-track"><div class="progress-fill" style="width:98%"></div></div></div>
+          <div><div class="progress-meta"><span class="progress-name">VA Placement Success</span><span class="progress-pct">96%</span></div><div class="progress-track"><div class="progress-fill" style="width:96%"></div></div></div>
+          <div><div class="progress-meta"><span class="progress-name">On-Time Delivery</span><span class="progress-pct">99%</span></div><div class="progress-track"><div class="progress-fill" style="width:99%"></div></div></div>
+          <div><div class="progress-meta"><span class="progress-name">VA Retention Rate</span><span class="progress-pct">92%</span></div><div class="progress-track"><div class="progress-fill" style="width:92%"></div></div></div>
+        </div>
+      </div>
+      <div class="why-cards">
+        <div class="why-card reveal d1"><div class="why-card-icon" style="background:rgba(233,30,140,0.08);border:1px solid rgba(233,30,140,0.18);color:var(--pink)"><i class="fas fa-magnifying-glass-chart"></i></div><h4>Rigorous Vetting</h4><p>All VAs pass skills assessments, background checks, and interviews before placement.</p></div>
+        <div class="why-card reveal d2"><div class="why-card-icon" style="background:rgba(192,20,60,0.08);border:1px solid rgba(192,20,60,0.18);color:#E05070"><i class="fas fa-clock"></i></div><h4>Fast Turnaround</h4><p>Get matched with your ideal VA within 48–72 hours. No long waiting times.</p></div>
+        <div class="why-card reveal d3"><div class="why-card-icon" style="background:rgba(233,30,140,0.08);border:1px solid rgba(233,30,140,0.18);color:var(--pink)"><i class="fas fa-shield-halved"></i></div><h4>Fully Managed</h4><p>We handle onboarding, training, and ongoing performance management.</p></div>
+        <div class="why-card reveal d4"><div class="why-card-icon" style="background:rgba(192,20,60,0.08);border:1px solid rgba(192,20,60,0.18);color:#E05070"><i class="fas fa-coins"></i></div><h4>Cost-Effective</h4><p>Save up to 70% on hiring costs vs. full-time in-house employees.</p></div>
+        <div class="why-card why-big-card reveal d5"><div class="why-card-icon"><i class="fas fa-trophy"></i></div><h4>Award-Winning Support</h4><p>Our dedicated account managers are available around the clock. We don't disappear after placement — we stay by your side every step of the way.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi-section" id="testimonials">
+  <div class="container">
+    <div class="testi-header">
+      <div class="badge reveal"><i class="fas fa-heart"></i> Client Love</div>
+      <h2 class="section-title reveal d1">What Our Clients <span class="gradient-text">Are Saying</span></h2>
+      <p class="section-sub reveal d2">Real results from real businesses that trusted Best Work Solution to level up their operations.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal d1"><div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testi-text">"Hiring through Best Work Solution was the best business decision I made this year. My VA handles everything and I finally have time to focus on growth."</p><div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Sarah M.</div><div class="testi-role">E-Commerce Founder, USA</div></div></div></div>
+      <div class="testi-card reveal d2"><div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testi-text">"The funnel they built for my coaching program increased my conversions by 3x in the first month. Their digital services are top-tier."</p><div class="testi-author"><div class="testi-avatar">J</div><div><div class="testi-name">James T.</div><div class="testi-role">Business Coach, UK</div></div></div></div>
+      <div class="testi-card reveal d3"><div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testi-text">"From day one, my VA felt like a true team member. The onboarding was seamless and I'm saving 20+ hours a week. My clients are happier than ever."</p><div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Angela R.</div><div class="testi-role">Real Estate Agent, Canada</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-section" id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <div class="badge reveal"><i class="fas fa-circle-question"></i> FAQ</div>
+      <h2 class="section-title reveal d1">Frequently Asked <span class="gradient-text">Questions</span></h2>
+      <p class="section-sub reveal d2">Everything you need to know before getting started.</p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal d1"><div class="faq-question" onclick="toggleFaq(this)">How quickly can I get a VA?<div class="faq-icon"><i class="fas fa-plus"></i></div></div><div class="faq-answer">Most clients are matched within 48–72 hours. We keep a pre-vetted roster ready to deploy quickly.</div></div>
+      <div class="faq-item reveal d2"><div class="faq-question" onclick="toggleFaq(this)">What industries do you serve?<div class="faq-icon"><i class="fas fa-plus"></i></div></div><div class="faq-answer">E-commerce, real estate, finance, healthcare, marketing, coaching, consulting, startups and more. Our VAs adapt to any industry.</div></div>
+      <div class="faq-item reveal d3"><div class="faq-question" onclick="toggleFaq(this)">Are your VAs trained and experienced?<div class="faq-icon"><i class="fas fa-plus"></i></div></div><div class="faq-answer">Every VA passes a multi-stage screening process including skills tests, software proficiency checks, and professional interviews.</div></div>
+      <div class="faq-item reveal d4"><div class="faq-question" onclick="toggleFaq(this)">What if I'm not satisfied?<div class="faq-icon"><i class="fas fa-plus"></i></div></div><div class="faq-answer">We offer a satisfaction guarantee. If you're unhappy with your VA, we'll find a replacement at no additional cost.</div></div>
+      <div class="faq-item reveal d1"><div class="faq-question" onclick="toggleFaq(this)">What hours do VAs work?<div class="faq-icon"><i class="fas fa-plus"></i></div></div><div class="faq-answer">VAs are flexible and can work in your time zone — part-time (20 hrs/week), full-time (40 hrs/week), or 24/7 coverage.</div></div>
+      <div class="faq-item reveal d2"><div class="faq-question" onclick="toggleFaq(this)">How is billing handled?<div class="faq-icon"><i class="fas fa-plus"></i></div></div><div class="faq-answer">Transparent monthly billing, no hidden fees. Packages scale up or down based on your needs at any time.</div></div>
+      <div class="faq-item reveal d3"><div class="faq-question" onclick="toggleFaq(this)">Do you offer Web Design & Funnels?<div class="faq-icon"><i class="fas fa-plus"></i></div></div><div class="faq-answer">Yes! We offer full Web Design, Sales Funnel Creation, and Automation services — bundled with VA support or as standalone projects.</div></div>
+      <div class="faq-item reveal d4"><div class="faq-question" onclick="toggleFaq(this)">What automation tools do you use?<div class="faq-icon"><i class="fas fa-plus"></i></div></div><div class="faq-answer">Zapier, Make, GoHighLevel, ActiveCampaign and more — building workflows that connect your tools and eliminate manual work.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px">
+      <div class="badge reveal"><i class="fas fa-envelope-open-text"></i> Let's Connect</div>
+      <h2 class="section-title reveal d1">Ready to Scale?<br/><span class="gradient-text">Let's Talk.</span></h2>
+      <p class="section-sub reveal d2" style="margin:0 auto">Tell us what you need and we'll find the perfect VA for your team — fast.</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="reveal-l">
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;margin-bottom:12px;line-height:1.2">We'd love to hear from you.</h2>
+        <p style="color:var(--text-m);font-size:0.92rem;line-height:1.75;margin-bottom:32px">Whether you're ready to hire or want to learn more, our team responds within 24 hours on business days.</p>
+        <div class="contact-details">
+          <div class="contact-detail"><div class="contact-detail-icon"><i class="fas fa-envelope"></i></div><div><div class="contact-detail-label">Email</div><div class="contact-detail-value">hello@bestworksolution.com</div></div></div>
+          <div class="contact-detail"><div class="contact-detail-icon"><i class="fas fa-phone"></i></div><div><div class="contact-detail-label">Phone / WhatsApp</div><div class="contact-detail-value">+63 977 249 7868</div></div></div>
+          <div class="contact-detail"><div class="contact-detail-icon"><i class="fas fa-clock"></i></div><div><div class="contact-detail-label">Response Time</div><div class="contact-detail-value">Within 24 hours (Mon–Fri)</div></div></div>
+        </div>
+        <div class="contact-socials">
+          <a href="https://www.facebook.com/bestworkssolutions" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/bestworks_solutions/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/best-works-solutions/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="reveal-r">
+        <div class="contact-form-wrap">
+          <h3>Send Us a Message</h3>
+          <p>Fill out the form and our team will reach out personally.</p>
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group"><label for="firstName">First Name</label><input type="text" id="firstName" placeholder="Jane" required/></div>
+              <div class="form-group"><label for="lastName">Last Name</label><input type="text" id="lastName" placeholder="Doe" required/></div>
+            </div>
+            <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" placeholder="jane@company.com" required/></div>
+            <div class="form-group"><label for="company">Company Name</label><input type="text" id="company" placeholder="Your Company (optional)"/></div>
+            <div class="form-group">
+              <label for="service">Service Interested In</label>
+              <select id="service" required>
+                <option value="" disabled selected>Select a service...</option>
+                <option>Administrative & Executive VA</option>
+                <option>Social Media Management</option>
+                <option>Customer Service & Support</option>
+                <option>Email & Calendar Management</option>
+                <option>E-Commerce Support</option>
+                <option>Bookkeeping & Finance</option>
+                <option>Web Design</option>
+                <option>Funnel Creation</option>
+                <option>Automations</option>
+                <option>Multiple Services / Not Sure Yet</option>
+              </select>
+            </div>
+            <div class="form-group"><label for="message">How Can We Help?</label><textarea id="message" placeholder="Tell us about your business needs..." required></textarea></div>
+            <button type="submit" class="btn btn-primary form-submit" id="submitBtn">
+              <i class="fas fa-paper-plane" id="submitIcon"></i><span id="submitText">Send Message</span>
+            </button>
+            <p class="form-note"><i class="fas fa-lock"></i> Your information is 100% private and never shared.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Logo%20Square.png"
+             alt="BWS Logo" class="footer-logo-img" crossorigin="anonymous"
+             onerror="this.style.display='none'"/>
+        <div class="logo-main">Best Work Solution</div>
+        <div class="logo-sub">Virtual Assistant Agency</div>
+        <p>Empowering businesses with world-class virtual assistant talent. Your growth is our mission.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/bestworkssolutions" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/bestworks_solutions/?hl=en" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/best-works-solutions/" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-link" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="#about">About Us</a></li><li><a href="#services">Our Services</a></li><li><a href="#why-us">Why Choose Us</a></li><li><a href="#testimonials">Reviews</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="#services">Admin VA</a></li><li><a href="#services">Social Media</a></li><li><a href="#services">Customer Service</a></li><li><a href="#services">Web Design</a></li><li><a href="#services">Funnels & Automation</a></li></ul></div>
+      <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:hello@bestworksolution.com">hello@bestworksolution.com</a></li><li><a href="tel:+639772497868">+63 977 249 7868</a></li><li><a href="#contact">Free Consultation</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; <span id="year"></span> <span>Best Work Solution</span>. All rights reserved.</p>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- end #page-main -->
+
+<script>
+/* ══════════════════════════════════════
+   AURORA WebGL — Landing Page
+══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('aurora-canvas');
+  const gl=c.getContext('webgl');
+  if(!gl)return;
+  const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
+  const fs=`
+  precision highp float;
+  uniform vec2 res;uniform float t;uniform vec2 mouse;
+  float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+  float noise(vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}
+  float fbm(vec2 p){float v=0.,a=0.5;for(int i=0;i<6;i++){v+=a*noise(p);p=p*2.1+vec2(1.7,9.2);a*=0.5;}return v;}
+  void main(){
+    vec2 uv=gl_FragCoord.xy/res;
+    float s=res.x/res.y;vec2 st=uv*vec2(s,1.);
+    vec2 m=mouse/res;float md=length(uv-m);
+    float rip=exp(-md*5.)*sin(md*22.-t*4.)*0.07;
+    vec2 q=vec2(fbm(st+t*0.04),fbm(st+vec2(5.2,1.3)+t*0.035));
+    vec2 r=vec2(fbm(st+2.*q+vec2(1.7,9.2)+t*0.03),fbm(st+2.*q+vec2(8.3,2.8)+t*0.025));
+    float f=fbm(st+2.*r+t*0.02)+rip;
+    vec3 c1=vec3(0.03,0.02,0.08);vec3 c2=vec3(0.52,0.03,0.18);vec3 c3=vec3(0.91,0.12,0.55);vec3 c4=vec3(0.07,0.03,0.14);vec3 c5=vec3(1.,0.4,0.7);
+    vec3 col=mix(c1,c2,clamp(f*2.,0.,1.));
+    col=mix(col,c3,clamp((f-.3)*2.5,0.,1.));
+    col=mix(col,c4,clamp((f-.6)*3.,0.,1.));
+    col=mix(col,c5,clamp((f-.8)*5.,0.,1.)*0.35);
+    col*=(1.-length((uv-.5)*1.7))*0.55+0.45;
+    col*=0.87+0.13*sin(t*.8);
+    gl_FragColor=vec4(col,1.);
+  }`;
+  function mk(tp,src){const s=gl.createShader(tp);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+  const prog=gl.createProgram();
+  gl.attachShader(prog,mk(gl.VERTEX_SHADER,vs));
+  gl.attachShader(prog,mk(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(prog);gl.useProgram(prog);
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const pl=gl.getAttribLocation(prog,'p');
+  gl.enableVertexAttribArray(pl);gl.vertexAttribPointer(pl,2,gl.FLOAT,false,0,0);
+  const uR=gl.getUniformLocation(prog,'res'),uT=gl.getUniformLocation(prog,'t'),uM=gl.getUniformLocation(prog,'mouse');
+  let W,H,mx=0,my=0;
+  function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;gl.viewport(0,0,W,H);}
+  resize();window.addEventListener('resize',resize);
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=H-e.clientY;});
+  document.addEventListener('touchmove',e=>{const t=e.touches[0];mx=t.clientX;my=H-t.clientY;},{passive:true});
+  function loop(ts){gl.uniform2f(uR,W,H);gl.uniform1f(uT,ts*.001);gl.uniform2f(uM,mx,my);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);requestAnimationFrame(loop);}
+  requestAnimationFrame(loop);
+})();
+
+/* ══════════════════════════════════════
+   LIQUID WIPE + PAGE TRANSITION
+══════════════════════════════════════ */
+const wipeCanvas=document.getElementById('wipe-canvas');
+const wCtx=wipeCanvas.getContext('2d');
+let wipeRunning=false;
+
+function resizeWipe(){wipeCanvas.width=window.innerWidth;wipeCanvas.height=window.innerHeight;}
+resizeWipe();window.addEventListener('resize',resizeWipe);
+
+function runWipe(cb){
+  if(wipeRunning)return;
+  wipeRunning=true;
+  wipeCanvas.style.display='block';
+  let p=0;
+  const W=wipeCanvas.width,H=wipeCanvas.height;
+  const BLOBS=20;
+  function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+  function frame(){
+    p+=0.016;const e=ease(Math.min(p,1));
+    wCtx.clearRect(0,0,W,H);
+    // pink wave
+    wCtx.fillStyle='#E91E8C';
+    for(let i=0;i<BLOBS;i++){
+      const ph=i/BLOBS,bx=(e-ph*.22)*W*1.4-W*.08;
+      const by=H*(.04+i/(BLOBS-1)*.92),r=H*.17*(.7+.3*Math.sin(i*2.3));
+      wCtx.beginPath();wCtx.ellipse(bx,by+Math.sin(i*1.8+p*9)*r*.18,r*1.9,r,0,0,Math.PI*2);wCtx.fill();
+    }
+    // crimson wave
+    wCtx.fillStyle='#C0143C';
+    for(let i=0;i<BLOBS;i++){
+      const ph=i/BLOBS,bx=(e-.07-ph*.18)*W*1.4-W*.08;
+      const by=H*(.07+i/(BLOBS-1)*.86),r=H*.13*(.6+.4*Math.sin(i*3.1));
+      wCtx.beginPath();wCtx.ellipse(bx,by+Math.sin(i*2.2+p*7)*r*.2,r*1.7,r,0,0,Math.PI*2);wCtx.fill();
+    }
+    // full dark fill
+    if(e>.72){
+      const a=(e-.72)/.28;
+      wCtx.fillStyle=`rgba(6,6,16,${a})`;wCtx.fillRect(0,0,W,H);
+    }
+    if(p<1)requestAnimationFrame(frame);
+    else setTimeout(cb,60);
+  }
+  requestAnimationFrame(frame);
+}
+
+function showMainSite(){
+  const landing=document.getElementById('page-landing');
+  const pm=document.getElementById('page-main');
+  landing.style.opacity='0';
+  landing.style.pointerEvents='none';
+  pm.style.display='block';
+  pm.style.opacity='0';
+  pm.style.transform='translateY(0)';
+  document.body.style.overflow='auto';
+  wipeCanvas.style.display='none';
+  wipeRunning=false;
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      pm.style.transition='opacity 0.6s ease';
+      pm.style.opacity='1';
+      pm.classList.add('visible');
+      setTimeout(()=>{ landing.style.display='none'; },400);
+    });
+  });
+}
+
+document.getElementById('enterBtn').addEventListener('click',()=>{
+  runWipe(showMainSite);
+});
+document.getElementById('learnBtn').addEventListener('click',()=>{
+  runWipe(()=>{
+    showMainSite();
+    setTimeout(()=>document.getElementById('about').scrollIntoView({behavior:'smooth'}),200);
+  });
+});
+
+/* ══════════════════════════════════════
+   THREE.JS PARTICLE FIELD — Main site
+══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('particles-canvas');
+  const renderer=new THREE.WebGLRenderer({canvas:c,alpha:true,antialias:false});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,.1,1000);
+  camera.position.z=5;
+  const COUNT=1400;
+  const geo=new THREE.BufferGeometry();
+  const pos=new Float32Array(COUNT*3);
+  const col=new Float32Array(COUNT*3);
+  for(let i=0;i<COUNT;i++){
+    pos[i*3]=(Math.random()-0.5)*22;
+    pos[i*3+1]=(Math.random()-0.5)*18;
+    pos[i*3+2]=(Math.random()-0.5)*14;
+    const t=Math.random();
+    // pink to purple palette
+    col[i*3]  =0.55+t*0.45;
+    col[i*3+1]=0.05+t*0.1;
+    col[i*3+2]=0.3+t*0.4;
+  }
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  const mat=new THREE.PointsMaterial({size:.045,vertexColors:true,transparent:true,opacity:0.55,sizeAttenuation:true});
+  const pts=new THREE.Points(geo,mat);
+  scene.add(pts);
+  function resize(){
+    const W=window.innerWidth,H=window.innerHeight;
+    renderer.setSize(W,H,false);
+    camera.aspect=W/H;camera.updateProjectionMatrix();
+  }
+  resize();window.addEventListener('resize',resize);
+  let mx=0,my=0;
+  document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-.5)*2;my=-(e.clientY/window.innerHeight-.5)*2;});
+  function loop(t){
+    requestAnimationFrame(loop);
+    pts.rotation.y=t*.00008+mx*.04;
+    pts.rotation.x=t*.00004+my*.025;
+    renderer.render(scene,camera);
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* ══════════════════════════════════════
+   NAVBAR / SCROLL
+══════════════════════════════════════ */
+const navbar=document.getElementById('navbar');
+const backTop=document.getElementById('backTop');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  navbar.classList.toggle('scrolled',y>40);
+  backTop.classList.toggle('visible',y>400);
+});
+backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ══════════════════════════════════════
+   MOBILE MENU
+══════════════════════════════════════ */
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');}
+
+// Replace inline onclick on FAQ with event delegation
+document.querySelectorAll('.faq-question').forEach(btn=>{
+  btn.removeAttribute('onclick');
+  btn.addEventListener('click',function(){toggleFaq(this);});
+});
+// Replace inline onclick on mobile menu links
+document.querySelectorAll('.mobile-menu a').forEach(a=>{
+  a.removeAttribute('onclick');
+  a.addEventListener('click',closeMobile);
+});
+
+/* ══════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════ */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+
+/* ══════════════════════════════════════
+   FAQ
+══════════════════════════════════════ */
+function toggleFaq(btn){
+  const item=btn.closest('.faq-item'),isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el=>el.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+/* ══════════════════════════════════════
+   CONTACT FORM
+══════════════════════════════════════ */
+const EMAILJS_PUBLIC_KEY='YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID='YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID='YOUR_TEMPLATE_ID';
+if(typeof emailjs!=='undefined')emailjs.init({publicKey:EMAILJS_PUBLIC_KEY});
+
+document.getElementById('contactForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const fn=document.getElementById('firstName').value.trim();
+  const ln=document.getElementById('lastName').value.trim();
+  const em=document.getElementById('email').value.trim();
+  const co=document.getElementById('company').value.trim();
+  const sv=document.getElementById('service').value;
+  const ms=document.getElementById('message').value.trim();
+  if(!fn||!ln||!em||!sv||!ms){showToast('error','Missing Fields','Please fill in all required fields.');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){showToast('error','Invalid Email','Please enter a valid email address.');return;}
+  const btn=document.getElementById('submitBtn');
+  document.getElementById('submitIcon').className='fas fa-spinner fa-spin';
+  document.getElementById('submitText').textContent='Sending...';
+  btn.disabled=true;
+  try{
+    if(typeof emailjs!=='undefined')
+      await emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,{from_name:`${fn} ${ln}`,from_email:em,reply_to:em,company:co||'Not provided',service:sv,message:ms});
+    showToast('success','Message Sent!',"We'll be in touch within 24 hours.");
+    document.getElementById('contactForm').reset();
+  }catch(err){
+    showToast('error','Send Failed','Something went wrong. Please email us directly.');
+  }finally{
+    btn.disabled=false;
+    document.getElementById('submitIcon').className='fas fa-paper-plane';
+    document.getElementById('submitText').textContent='Send Message';
+  }
+});
+
+function showToast(type,title,msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toastIcon').className=type==='success'?'fas fa-check':'fas fa-triangle-exclamation';
+  document.getElementById('toastTitle').textContent=title;
+  document.getElementById('toastMsg').textContent=msg;
+  t.className=`toast ${type}`;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),5000);
+}
+
+/* ══════════════════════════════════════
+   CURSOR GLOW
+══════════════════════════════════════ */
+const cg=document.getElementById('cursorGlow');
+let cgx=0,cgy=0,mx2=0,my2=0;
+document.addEventListener('mousemove',e=>{mx2=e.clientX;my2=e.clientY;});
+(function loop(){cgx+=(mx2-cgx)*.06;cgy+=(my2-cgy)*.06;cg.style.left=cgx+'px';cg.style.top=cgy+'px';requestAnimationFrame(loop);})();
+
+/* ══════════════════════════════════════
+   MISC
+══════════════════════════════════════ */
+document.getElementById('year').textContent=new Date().getFullYear();
+
+// Active nav link
+const sections=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id;});
+  navAs.forEach(a=>{a.style.color=a.getAttribute('href')===`#${cur}`?'var(--pink-l)':'';});
+});
+
+// Initially hide main, lock scroll
+document.body.style.overflow='hidden';
+document.getElementById('page-main').style.display='none';
+</script>
+</body>
+</html>

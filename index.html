@@ -177,11 +177,15 @@ header,main,footer{position:relative;z-index:2}
 .fb-2{bottom:24%;left:-12%;animation-delay:1.5s}
 
 /* ══ TICKER ══ */
-.ticker{padding:24px 0;border-top:1px solid var(--glass-b);border-bottom:1px solid var(--glass-b);background:var(--bg2);overflow:hidden}
+.ticker{padding:24px 0;border-top:1px solid var(--glass-b);border-bottom:1px solid var(--glass-b);background:var(--bg2);overflow:hidden;cursor:pointer}
+.ticker:hover .ticker-track{animation-play-state:paused}
 .ticker-track{display:flex;gap:56px;animation:ticker-scroll 32s linear infinite;width:max-content}
-.ticker-item{display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-f);letter-spacing:0.1em;text-transform:uppercase}
+.ticker-item{display:flex;align-items:center;gap:10px;white-space:nowrap;font-family:'Space Grotesk',sans-serif;font-size:0.8rem;font-weight:600;color:var(--text-f);letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;padding:4px 0}
+.ticker-item:hover{color:var(--pink-l)}
 .ticker-item i{color:var(--pink);font-size:0.9rem}
-.ticker-dot{width:4px;height:4px;background:var(--red);border-radius:50%}
+.ticker-item.ticker-clickable{cursor:pointer;padding:4px 8px;border-radius:6px;transition:all 0.2s}
+.ticker-item.ticker-clickable:hover{background:rgba(233,30,140,0.1);color:var(--pink-l);transform:translateY(-1px)}
+.ticker-dot{width:4px;height:4px;background:var(--red);border-radius:50%;flex-shrink:0}
 @keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ══ ABOUT ══ */
@@ -533,28 +537,28 @@ footer{background:var(--bg2);border-top:1px solid var(--glass-b);padding:56px 0 
   </section>
 
   <!-- TICKER -->
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <div class="ticker-item"><i class="fas fa-briefcase"></i>Administrative Support</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-hashtag"></i>Social Media Management</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-headset"></i>Customer Service</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-calendar-check"></i>Calendar & Email</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-store"></i>E-Commerce Support</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-calculator"></i>Bookkeeping</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-palette"></i>Web Design</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-filter"></i>Funnel Creation</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-robot"></i>Automations</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-bolt"></i>7-Day Website · $999</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-briefcase"></i>Administrative Support</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-hashtag"></i>Social Media Management</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-headset"></i>Customer Service</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-calendar-check"></i>Calendar & Email</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-store"></i>E-Commerce Support</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-calculator"></i>Bookkeeping</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-palette"></i>Web Design</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-filter"></i>Funnel Creation</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-robot"></i>Automations</div><div class="ticker-dot"></div>
-      <div class="ticker-item"><i class="fas fa-bolt"></i>7-Day Website · $999</div><div class="ticker-dot"></div>
+  <div class="ticker" id="tickerBar" aria-label="Services ticker">
+    <div class="ticker-track" id="tickerTrack">
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-briefcase"></i>Administrative Support</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-hashtag"></i>Social Media Management</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-headset"></i>Customer Service</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-calendar-check"></i>Calendar & Email</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-store"></i>E-Commerce Support</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-calculator"></i>Bookkeeping</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-palette"></i>Web Design</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-filter"></i>Funnel Creation</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-robot"></i>Automations</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="7day" style="color:var(--pink-l)"><i class="fas fa-bolt"></i>7-Day Website · $999</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-briefcase"></i>Administrative Support</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-hashtag"></i>Social Media Management</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-headset"></i>Customer Service</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-calendar-check"></i>Calendar & Email</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-store"></i>E-Commerce Support</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-calculator"></i>Bookkeeping</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-palette"></i>Web Design</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-filter"></i>Funnel Creation</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="services"><i class="fas fa-robot"></i>Automations</div><div class="ticker-dot"></div>
+      <div class="ticker-item ticker-clickable" data-action="7day" style="color:var(--pink-l)"><i class="fas fa-bolt"></i>7-Day Website · $999</div><div class="ticker-dot"></div>
     </div>
   </div>
 
@@ -698,7 +702,7 @@ footer{background:var(--bg2);border-top:1px solid var(--glass-b);padding:56px 0 
           <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.5vw,2rem);font-weight:700;margin-bottom:12px;line-height:1.2">We'd love to hear from you.</h2>
           <p style="color:var(--text-m);font-size:0.92rem;line-height:1.75;margin-bottom:32px">Ready to hire or just curious? Our team responds within 24 hours on business days.</p>
           <div class="contact-details">
-            <div class="contact-detail"><div class="contact-detail-icon"><i class="fas fa-envelope"></i></div><div><div class="contact-detail-label">Email</div><div class="contact-detail-value">bestworkssolution@gmail.com</div></div></div>
+            <div class="contact-detail"><div class="contact-detail-icon"><i class="fas fa-envelope"></i></div><div><div class="contact-detail-label">Email</div><div class="contact-detail-value">hello@bestworksolution.com</div></div></div>
             <div class="contact-detail"><div class="contact-detail-icon"><i class="fas fa-phone"></i></div><div><div class="contact-detail-label">Phone / WhatsApp</div><div class="contact-detail-value">+63 977 249 7868</div></div></div>
             <div class="contact-detail"><div class="contact-detail-icon"><i class="fas fa-clock"></i></div><div><div class="contact-detail-label">Response Time</div><div class="contact-detail-value">Within 24 hours (Mon–Fri)</div></div></div>
           </div>
@@ -761,7 +765,7 @@ footer{background:var(--bg2);border-top:1px solid var(--glass-b);padding:56px 0 
         </div>
         <div class="footer-col"><h5>Company</h5><ul><li><a href="#about">About Us</a></li><li><a href="#services">Our Services</a></li><li><a href="#why-us">Why Choose Us</a></li><li><a href="#testimonials">Reviews</a></li><li><a href="#contact">Contact</a></li></ul></div>
         <div class="footer-col"><h5>Services</h5><ul><li><a href="#services">Admin VA</a></li><li><a href="#services">Social Media</a></li><li><a href="#services">Customer Service</a></li><li><a href="#services">Web Design</a></li><li><a id="footer7dayBtn" href="#">7-Day Website</a></li></ul></div>
-        <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:bestworkssoluution@gmail.com">bestworkssoluution@gmail.com</a></li><li><a href="tel:+639772497868">+63 977 249 7868</a></li><li><a href="#contact">Free Consultation</a></li></ul></div>
+        <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:hello@bestworksolution.com">hello@bestworksolution.com</a></li><li><a href="tel:+639772497868">+63 977 249 7868</a></li><li><a href="#contact">Free Consultation</a></li></ul></div>
       </div>
       <div class="footer-bottom">
         <p class="footer-copy">&copy; <span id="year"></span> <span>Best Work Solution</span>. All rights reserved.</p>
@@ -1034,6 +1038,20 @@ function initParticles(){
   document.addEventListener('mousemove',e=>{mx2=(e.clientX/innerWidth-.5)*2;my2=-(e.clientY/innerHeight-.5)*2;});
   (function loop(t){requestAnimationFrame(loop);pts.rotation.y=t*.00008+mx2*.04;pts.rotation.x=t*.00004+my2*.025;renderer.render(scene,camera);})();
 }
+
+/* ════════════════════════════════════════
+   TICKER INTERACTIONS
+════════════════════════════════════════ */
+document.getElementById('tickerBar').addEventListener('click',function(e){
+  const item=e.target.closest('.ticker-clickable');
+  if(!item)return;
+  const action=item.dataset.action;
+  if(action==='7day'){open7Day(e);}
+  else if(action==='services'){
+    const el=document.getElementById('services');
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  }
+});
 
 /* ════════════════════════════════════════
    SCROLL REVEAL

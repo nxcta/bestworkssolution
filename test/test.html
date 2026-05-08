@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Best Work Solution - Premium Pink Experience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    :root{
+      --bg:#120715;
+      --bg-2:#1a0b1f;
+      --bg-3:#221029;
+      --line:rgba(255,182,213,.18);
+      --text:#ffe6f1;
+      --muted:#f0bfd6;
+      --pink:#ff82bb;
+      --pink-2:#ff5fa7;
+      --pink-3:#ffc8e5;
+      --good:#57f0c6;
+      --radius:20px;
+      --shadow:0 20px 60px rgba(255, 58, 154, .22);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      overflow-x:hidden;
+    }
+    .bg-canvas{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      z-index:-2;
+    }
+    .grain{
+      position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.25;
+      background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.12) 1px,transparent 0);
+      background-size:3px 3px;
+      mix-blend-mode:soft-light;
+    }
+    .container{width:min(1180px,92%);margin:0 auto}
+    .pill{
+      display:inline-flex;align-items:center;gap:10px;
+      border:1px solid rgba(255,169,212,.28);
+      background:rgba(255,137,192,.12);
+      color:#ffd8eb;
+      padding:8px 13px;border-radius:999px;font-size:.8rem;
+      backdrop-filter: blur(12px);
+    }
+    .btn{
+      border:0;cursor:pointer;border-radius:14px;
+      padding:12px 18px;font-weight:700;color:#fff;
+      transition:.25s ease;display:inline-flex;align-items:center;gap:9px;
+    }
+    .btn-primary{
+      background:linear-gradient(120deg,var(--pink),var(--pink-2));
+      box-shadow:0 10px 30px rgba(255,95,167,.3);
+    }
+    .btn-primary:hover{transform:translateY(-2px) scale(1.01)}
+    .btn-ghost{
+      background:rgba(255,130,187,.12);border:1px solid rgba(255,130,187,.3);color:#ffd8eb;
+    }
+    header{
+      position:sticky;top:0;z-index:60;
+      backdrop-filter: blur(12px);
+      background:linear-gradient(180deg,rgba(20,8,23,.8),rgba(20,8,23,.45));
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+    .brand img{width:42px;height:42px;border-radius:12px;object-fit:cover}
+    .brand h1{margin:0;font-size:1.05rem;line-height:1}
+    .brand span{font-size:.73rem;color:var(--muted)}
+    .nav-links{display:flex;align-items:center;gap:18px}
+    .nav-links a{color:#ffd3e9;text-decoration:none;font-size:.92rem;opacity:.9}
+    .hero{
+      min-height:92vh;display:grid;place-items:center;padding:70px 0 40px;position:relative;
+    }
+    .hero-grid{
+      display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;
+    }
+    .headline{
+      font-family:"Playfair Display",serif;
+      font-size:clamp(2.1rem,4.8vw,4.5rem);
+      line-height:1.05;margin:16px 0 12px;
+      letter-spacing:-.02em;
+    }
+    .headline .accent{
+      background:linear-gradient(120deg,#ffd6ea,#ff8ec3 42%,#ff4e9f);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    .sub{color:var(--muted);max-width:620px;line-height:1.7}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .hero-card{
+      border:1px solid var(--line);
+      background:linear-gradient(160deg,rgba(255,146,201,.14),rgba(255,146,201,.05));
+      border-radius:24px;padding:24px;
+      box-shadow:var(--shadow);
+      position:relative;overflow:hidden;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;inset:-30% -10% auto -10%;
+      height:220px;
+      background:radial-gradient(circle at center,rgba(255,177,218,.4),transparent 65%);
+      animation:floatGlow 8s ease-in-out infinite;
+    }
+    @keyframes floatGlow{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(24px)}
+    }
+    .kpi{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px;
+    }
+    .kpi div{
+      border:1px solid var(--line);border-radius:14px;padding:11px;
+      background:rgba(255,164,211,.08);
+    }
+    .kpi strong{display:block;font-size:1.12rem}
+    .sec{padding:86px 0}
+    .sec-head{text-align:center;max-width:780px;margin:0 auto 42px}
+    .sec-title{
+      margin:12px 0 10px;font-family:"Playfair Display",serif;
+      font-size:clamp(1.6rem,3vw,2.7rem);line-height:1.15;
+    }
+    .sec-sub{color:var(--muted);line-height:1.75}
+    .glass{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,142,195,.09),rgba(255,142,195,.03));
+      border-radius:var(--radius);
+      box-shadow:0 12px 34px rgba(0,0,0,.2);
+    }
+    .svc-grid{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;
+    }
+    .svc-card{
+      padding:18px 16px;transition:.28s ease;
+      position:relative;overflow:hidden;
+    }
+    .svc-card:hover{transform:translateY(-7px)}
+    .svc-icon{
+      width:42px;height:42px;border-radius:12px;
+      display:grid;place-items:center;
+      background:rgba(255,128,187,.16);border:1px solid rgba(255,128,187,.3);
+      color:#ffc5e2;margin-bottom:10px;
+    }
+    .svc-card h3{margin:0 0 8px;font-size:1.04rem}
+    .svc-card p{margin:0;color:var(--muted);line-height:1.6;font-size:.92rem}
+    .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+    .tags span{
+      border:1px solid rgba(255,176,214,.22);padding:5px 8px;border-radius:999px;
+      font-size:.72rem;background:rgba(255,176,214,.08)
+    }
+    .featured-ad{
+      margin-top:18px;padding:22px;display:grid;
+      grid-template-columns:1.1fr .9fr;gap:18px;align-items:center;
+      border:1px solid rgba(255,115,177,.4);
+      background:
+      radial-gradient(circle at 85% 15%,rgba(255,149,205,.25),transparent 40%),
+      linear-gradient(150deg,rgba(255,101,173,.18),rgba(255,101,173,.06));
+      border-radius:24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .featured-ad::after{
+      content:"";
+      position:absolute;inset:auto -20% -70% -20%;height:280px;
+      background:radial-gradient(circle at center,rgba(255,130,187,.28),transparent 68%);
+      animation:adPulse 4.8s ease-in-out infinite;
+    }
+    @keyframes adPulse{
+      0%,100%{opacity:.45;transform:scale(1)}
+      50%{opacity:1;transform:scale(1.06)}
+    }
+    .ad-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+      color:#ffd8ec;
+      background:rgba(255,133,191,.19);
+      border:1px solid rgba(255,133,191,.38);
+      border-radius:999px;padding:7px 11px;
+    }
+    .ad-title{
+      margin:10px 0;font-family:"Playfair Display",serif;font-size:2rem;line-height:1.05;
+    }
+    .ad-price{
+      font-size:2.2rem;font-weight:800;
+      background:linear-gradient(120deg,#ffe6f3,#ff8ec3 55%,#ff4fa2);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+      margin:8px 0;
+    }
+    .ad-perks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+    .ad-perks div{
+      border:1px solid var(--line);
+      background:rgba(255,177,218,.08);border-radius:12px;padding:10px;font-size:.82rem;
+    }
+    .about{
+      display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:stretch;
+    }
+    .about-photo img{
+      width:100%;height:100%;min-height:420px;object-fit:cover;border-radius:18px;
+    }
+    .about-copy{padding:26px}
+    .testi{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;
+    }
+    .testi .card{padding:18px}
+    .star{color:#ffd06a}
+    .book-wrap{
+      display:grid;grid-template-columns:.95fr 1.05fr;gap:18px;align-items:stretch;
+    }
+    .book-side{padding:22px}
+    .book-card{padding:22px}
+    .stepper{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+    .step{
+      width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:700;
+      border:1px solid var(--line);background:rgba(255,162,208,.08)
+    }
+    .step.active{background:linear-gradient(120deg,var(--pink),var(--pink-2));border-color:transparent}
+    .line{height:1px;flex:1;min-width:24px;background:var(--line)}
+    .panel{display:none}
+    .panel.active{display:block;animation:fadeIn .28s ease}
+    @keyframes fadeIn{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .chip{
+      border:1px solid var(--line);padding:11px;border-radius:12px;background:rgba(255,169,212,.07);
+      cursor:pointer;transition:.2s ease;font-size:.88rem;
+    }
+    .chip.active{border-color:rgba(255,135,192,.8);background:rgba(255,135,192,.2)}
+    .days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;margin-top:12px}
+    .day{
+      text-align:center;padding:9px 0;border:1px solid var(--line);border-radius:10px;
+      background:rgba(255,177,218,.07);cursor:pointer;font-size:.86rem;
+    }
+    .day.disabled{opacity:.35;pointer-events:none}
+    .day.active{border-color:rgba(255,130,187,.82);background:rgba(255,130,187,.24)}
+    .times{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+    .time{padding:10px;border-radius:11px;border:1px solid var(--line);text-align:center;cursor:pointer;background:rgba(255,178,218,.08)}
+    .time.active{background:rgba(255,130,187,.24);border-color:rgba(255,130,187,.9)}
+    input,textarea,select{
+      width:100%;padding:11px 12px;background:rgba(255,184,220,.08);border:1px solid var(--line);
+      border-radius:12px;color:var(--text);font:inherit;outline:none;
+    }
+    input:focus,textarea:focus,select:focus{border-color:rgba(255,130,187,.85)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .book-nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+    .tiny{font-size:.78rem;color:var(--muted)}
+    .success{
+      margin-top:12px;padding:13px;border-radius:12px;
+      border:1px solid rgba(87,240,198,.4);background:rgba(87,240,198,.12);display:none;
+    }
+    .success.show{display:block}
+    footer{padding:34px 0;border-top:1px solid var(--line);margin-top:30px}
+    .float-chat{
+      position:fixed;right:18px;bottom:18px;z-index:50;
+      width:56px;height:56px;border-radius:50%;display:grid;place-items:center;
+      background:linear-gradient(120deg,var(--pink),var(--pink-2));
+      color:#fff;text-decoration:none;box-shadow:var(--shadow);animation:bounce 3s ease-in-out infinite;
+    }
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    .reveal{opacity:0;transform:translateY(18px);transition:.55s ease}
+    .reveal.show{opacity:1;transform:none}
+    @media (max-width:1024px){
+      .hero-grid,.about,.book-wrap{grid-template-columns:1fr}
+      .svc-grid,.testi{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .featured-ad{grid-template-columns:1fr}
+    }
+    @media (max-width:700px){
+      .nav-links{display:none}
+      .svc-grid,.testi,.grid2,.times{grid-template-columns:1fr}
+      .days{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .kpi{grid-template-columns:1fr}
+      .row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bgCanvas" class="bg-canvas"></canvas>
+  <div class="grain"></div>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#home">
+        <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Logo%20Square.png" alt="BWS Logo" crossorigin="anonymous" onerror="this.style.display='none'" />
+        <div>
+          <h1>Best Work Solution</h1>
+          <span>Virtual Assistant Agency</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#booking">Booking</a>
+        <button class="btn btn-primary" id="navCta"><i class="fas fa-bolt"></i> 7-Day Website</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="pill"><i class="fas fa-sparkles"></i> Elegant soft-pink premium experience</div>
+          <h2 class="headline">Build a Business That Feels <span class="accent">Lighter, Faster, and Smarter</span>.</h2>
+          <p class="sub">Empowering businesses with world-class virtual assistant talent and digital execution. You get expert support, modern systems, and momentum you can feel every day.</p>
+          <div class="hero-actions">
+            <a href="#booking" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book Discovery Call</a>
+            <a href="#services" class="btn btn-ghost"><i class="fas fa-layer-group"></i> View Services</a>
+          </div>
+          <div class="kpi">
+            <div><strong>98%</strong><span>Client Satisfaction</span></div>
+            <div><strong>48-72h</strong><span>VA Matching</span></div>
+            <div><strong>99%</strong><span>On-Time Delivery</span></div>
+          </div>
+        </div>
+        <aside class="hero-card reveal">
+          <div class="pill"><i class="fas fa-star"></i> Client Favorite Offer</div>
+          <h3 style="font-size:1.35rem;margin:12px 0 6px">The 7-Day Website</h3>
+          <p class="sub" style="font-size:.9rem">Custom design, frontend + backend, SEO setup, SSL, deployment, and post-launch support.</p>
+          <div style="margin:10px 0 8px;font-size:2rem;font-weight:800;color:#ffd7ea">$999</div>
+          <button class="btn btn-primary" id="heroOfferBtn"><i class="fas fa-rocket"></i> Reserve a Build Slot</button>
+        </aside>
+      </div>
+    </section>
+
+    <section class="sec" id="services">
+      <div class="container">
+        <div class="sec-head reveal">
+          <div class="pill"><i class="fas fa-layer-group"></i> What We Offer</div>
+          <h3 class="sec-title">Comprehensive VA Services Tailored to Your Needs</h3>
+          <p class="sec-sub">From admin ops to digital presence - trained, tested, and ready to make your business thrive.</p>
+        </div>
+
+        <div class="svc-grid">
+          <article class="svc-card glass reveal"><div class="svc-icon"><i class="fas fa-briefcase"></i></div><h3>Administrative & Executive VA</h3><p>Streamline operations with a dedicated assistant managing your daily workflow with precision.</p><div class="tags"><span>Scheduling</span><span>Reporting</span><span>Research</span><span>Document Prep</span></div></article>
+          <article class="svc-card glass reveal"><div class="svc-icon"><i class="fas fa-hashtag"></i></div><h3>Social Media Management</h3><p>Grow your online presence with strategic content creation and performance-driven campaigns.</p><div class="tags"><span>Content Creation</span><span>Scheduling</span><span>Analytics</span><span>Engagement</span></div></article>
+          <article class="svc-card glass reveal"><div class="svc-icon"><i class="fas fa-headset"></i></div><h3>Customer Service & Support</h3><p>Deliver exceptional experiences with trained specialists representing your brand at every touchpoint.</p><div class="tags"><span>Live Chat</span><span>Email Support</span><span>Ticketing</span><span>CRM</span></div></article>
+          <article class="svc-card glass reveal"><div class="svc-icon"><i class="fas fa-calendar-check"></i></div><h3>Email & Calendar Management</h3><p>Never miss a meeting again. Your VA keeps your inbox and schedule under complete control.</p><div class="tags"><span>Inbox Zero</span><span>Meetings</span><span>Follow-ups</span><span>Travel Planning</span></div></article>
+          <article class="svc-card glass reveal"><div class="svc-icon"><i class="fas fa-store"></i></div><h3>E-Commerce Support</h3><p>Manage your online store efficiently - listings, orders, inquiries, and inventory with ease.</p><div class="tags"><span>Product Listings</span><span>Order Management</span><span>Shopify</span><span>Amazon</span></div></article>
+          <article class="svc-card glass reveal"><div class="svc-icon"><i class="fas fa-calculator"></i></div><h3>Bookkeeping & Finance</h3><p>Keep financials in order - from expense tracking to invoicing and reconciliation.</p><div class="tags"><span>QuickBooks</span><span>Invoicing</span><span>Reconciliation</span><span>Payroll</span></div></article>
+          <article class="svc-card glass reveal"><div class="svc-icon"><i class="fas fa-palette"></i></div><h3>Web Design</h3><p>Beautiful, conversion-focused websites that turn visitors into clients - fully responsive and on-brand.</p><div class="tags"><span>WordPress</span><span>Wix</span><span>UI/UX</span><span>Responsive</span></div></article>
+          <article class="svc-card glass reveal"><div class="svc-icon"><i class="fas fa-filter"></i></div><h3>Funnel Creation</h3><p>High-converting sales funnels designed and built to guide prospects from curiosity to purchase.</p><div class="tags"><span>ClickFunnels</span><span>GoHighLevel</span><span>Lead Capture</span><span>Upsells</span></div></article>
+          <article class="svc-card glass reveal"><div class="svc-icon"><i class="fas fa-robot"></i></div><h3>Automations</h3><p>Let your business run on autopilot with smart workflows that save you hours every single week.</p><div class="tags"><span>Zapier</span><span>Make</span><span>CRM Automation</span><span>Email Flows</span></div></article>
+        </div>
+
+        <div class="featured-ad reveal" id="offer7d">
+          <div>
+            <div class="ad-badge"><i class="fas fa-bolt"></i> High-Demand Launch Offer</div>
+            <h4 class="ad-title">7-Day Website <br />Conversion Engine</h4>
+            <p class="sec-sub" style="max-width:560px">Not just a website. You get a strategic customer journey designed for lead capture, trust building, and action - launched in one week.</p>
+            <div class="ad-price">$999</div>
+            <a href="#booking" class="btn btn-primary"><i class="fas fa-calendar-plus"></i> Claim Your Priority Slot</a>
+          </div>
+          <div>
+            <div class="ad-perks">
+              <div><i class="fas fa-check"></i> UI/UX Design + Premium Motion</div>
+              <div><i class="fas fa-check"></i> Frontend + Backend Build</div>
+              <div><i class="fas fa-check"></i> SSL, SEO, Performance Setup</div>
+              <div><i class="fas fa-check"></i> 30-Day Post Launch Support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="about">
+      <div class="container about">
+        <div class="about-photo glass reveal">
+          <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Jave_s%20Picture.png" alt="Jave - Founder" crossorigin="anonymous" onerror="this.parentElement.style.minHeight='420px'" />
+        </div>
+        <article class="about-copy glass reveal">
+          <div class="pill"><i class="fas fa-heart"></i> About Best Work Solution</div>
+          <h3 class="sec-title" style="margin-top:12px">Your Growth Is Our Mission</h3>
+          <p class="sec-sub">We do not just fill positions - we build partnerships that create measurable impact. Every VA is vetted, trained, and matched to your exact workflow so you can move faster with confidence.</p>
+          <div class="tags">
+            <span>Rigorous Vetting</span><span>Fast Turnaround</span><span>Fully Managed</span><span>Cost-Effective</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="sec" id="testimonials">
+      <div class="container">
+        <div class="sec-head reveal">
+          <div class="pill"><i class="fas fa-heart"></i> Client Love</div>
+          <h3 class="sec-title">What Our Clients Are Saying</h3>
+          <p class="sec-sub">Real results from real businesses that trusted Best Work Solution.</p>
+        </div>
+        <div class="testi">
+          <article class="card glass reveal"><div class="star"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div><p>"Hiring through Best Work Solution was the best business decision I made this year."</p><small>Sarah M. - E-Commerce Founder, USA</small></article>
+          <article class="card glass reveal"><div class="star"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div><p>"The funnel they built increased my conversions by 3x in the first month."</p><small>James T. - Business Coach, UK</small></article>
+          <article class="card glass reveal"><div class="star"><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></div><p>"They delivered my 7-Day Website in 6 days. Worth every penny and more."</p><small>Mark D. - SaaS Founder, USA</small></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="booking">
+      <div class="container book-wrap">
+        <aside class="book-side glass reveal">
+          <div class="pill"><i class="fas fa-calendar-star"></i> Advanced Booking</div>
+          <h3 class="sec-title" style="margin-top:14px">Book a Strategy Call in Minutes</h3>
+          <p class="sec-sub">A modern guided scheduler with live slot simulation. No EmailJS, no Calendly. Your reservation is saved instantly and a confirmation summary is generated.</p>
+          <div class="tags">
+            <span>Email: bestworkssolutions@gmail.com</span>
+            <span>Phone: +63 977 249 7868</span>
+            <span>Response: Within a few hours</span>
+          </div>
+        </aside>
+        <div class="book-card glass reveal">
+          <div class="stepper">
+            <div class="step active" data-step="1">1</div><div class="line"></div>
+            <div class="step" data-step="2">2</div><div class="line"></div>
+            <div class="step" data-step="3">3</div><div class="line"></div>
+            <div class="step" data-step="4">4</div>
+          </div>
+
+          <div class="panel active" id="p1">
+            <h4>Select Service</h4>
+            <div class="grid2" id="serviceGrid">
+              <button class="chip" data-value="Administrative & Executive VA">Administrative & Executive VA</button>
+              <button class="chip" data-value="Social Media Management">Social Media Management</button>
+              <button class="chip" data-value="Customer Service & Support">Customer Service & Support</button>
+              <button class="chip" data-value="Email & Calendar Management">Email & Calendar Management</button>
+              <button class="chip" data-value="E-Commerce Support">E-Commerce Support</button>
+              <button class="chip" data-value="Bookkeeping & Finance">Bookkeeping & Finance</button>
+              <button class="chip" data-value="Web Design">Web Design</button>
+              <button class="chip" data-value="Funnel Creation">Funnel Creation</button>
+              <button class="chip" data-value="Automations">Automations</button>
+              <button class="chip" data-value="The 7-Day Website ($999)">The 7-Day Website ($999)</button>
+            </div>
+            <div class="book-nav"><span></span><button class="btn btn-primary" id="next1" disabled>Next <i class="fas fa-arrow-right"></i></button></div>
+          </div>
+
+          <div class="panel" id="p2">
+            <h4>Choose Date</h4>
+            <p class="tiny">Available days for the next 14 days.</p>
+            <div class="days" id="daysWrap"></div>
+            <div class="book-nav">
+              <button class="btn btn-ghost" id="back2"><i class="fas fa-arrow-left"></i> Back</button>
+              <button class="btn btn-primary" id="next2" disabled>Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="panel" id="p3">
+            <h4>Select Time Slot</h4>
+            <p class="tiny">30-minute discovery calls, based on your selected date.</p>
+            <div class="times" id="timeWrap"></div>
+            <div class="book-nav">
+              <button class="btn btn-ghost" id="back3"><i class="fas fa-arrow-left"></i> Back</button>
+              <button class="btn btn-primary" id="next3" disabled>Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <div class="panel" id="p4">
+            <h4>Your Details</h4>
+            <div class="row">
+              <input id="name" placeholder="Full name" />
+              <input id="email" placeholder="Email address" />
+            </div>
+            <div class="row" style="margin-top:10px">
+              <input id="company" placeholder="Company" />
+              <input id="phone" placeholder="Phone / WhatsApp" />
+            </div>
+            <textarea id="notes" rows="4" style="margin-top:10px" placeholder="Goals or notes for the call"></textarea>
+            <div class="book-nav">
+              <button class="btn btn-ghost" id="back4"><i class="fas fa-arrow-left"></i> Back</button>
+              <button class="btn btn-primary" id="confirmBtn"><i class="fas fa-check"></i> Confirm Booking</button>
+            </div>
+            <div class="success" id="successBox"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <small>&copy; <span id="year"></span> Best Work Solution. All rights reserved.</small>
+      <small>Facebook · Instagram · LinkedIn · WhatsApp</small>
+    </div>
+  </footer>
+
+  <a class="float-chat" href="https://wa.me/639772497868" target="_blank" rel="noopener" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+  <script>
+    (function(){
+      const c = document.getElementById("bgCanvas");
+      const g = c.getContext("2d");
+      if (!c || !g) return;
+      let w = 0;
+      let h = 0;
+      let t = 0;
+      const blobs = [
+        {x:0.12,y:0.2,r:0.45,s:0.00018,c:"rgba(255,136,192,"},
+        {x:0.82,y:0.12,r:0.42,s:0.00014,c:"rgba(255,96,167,"},
+        {x:0.6,y:0.78,r:0.5,s:0.0001,c:"rgba(255,188,224,"}
+      ];
+
+      function resize(){
+        w = c.width = window.innerWidth;
+        h = c.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener("resize", resize);
+
+      (function loop(ts = 0){
+        t = ts;
+        g.fillStyle = "rgba(18,7,21,1)";
+        g.fillRect(0, 0, w, h);
+        blobs.forEach(function(b, i){
+          const ox = w * (b.x + Math.sin(t * b.s + i * 1.8) * 0.09);
+          const oy = h * (b.y + Math.cos(t * b.s + i * 2.1) * 0.08);
+          const rr = Math.min(w, h) * b.r;
+          if (!Number.isFinite(ox) || !Number.isFinite(oy) || !Number.isFinite(rr) || rr <= 0) return;
+          const gr = g.createRadialGradient(ox, oy, 0, ox, oy, rr);
+          gr.addColorStop(0, b.c + "0.16)");
+          gr.addColorStop(1, b.c + "0)");
+          g.fillStyle = gr;
+          g.fillRect(0, 0, w, h);
+        });
+        requestAnimationFrame(loop);
+      })();
+    })();
+
+    (function(){
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const revealEls = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) entry.target.classList.add("show");
+        });
+      }, {threshold: 0.12});
+      revealEls.forEach(function(el){ io.observe(el); });
+
+      const navCta = document.getElementById("navCta");
+      const heroOfferBtn = document.getElementById("heroOfferBtn");
+      [navCta, heroOfferBtn].forEach(function(btn){
+        if (!btn) return;
+        btn.addEventListener("click", function(){
+          const b = document.getElementById("booking");
+          if (b) b.scrollIntoView({behavior:"smooth"});
+        });
+      });
+    })();
+
+    (function(){
+      const data = {service:"", date:"", time:""};
+      const panels = ["p1","p2","p3","p4"];
+      const steps = document.querySelectorAll(".step");
+      let current = 1;
+
+      function setStep(next){
+        current = next;
+        panels.forEach(function(id, idx){
+          const active = (idx + 1) === current;
+          const panel = document.getElementById(id);
+          if (panel) panel.classList.toggle("active", active);
+        });
+        steps.forEach(function(st){
+          const stepNum = Number(st.getAttribute("data-step"));
+          st.classList.toggle("active", stepNum <= current);
+        });
+      }
+
+      const serviceButtons = document.querySelectorAll("#serviceGrid .chip");
+      const next1 = document.getElementById("next1");
+      serviceButtons.forEach(function(btn){
+        btn.addEventListener("click", function(){
+          serviceButtons.forEach(function(b){ b.classList.remove("active"); });
+          btn.classList.add("active");
+          data.service = btn.getAttribute("data-value") || "";
+          next1.disabled = !data.service;
+        });
+      });
+      next1.addEventListener("click", function(){ setStep(2); });
+
+      const daysWrap = document.getElementById("daysWrap");
+      const next2 = document.getElementById("next2");
+      const today = new Date();
+      const dayNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+      for (let i = 0; i < 14; i++){
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        const isBlocked = d.getDay() === 0;
+        const label = dayNames[d.getDay()] + " " + d.toLocaleDateString("en-US", {month:"short", day:"numeric"});
+        const el = document.createElement("button");
+        el.className = "day" + (isBlocked ? " disabled" : "");
+        el.textContent = label;
+        el.type = "button";
+        if (!isBlocked){
+          el.addEventListener("click", function(){
+            daysWrap.querySelectorAll(".day").forEach(function(x){ x.classList.remove("active"); });
+            el.classList.add("active");
+            data.date = d.toISOString().slice(0, 10);
+            next2.disabled = false;
+          });
+        }
+        daysWrap.appendChild(el);
+      }
+
+      const back2 = document.getElementById("back2");
+      back2.addEventListener("click", function(){ setStep(1); });
+      next2.addEventListener("click", function(){ setStep(3); });
+
+      const times = ["08:30 AM","09:00 AM","10:30 AM","01:00 PM","02:30 PM","04:00 PM","06:00 PM"];
+      const timeWrap = document.getElementById("timeWrap");
+      const next3 = document.getElementById("next3");
+      times.forEach(function(t){
+        const el = document.createElement("button");
+        el.type = "button";
+        el.className = "time";
+        el.textContent = t;
+        el.addEventListener("click", function(){
+          timeWrap.querySelectorAll(".time").forEach(function(x){ x.classList.remove("active"); });
+          el.classList.add("active");
+          data.time = t;
+          next3.disabled = false;
+        });
+        timeWrap.appendChild(el);
+      });
+      document.getElementById("back3").addEventListener("click", function(){ setStep(2); });
+      next3.addEventListener("click", function(){ setStep(4); });
+      document.getElementById("back4").addEventListener("click", function(){ setStep(3); });
+
+      document.getElementById("confirmBtn").addEventListener("click", function(){
+        const name = (document.getElementById("name").value || "").trim();
+        const email = (document.getElementById("email").value || "").trim();
+        const company = (document.getElementById("company").value || "").trim();
+        const phone = (document.getElementById("phone").value || "").trim();
+        const notes = (document.getElementById("notes").value || "").trim();
+        if (!name || !email || !data.service || !data.date || !data.time){
+          alert("Please complete required fields before confirming.");
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+          alert("Please enter a valid email address.");
+          return;
+        }
+        const payload = {
+          id: "BWS-" + Date.now(),
+          createdAt: new Date().toISOString(),
+          service: data.service,
+          date: data.date,
+          time: data.time,
+          name: name,
+          email: email,
+          company: company,
+          phone: phone,
+          notes: notes
+        };
+        const existing = JSON.parse(localStorage.getItem("bwsBookings") || "[]");
+        existing.push(payload);
+        localStorage.setItem("bwsBookings", JSON.stringify(existing));
+
+        const box = document.getElementById("successBox");
+        box.classList.add("show");
+        box.innerHTML = "<strong><i class='fas fa-circle-check'></i> Booking reserved!</strong><br/>" +
+          "Ref: " + payload.id + "<br/>" +
+          "Service: " + payload.service + "<br/>" +
+          "Date/Time: " + payload.date + " at " + payload.time + "<br/>" +
+          "We will confirm via email or WhatsApp shortly.";
+      });
+    })();
+  </script>
+</body>
+</html>

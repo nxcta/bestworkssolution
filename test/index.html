@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Best Work Solution | Elite Virtual Assistant Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --p1:#F06292;--p2:#F48FB1;--p3:#FBBDC9;--p4:#FCE4EC;
+  --pa:#E91E8C;--pd:#C2185B;
+  --bg:#08050E;--bg2:#100B1A;--bg3:#181225;--bg4:#201830;
+  --gl:rgba(240,98,146,.06);--glb:rgba(240,98,146,.16);
+  --gd:linear-gradient(135deg,#F06292,#C2185B);
+  --gds:linear-gradient(135deg,rgba(240,98,146,.13),rgba(194,24,91,.07));
+  --ease:cubic-bezier(.16,1,.3,1);
+  --r:12px;--rl:20px;--rxl:28px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#fff;overflow-x:hidden;line-height:1.6}
+::selection{background:var(--pa);color:#fff}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--p1);border-radius:99px}
+a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
+.container{width:100%;max-width:1160px;margin:0 auto;padding:0 24px}
+.sec{padding:100px 0}
+.gdt{background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.badge{display:inline-flex;align-items:center;gap:7px;background:rgba(240,98,146,.09);border:1px solid rgba(240,98,146,.24);color:var(--p2);font-size:.67rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 13px;border-radius:99px;margin-bottom:16px}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.85rem,3.4vw,2.75rem);font-weight:700;line-height:1.15;margin-bottom:14px}
+.sec-sub{color:rgba(251,189,201,.72);font-size:.93rem;line-height:1.82;max-width:520px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:12px 26px;border-radius:99px;font-weight:600;font-size:.86rem;cursor:pointer;transition:all .3s var(--ease);border:none;outline:none;text-decoration:none;letter-spacing:.01em;position:relative;overflow:hidden}
+.btn-p{background:var(--gd);color:#fff;box-shadow:0 4px 22px rgba(233,30,140,.28)}
+.btn-p::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#FF85B3,#E91E8C);opacity:0;transition:opacity .3s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(233,30,140,.48)}
+.btn-p:hover::after{opacity:1}
+.btn-p>*{position:relative;z-index:1}
+.btn-g{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);color:#fff;backdrop-filter:blur(12px)}
+.btn-g:hover{border-color:rgba(240,98,146,.42);background:rgba(240,98,146,.08);transform:translateY(-2px)}
+.btn-sm{padding:9px 20px;font-size:.79rem}
+/* Ripple */
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.3);transform:scale(0);animation:ripple-anim .6s linear;pointer-events:none}
+@keyframes ripple-anim{to{transform:scale(4);opacity:0}}
+/* Reveal */
+.rv,.rvl,.rvr{opacity:1;transform:none}
+.rv.on{animation:revealUp .65s var(--ease) both}
+.rvl.on{animation:revealLeft .65s var(--ease) both}
+.rvr.on{animation:revealRight .65s var(--ease) both}
+@keyframes revealUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes revealLeft{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+@keyframes revealRight{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+/* SCROLL PROGRESS */
+#sp{position:fixed;top:0;left:0;height:2px;background:var(--gd);z-index:1001;width:0%;transition:width .1s}
+
+/* GLOBAL BG */
+#bg-c{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* CUSTOM CURSOR */
+.cur-ring{position:fixed;width:30px;height:30px;border:1.5px solid rgba(240,98,146,.5);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .22s,height .22s,background .22s,border-color .22s}
+.cur-dot{position:fixed;width:5px;height:5px;background:var(--p1);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
+
+/* PAGE OVERLAY */
+#ov{position:fixed;inset:0;z-index:8000;background:var(--bg2);opacity:0;pointer-events:none;transition:opacity .35s ease}
+#ov.in{opacity:1;pointer-events:all}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none}
+.ld-logo-wrap{width:64px;height:64px;border-radius:16px;overflow:hidden;border:1px solid rgba(240,98,146,.3);box-shadow:0 0 30px rgba(240,98,146,.25);margin-bottom:18px}
+.ld-logo-wrap img{width:100%;height:100%;object-fit:cover}
+.ld-bar-track{width:160px;height:2px;background:rgba(240,98,146,.15);border-radius:99px;overflow:hidden;margin-top:10px}
+.ld-bar{height:100%;width:0%;background:var(--gd);border-radius:99px;animation:ldbar 1.2s var(--ease) forwards}
+@keyframes ldbar{to{width:100%}}
+.ld-txt{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,98,146,.6);margin-top:10px}
+
+/* SOCIAL PROOF NOTIFICATION */
+.sp-notif{position:fixed;bottom:76px;left:24px;z-index:888;background:var(--bg3);border:1px solid rgba(240,98,146,.22);border-radius:12px;padding:11px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.5);transform:translateX(-200%);transition:transform .4s var(--ease);max-width:260px}
+.sp-notif.show{transform:translateX(0)}
+.sp-av{width:32px;height:32px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:.85rem;flex-shrink:0}
+.sp-name{font-size:.78rem;font-weight:700}
+.sp-action{font-size:.7rem;color:rgba(251,189,201,.6);margin-top:1px}
+.sp-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;flex-shrink:0;box-shadow:0 0 5px rgba(34,197,94,.5)}
+
+/* MOBILE STICKY BAR */
+.mob-sticky{display:none;position:fixed;bottom:0;left:0;right:0;z-index:700;background:rgba(8,5,14,.95);backdrop-filter:blur(20px);border-top:1px solid rgba(240,98,146,.15);padding:12px 20px;gap:10px}
+@media(max-width:768px){.mob-sticky{display:flex}}
+.mob-sticky .btn{flex:1;justify-content:center;border-radius:10px;font-size:.82rem;padding:11px 14px}
+
+/* ══ LANDING PAGE ══ */
+#pg-land{position:fixed;inset:0;z-index:500;overflow:hidden;transition:opacity .5s,visibility .5s}
+#pg-land.out{opacity:0;visibility:hidden;pointer-events:none}
+#lc{position:absolute;inset:0;width:100%;height:100%}
+#part-c{position:absolute;inset:0;pointer-events:none;z-index:1}
+.land-ui{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 20px}
+.land-logo{width:72px;height:72px;border-radius:18px;overflow:hidden;margin:0 auto 20px;border:1px solid rgba(240,98,146,.35);box-shadow:0 0 44px rgba(240,98,146,.28);animation:pop .8s .3s var(--ease) both}
+.land-logo img{width:100%;height:100%;object-fit:cover}
+.land-ey{font-size:.66rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--p2);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:10px;animation:fup .8s .5s var(--ease) both}
+.land-ey::before,.land-ey::after{content:'';width:26px;height:1px;background:rgba(240,98,146,.4)}
+.land-title{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:900;line-height:1.04;letter-spacing:-.03em;margin-bottom:14px;animation:fup .9s .6s var(--ease) both}
+.land-title em{font-style:italic;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.land-sub{font-size:.97rem;color:rgba(251,189,201,.75);line-height:1.78;max-width:400px;margin:0 auto 30px;animation:fup .9s .75s var(--ease) both}
+.land-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fup .9s .9s var(--ease) both}
+.land-stats{display:flex;gap:32px;justify-content:center;margin-top:44px;animation:fup .9s 1.05s var(--ease) both;flex-wrap:wrap}
+.ls-n{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:700;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.ls-l{font-size:.67rem;color:rgba(200,160,180,.45);letter-spacing:.08em;margin-top:3px}
+/* Service pills on landing */
+.land-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:540px;margin:28px auto 0;animation:fup .9s 1.2s var(--ease) both}
+.land-pill{display:flex;align-items:center;gap:6px;background:rgba(240,98,146,.07);border:1px solid rgba(240,98,146,.18);color:rgba(251,189,201,.75);font-size:.7rem;font-weight:600;padding:5px 12px;border-radius:99px;transition:all .3s}
+.land-pill:hover{background:rgba(240,98,146,.14);border-color:rgba(240,98,146,.35);color:#fff}
+.land-pill i{color:var(--p1);font-size:.72rem}
+.land-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:.61rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,160,180,.35);display:flex;flex-direction:column;align-items:center;gap:7px;animation:fup 1s 1.4s var(--ease) both;pointer-events:none}
+.mouse-icon{width:18px;height:28px;border:1.5px solid rgba(200,160,180,.3);border-radius:99px;display:flex;align-items:flex-start;justify-content:center;padding-top:4px}
+.mouse-dot{width:2px;height:5px;background:var(--p1);border-radius:99px;animation:mdot 1.6s ease-in-out infinite}
+@keyframes mdot{0%,100%{transform:translateY(0);opacity:1}50%{transform:translateY(6px);opacity:.2}}
+@keyframes pop{from{opacity:0;transform:scale(.78) translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* ══ 7-DAY PAGE ══ */
+#pg-7d{display:none;position:fixed;inset:0;z-index:600;overflow-y:auto;background:var(--bg)}
+#c7d{position:fixed;inset:0;z-index:0;pointer-events:none}
+.d7-back{position:fixed;top:20px;left:20px;z-index:10;display:flex;align-items:center;gap:7px;font-size:.75rem;font-weight:600;color:rgba(251,189,201,.6);cursor:pointer;background:rgba(8,5,14,.8);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(14px);padding:7px 15px;border-radius:99px;transition:color .3s}
+.d7-back:hover{color:var(--p2)}
+.d7-wrap{position:relative;z-index:2;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:0}
+.d7-left{padding:80px 52px 60px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(240,98,146,.1)}
+.d7-right{padding:80px 52px 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:linear-gradient(160deg,rgba(240,98,146,.04),rgba(194,24,91,.07))}
+.d7-live{display:inline-flex;align-items:center;gap:7px;font-size:.67rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#22c55e;margin-bottom:16px}
+.live-dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,.4)}50%{opacity:.5;box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.d7-headline{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.8vw,3.4rem);font-weight:900;line-height:1.06;letter-spacing:-.025em;margin-bottom:16px}
+.d7-headline em{font-style:italic;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.d7-desc{font-size:.93rem;color:rgba(251,189,201,.72);line-height:1.8;margin-bottom:26px;max-width:430px}
+.d7-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:30px}
+.d7-feats li{display:flex;align-items:center;gap:10px;font-size:.85rem;color:rgba(255,255,255,.88)}
+.d7-check{width:18px;height:18px;min-width:18px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:.52rem;color:#fff}
+.d7-ctas{display:flex;gap:10px;flex-wrap:wrap}
+/* Comparison table */
+.d7-compare{background:rgba(255,255,255,.03);border:1px solid rgba(240,98,146,.14);border-radius:14px;padding:18px;width:100%;max-width:360px}
+.d7-compare-title{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--p2);margin-bottom:14px;text-align:center}
+.d7-cmp-row{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:.76rem}
+.d7-cmp-row:last-child{border-bottom:none}
+.d7-cmp-feat{color:rgba(251,189,201,.65);flex:1}
+.d7-cmp-x{color:#f55;font-size:.75rem;text-align:center}
+.d7-cmp-check{color:var(--p1);font-size:.75rem;text-align:center}
+.d7-cmp-hdr{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,160,180,.4);text-align:center}
+/* Price card */
+.d7-price-card{background:rgba(255,255,255,.03);border:1px solid rgba(240,98,146,.22);border-radius:22px;padding:28px;text-align:center;width:100%;max-width:360px;backdrop-filter:blur(12px);position:relative;overflow:hidden}
+.d7-price-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(240,98,146,.11),transparent 65%)}
+.d7-was{font-size:.78rem;color:rgba(251,189,201,.45);text-decoration:line-through;margin-bottom:3px}
+.d7-price{font-family:'Playfair Display',serif;font-size:3.8rem;font-weight:900;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;position:relative;z-index:1}
+.d7-price sup{font-size:.42em;vertical-align:super}
+.d7-price-note{font-size:.73rem;color:rgba(251,189,201,.55);margin-top:3px;position:relative;z-index:1}
+.d7-cd-lbl{font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--p2);margin:16px 0 7px;position:relative;z-index:1}
+.d7-cd{display:flex;gap:9px;justify-content:center;position:relative;z-index:1}
+.cd-u{text-align:center}
+.cd-n{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:900;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;min-width:38px;display:block}
+.cd-l{font-size:.58rem;color:rgba(251,189,201,.45);letter-spacing:.07em;margin-top:2px}
+.cd-sep{font-size:1.4rem;font-weight:300;color:rgba(240,98,146,.35);padding-top:3px}
+.d7-slots{background:rgba(233,30,140,.07);border:1px solid rgba(233,30,140,.2);border-radius:9px;padding:11px 14px;margin-top:14px;display:flex;align-items:center;gap:10px;position:relative;z-index:1}
+.slot-dots{display:flex;gap:5px}
+.slot-d{width:10px;height:10px;border-radius:50%}
+.slot-d.tk{background:rgba(255,255,255,.14)}
+.slot-d.av{background:var(--p1);box-shadow:0 0 6px rgba(240,98,146,.5)}
+.slot-txt{font-size:.77rem;font-weight:600}
+.slot-txt span{color:var(--p2);font-weight:700}
+.d7-sp{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:13px;width:100%;max-width:360px}
+.d7-sp-stars{display:flex;gap:3px;margin-bottom:5px}
+.d7-sp-stars i{color:var(--p1);font-size:.68rem}
+.d7-sp-q{font-size:.75rem;color:rgba(251,189,201,.72);font-style:italic;line-height:1.6;margin-bottom:7px}
+.d7-sp-a{font-size:.69rem;font-weight:700;color:rgba(255,255,255,.65)}
+
+/* ══ MAIN SITE ══ */
+#pg-main{display:none;opacity:0;transition:opacity .5s var(--ease)}
+#pg-main.on{opacity:1}
+#pc{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* NAVBAR */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:900;transition:all .4s var(--ease)}
+.navbar.sc{background:rgba(8,5,14,.92);backdrop-filter:blur(24px);border-bottom:1px solid rgba(240,98,146,.09);box-shadow:0 4px 40px rgba(0,0,0,.4)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.nav-logo-img{width:34px;height:34px;border-radius:8px;object-fit:cover;border:1px solid rgba(240,98,146,.28)}
+.logo-n{font-family:'Playfair Display',serif;font-size:1.08rem;font-weight:700;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-s{font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,160,180,.45);margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:22px;list-style:none}
+.nav-links li a{font-size:.82rem;font-weight:500;color:rgba(251,189,201,.65);transition:color .3s;cursor:pointer;position:relative}
+.nav-links li a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--gd);border-radius:99px;transition:width .3s var(--ease)}
+.nav-links li a:hover,.nav-links li a.active{color:#fff}
+.nav-links li a:hover::after,.nav-links li a.active::after{width:100%}
+.nav-cta{background:var(--gd)!important;color:#fff!important;padding:6px 15px!important;border-radius:99px;font-size:.76rem!important;font-weight:700!important;box-shadow:0 2px 14px rgba(233,30,140,.32)}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 22px rgba(233,30,140,.52)!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{display:block;width:22px;height:2px;background:#fff;border-radius:99px;transition:all .3s}
+.mob-menu{display:none;position:fixed;inset:0;background:rgba(8,5,14,.97);backdrop-filter:blur(20px);z-index:899;flex-direction:column;align-items:center;justify-content:center;gap:24px}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:'Playfair Display',serif;font-size:1.6rem;color:#fff;transition:color .3s;cursor:pointer}
+.mob-menu a:hover{color:var(--p1)}
+.mob-close{position:absolute;top:20px;right:22px;background:none;border:none;font-size:1.2rem;color:rgba(200,160,180,.55);cursor:pointer;transition:color .3s}
+.mob-close:hover{color:var(--p1)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:68px;position:relative;z-index:2;overflow:hidden}
+#hc{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;position:relative;z-index:1}
+.hero-ey{display:flex;align-items:center;gap:9px;margin-bottom:17px}
+.hero-ey .ln{width:27px;height:1px;background:var(--gd)}
+.hero-ey span{font-size:.69rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--p2)}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.3rem,4.4vw,3.8rem);font-weight:900;line-height:1.05;margin-bottom:18px;letter-spacing:-.025em}
+.hero-title em{font-style:italic;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.promo-strip{display:flex;align-items:center;gap:11px;background:rgba(240,98,146,.06);border:1px solid rgba(240,98,146,.2);border-radius:10px;padding:9px 14px;margin-bottom:20px;cursor:pointer;transition:all .3s;max-width:fit-content}
+.promo-strip:hover{background:rgba(240,98,146,.12);border-color:rgba(240,98,146,.4);transform:translateX(4px)}
+.promo-icon{width:28px;height:28px;border-radius:7px;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:.74rem;flex-shrink:0}
+.promo-txt strong{font-size:.77rem;font-weight:700;color:#fff;display:block}
+.promo-txt span{font-size:.67rem;color:rgba(251,189,201,.6)}
+.hero-desc{color:rgba(251,189,201,.68);font-size:.97rem;line-height:1.82;max-width:440px;margin-bottom:30px}
+.hero-btns{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:44px}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap}
+.stat-n{font-family:'Playfair Display',serif;font-size:1.72rem;font-weight:700;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.stat-l{font-size:.68rem;color:rgba(200,160,180,.45);margin-top:3px;letter-spacing:.05em}
+/* Hero visual + tilt */
+.hero-visual{position:relative;display:flex;justify-content:center;perspective:1000px}
+.hero-tilt{transform-style:preserve-3d;transition:transform .15s ease-out}
+.hero-card{background:var(--bg3);border:1px solid rgba(240,98,146,.2);border-radius:var(--rxl);overflow:hidden;position:relative;width:288px;box-shadow:0 0 80px rgba(240,98,146,.1),0 20px 60px rgba(0,0,0,.5)}
+.hero-card img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top}
+.hero-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,5,14,.72) 0%,transparent 55%);pointer-events:none}
+.hero-tag{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(8,5,14,.88);border:1px solid rgba(240,98,146,.18);backdrop-filter:blur(16px);border-radius:10px;padding:9px 16px;text-align:center;white-space:nowrap;z-index:2}
+.hero-tag-name{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700}
+.hero-tag-role{font-size:.59rem;color:var(--p2);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.fp{position:absolute;background:rgba(10,7,22,.9);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(12px);border-radius:10px;padding:8px 13px;display:flex;align-items:center;gap:8px;font-size:.71rem;font-weight:600;white-space:nowrap;animation:float 3.2s ease-in-out infinite}
+.fp i{color:var(--p1)}
+.fp1{top:5%;right:-10%;animation-delay:0s}
+.fp2{bottom:24%;left:-12%;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* IMPACT STRIP */
+.impact-strip{background:var(--bg2);border-top:1px solid rgba(240,98,146,.09);border-bottom:1px solid rgba(240,98,146,.09);padding:36px 0;position:relative;z-index:2}
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center}
+.impact-item{padding:16px 24px;border-right:1px solid rgba(240,98,146,.1);position:relative}
+.impact-item:last-child{border-right:none}
+.impact-n{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
+.impact-l{font-size:.72rem;color:rgba(200,160,180,.5);letter-spacing:.08em}
+
+/* TICKER */
+.ticker{overflow:hidden;border-top:1px solid rgba(240,98,146,.09);border-bottom:1px solid rgba(240,98,146,.09);background:var(--bg2);padding:16px 0;cursor:pointer;position:relative;z-index:2}
+.ticker:hover .tick-t{animation-play-state:paused}
+.tick-t{display:flex;gap:44px;animation:tscroll 34s linear infinite;width:max-content}
+.tick-i{display:flex;align-items:center;gap:9px;white-space:nowrap;font-size:.75rem;font-weight:600;color:rgba(200,160,180,.5);letter-spacing:.1em;text-transform:uppercase;transition:color .2s;cursor:pointer}
+.tick-i:hover{color:var(--p2)}
+.tick-i i{color:var(--p1);font-size:.8rem}
+.tick-dot{width:3px;height:3px;background:var(--pd);border-radius:50%;flex-shrink:0}
+@keyframes tscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center}
+.about-img-w{position:relative}
+.about-img{width:100%;aspect-ratio:4/5;border-radius:var(--rxl);overflow:hidden;border:1px solid rgba(240,98,146,.16);box-shadow:0 0 60px rgba(240,98,146,.07)}
+.about-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.about-badge-abs{position:absolute;bottom:-16px;right:-16px;background:var(--bg3);border:1px solid rgba(240,98,146,.2);border-radius:var(--rl);padding:14px 18px;box-shadow:0 14px 44px rgba(0,0,0,.5)}
+.abn{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.abt{font-size:.66rem;color:rgba(200,160,180,.55);margin-top:3px}
+.pillars{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+.pillar{display:flex;gap:12px;align-items:flex-start}
+.pillar-icon{width:38px;height:38px;min-width:38px;border-radius:10px;background:rgba(240,98,146,.08);border:1px solid rgba(240,98,146,.18);display:flex;align-items:center;justify-content:center;color:var(--p1);font-size:.86rem}
+.pillar h4{font-size:.85rem;font-weight:700;margin-bottom:3px}
+.pillar p{font-size:.77rem;color:rgba(251,189,201,.62);line-height:1.65}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:50px;position:relative}
+.how-grid::before{content:'';position:absolute;top:40px;left:16%;right:16%;height:1px;background:linear-gradient(90deg,transparent,rgba(240,98,146,.3),transparent)}
+.how-card{background:var(--gl);border:1px solid rgba(240,98,146,.1);border-radius:var(--rl);padding:28px 22px;position:relative;overflow:hidden;transition:all .4s var(--ease);text-align:center}
+.how-card:hover{border-color:rgba(240,98,146,.3);transform:translateY(-5px);box-shadow:0 18px 48px rgba(240,98,146,.09)}
+.how-num{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:.07;position:absolute;top:12px;right:15px;line-height:1}
+.how-icon{width:52px;height:52px;border-radius:13px;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin:0 auto 16px;box-shadow:0 4px 18px rgba(233,30,140,.28)}
+.how-card h3{font-size:.97rem;font-weight:700;margin-bottom:8px}
+.how-card p{font-size:.81rem;color:rgba(251,189,201,.62);line-height:1.72}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc-card{background:var(--gl);border:1px solid rgba(240,98,146,.09);border-radius:var(--rl);padding:25px 21px;position:relative;overflow:hidden;transition:all .4s var(--ease)}
+.svc-card::before{content:'';position:absolute;inset:0;background:var(--gds);opacity:0;transition:opacity .4s}
+.svc-card:hover{border-color:rgba(240,98,146,.28);transform:translateY(-5px);box-shadow:0 18px 46px rgba(240,98,146,.09)}
+.svc-card:hover::before{opacity:1}
+.svc-inner{position:relative;z-index:1}
+.svc-n{font-family:'Playfair Display',serif;font-size:2.7rem;font-weight:900;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:.07;position:absolute;top:10px;right:14px;line-height:1}
+.svc-icon{width:44px;height:44px;border-radius:11px;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:16px;box-shadow:0 4px 16px rgba(233,30,140,.26)}
+.svc-card h3{font-size:.94rem;font-weight:700;margin-bottom:7px}
+.svc-card p{font-size:.8rem;color:rgba(251,189,201,.62);line-height:1.72;margin-bottom:14px}
+.svc-tags{display:flex;flex-wrap:wrap;gap:4px}
+.svc-tag{font-size:.6rem;font-weight:700;padding:3px 8px;background:rgba(240,98,146,.08);border:1px solid rgba(240,98,146,.17);border-radius:99px;color:var(--p2);letter-spacing:.04em}
+.svc-div{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin:4px 0}
+.svc-div span{font-size:.61rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(180,140,160,.45);white-space:nowrap}
+.svc-div::before,.svc-div::after{content:'';flex:1;height:1px;background:rgba(240,98,146,.09)}
+.svc-7day{background:linear-gradient(135deg,rgba(240,98,146,.09),rgba(194,24,91,.05));border-color:rgba(240,98,146,.26);grid-column:span 3;display:grid;grid-template-columns:1fr auto;align-items:center;gap:26px;cursor:pointer}
+.svc-7day:hover{box-shadow:0 20px 50px rgba(240,98,146,.14)}
+.s7p{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:5px}
+
+/* WHY US */
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:58px;align-items:center}
+.why-cards{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.why-card{background:var(--bg3);border:1px solid rgba(240,98,146,.09);border-radius:var(--r);padding:20px 16px;transition:all .3s var(--ease)}
+.why-card:hover{border-color:rgba(240,98,146,.26);box-shadow:0 7px 24px rgba(240,98,146,.07);transform:translateY(-3px)}
+.why-icon{width:37px;height:37px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.88rem;margin-bottom:11px}
+.why-card h4{font-size:.84rem;font-weight:700;margin-bottom:5px}
+.why-card p{font-size:.76rem;color:rgba(251,189,201,.58);line-height:1.65}
+.why-big{grid-column:span 2;background:var(--gds);border-color:rgba(240,98,146,.18)}
+.prog-bars{display:flex;flex-direction:column;gap:14px;margin-top:26px}
+.prog-meta{display:flex;justify-content:space-between;margin-bottom:5px}
+.prog-name{font-size:.78rem;font-weight:500}
+.prog-pct{font-size:.78rem;font-weight:700;color:var(--p2)}
+.prog-track{height:4px;background:var(--bg4);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;border-radius:99px;background:var(--gd);transform:scaleX(0);transform-origin:left;transition:transform 1.5s var(--ease)}
+.prog-fill.on{transform:scaleX(1)}
+
+/* TESTIMONIALS */
+.testi-slider{overflow:hidden;position:relative}
+.testi-track{display:flex;gap:18px;transition:transform .6s var(--ease)}
+.testi-card{background:rgba(255,255,255,.03);border:1px solid rgba(240,98,146,.11);border-radius:var(--rl);padding:24px;flex:0 0 calc(33.33% - 12px);transition:border-color .3s}
+.testi-card:hover{border-color:rgba(240,98,146,.26)}
+.testi-card::before{content:'\201C';position:absolute;top:9px;right:14px;font-family:'Playfair Display',serif;font-size:3.6rem;line-height:1;background:var(--gd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:.14}
+.testi-card{position:relative;overflow:hidden}
+.testi-stars{display:flex;gap:3px;margin-bottom:11px}
+.testi-stars i{color:var(--p1);font-size:.71rem}
+.testi-text{font-size:.82rem;color:rgba(251,189,201,.72);line-height:1.76;margin-bottom:17px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:9px}
+.testi-av{width:35px;height:35px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:.86rem;color:#fff;flex-shrink:0}
+.testi-name{font-weight:700;font-size:.82rem}
+.testi-role{font-size:.65rem;color:rgba(200,160,180,.45);margin-top:1px}
+.testi-dots{display:flex;gap:7px;justify-content:center;margin-top:20px}
+.testi-dot{width:7px;height:7px;border-radius:50%;background:rgba(240,98,146,.22);cursor:pointer;transition:all .3s}
+.testi-dot.active{background:var(--p1);width:22px;border-radius:99px}
+
+/* BOOKING */
+.booking-sec{background:var(--bg2)}
+.booking-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:52px;align-items:start}
+.bk-contact{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.bk-row{display:flex;align-items:center;gap:12px}
+.bk-icon{width:38px;height:38px;min-width:38px;border-radius:9px;background:rgba(240,98,146,.08);border:1px solid rgba(240,98,146,.16);display:flex;align-items:center;justify-content:center;color:var(--p1);font-size:.88rem}
+.bk-lbl{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(200,160,180,.45);margin-bottom:1px}
+.bk-val{font-weight:500;font-size:.86rem}
+.socials{display:flex;gap:8px;margin-top:22px}
+.soc-l{width:37px;height:37px;border-radius:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(200,160,180,.55);font-size:.86rem;transition:all .3s}
+.soc-l:hover{background:var(--gd);border-color:transparent;color:#fff;transform:translateY(-2px)}
+
+/* Booking wizard */
+.bk-card{background:var(--bg3);border:1px solid rgba(240,98,146,.14);border-radius:var(--rxl);padding:30px;overflow:hidden;position:relative}
+.bk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gd)}
+.bk-steps{display:flex;align-items:center;margin-bottom:26px;gap:0}
+.bk-step{display:flex;align-items:center;flex:1}
+.bk-sn{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.73rem;font-weight:700;border:1.5px solid rgba(240,98,146,.22);color:rgba(200,160,180,.45);transition:all .35s;flex-shrink:0}
+.bk-step.done .bk-sn{background:var(--gd);border-color:transparent;color:#fff}
+.bk-step.active .bk-sn{background:rgba(240,98,146,.14);border-color:var(--p1);color:var(--p1);box-shadow:0 0 0 3px rgba(240,98,146,.1)}
+.bk-sl{font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(200,160,180,.35);margin-left:6px;white-space:nowrap}
+.bk-step.active .bk-sl{color:var(--p1)}
+.bk-step.done .bk-sl{color:var(--p2)}
+.bk-line{flex:1;height:1px;background:rgba(240,98,146,.13);margin:0 7px}
+.bk-step.done .bk-line{background:rgba(240,98,146,.36)}
+.bk-panel{display:none}
+.bk-panel.active{display:block}
+.bk-ptitle{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:5px}
+.bk-psub{font-size:.78rem;color:rgba(251,189,201,.55);margin-bottom:17px}
+.bk-svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px}
+.bk-svc-pill{padding:9px 12px;border-radius:9px;border:1px solid rgba(240,98,146,.14);background:rgba(240,98,146,.04);font-size:.76rem;font-weight:600;cursor:pointer;transition:all .3s;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:7px}
+.bk-svc-pill:hover{border-color:rgba(240,98,146,.33);background:rgba(240,98,146,.08)}
+.bk-svc-pill.sel{border-color:var(--p1);background:rgba(240,98,146,.13);color:#fff}
+.bk-svc-pill i{color:var(--p1);font-size:.78rem;width:14px}
+.cal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.cal-nav{background:none;border:1px solid rgba(240,98,146,.18);border-radius:8px;width:29px;height:29px;color:var(--p1);cursor:pointer;font-size:.82rem;transition:all .3s;display:flex;align-items:center;justify-content:center}
+.cal-nav:hover{background:rgba(240,98,146,.1)}
+.cal-month{font-weight:700;font-size:.9rem}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:10px}
+.cal-dh{text-align:center;font-size:.6rem;font-weight:700;letter-spacing:.07em;color:rgba(200,160,180,.38);padding:4px 0}
+.cal-d{text-align:center;padding:6px 2px;border-radius:7px;font-size:.78rem;border:1px solid transparent;transition:all .22s}
+.cal-d.dis{color:rgba(200,160,180,.18);cursor:not-allowed}
+.cal-d.avail{color:rgba(255,255,255,.82);cursor:pointer}
+.cal-d.avail:hover{background:rgba(240,98,146,.11);border-color:rgba(240,98,146,.24);color:#fff}
+.cal-d.today{font-weight:700;color:var(--p1)}
+.cal-d.sel{background:var(--gd);color:#fff;font-weight:700;box-shadow:0 2px 9px rgba(240,98,146,.3)}
+.time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}
+.time-pill{padding:9px 4px;border-radius:8px;border:1px solid rgba(240,98,146,.14);background:rgba(240,98,146,.04);font-size:.76rem;font-weight:600;cursor:pointer;transition:all .3s;color:rgba(255,255,255,.72);text-align:center}
+.time-pill:hover:not(.unavail){border-color:rgba(240,98,146,.33);background:rgba(240,98,146,.1)}
+.time-pill.sel{border-color:var(--p1);background:rgba(240,98,146,.15);color:#fff}
+.time-pill.unavail{opacity:.28;cursor:not-allowed;text-decoration:line-through}
+.form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:11px}
+.form-group label{font-size:.66rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(200,160,180,.55)}
+.form-group input,.form-group select,.form-group textarea{background:var(--bg4);border:1.5px solid rgba(255,255,255,.08);border-radius:9px;padding:10px 13px;font-family:'Inter',sans-serif;font-size:.84rem;color:#fff;transition:all .3s;outline:none;width:100%}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(150,120,140,.42)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--p1);box-shadow:0 0 0 3px rgba(240,98,146,.09)}
+.form-group select option{background:var(--bg3)}
+.form-group textarea{resize:none;height:78px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bk-tz-note{font-size:.72rem;line-height:1.55;color:rgba(251,189,201,.52);margin-top:7px;display:block}
+.bk-tz-note strong{color:rgba(251,189,201,.78);font-weight:600}
+.bk-consent{display:flex;gap:10px;align-items:flex-start;font-size:.76rem;color:rgba(251,189,201,.68);margin:12px 0 4px;line-height:1.45}
+.bk-consent input{flex-shrink:0;margin-top:3px;width:auto!important}
+.bk-hp-wrap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+.bk-submit-err{display:none;font-size:.78rem;color:#ff8a8a;margin-top:8px}
+.bk-submit-err.show{display:block}
+.bk-nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px;gap:10px}
+.bk-nav-r{display:flex;justify-content:flex-end;margin-top:16px}
+.bk-confirm{text-align:center;padding:8px 0}
+.bk-check-w{width:58px;height:58px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:1.35rem;animation:popIn .5s var(--ease) both;box-shadow:0 4px 22px rgba(233,30,140,.38)}
+@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.bk-ref{display:inline-block;background:rgba(240,98,146,.1);border:1px solid rgba(240,98,146,.24);border-radius:8px;padding:5px 15px;font-size:.78rem;font-weight:700;color:var(--p2);letter-spacing:.1em;margin:10px 0}
+.bk-summary{background:var(--bg4);border-radius:10px;padding:14px;margin:14px 0;text-align:left}
+.bk-sum-row{display:flex;justify-content:space-between;font-size:.78rem;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.bk-sum-row:last-child{border-bottom:none}
+.bk-sum-l{color:rgba(200,160,180,.5)}
+.bk-sum-v{font-weight:600;color:rgba(255,255,255,.88)}
+.bk-confirm-btns{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:840px;margin:0 auto}
+.faq-item{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;transition:border-color .3s}
+.faq-item.open{border-color:rgba(240,98,146,.24)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:11px;padding:16px 18px;cursor:pointer;font-size:.84rem;font-weight:600;transition:color .3s;user-select:none}
+.faq-q:hover{color:var(--p2)}
+.faq-ico{width:23px;height:23px;min-width:23px;border-radius:50%;background:rgba(240,98,146,.08);border:1px solid rgba(240,98,146,.17);display:flex;align-items:center;justify-content:center;color:var(--p1);font-size:.59rem;transition:all .3s}
+.faq-item.open .faq-ico{background:var(--gd);border-color:transparent;color:#fff;transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;padding:0 18px;font-size:.8rem;color:rgba(251,189,201,.67);line-height:1.76}
+.faq-item.open .faq-a{max-height:200px;padding:0 18px 16px}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid rgba(240,98,146,.09);padding:50px 0 20px;position:relative;z-index:2}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.foot-logo-img{width:36px;height:36px;border-radius:9px;object-fit:cover;margin-bottom:8px;border:1px solid rgba(240,98,146,.15)}
+.foot-brand .logo-n{font-size:1.2rem;display:block;margin-bottom:2px}
+.foot-brand .logo-s{display:block;margin-bottom:10px}
+.foot-brand p{font-size:.78rem;color:rgba(200,160,180,.45);line-height:1.7;max-width:210px}
+.foot-col h5{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,160,180,.55);margin-bottom:14px}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-col ul a{font-size:.8rem;color:rgba(180,140,160,.45);transition:all .3s;cursor:pointer;display:inline-block}
+.foot-col ul a:hover{color:var(--p2);transform:translateX(3px)}
+.foot-btm{border-top:1px solid rgba(240,98,146,.07);padding-top:18px;display:flex;align-items:center;justify-content:space-between}
+.foot-copy{font-size:.71rem;color:rgba(180,140,160,.38)}
+.foot-copy span{color:var(--p1)}
+.foot-legal{display:flex;gap:16px}
+.foot-legal a{font-size:.71rem;color:rgba(180,140,160,.38);transition:color .3s}
+.foot-legal a:hover{color:var(--p2)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--bg3);border:1px solid rgba(240,98,146,.28);border-radius:var(--r);padding:12px 17px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.5);z-index:9990;transform:translateY(140%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);max-width:310px}
+.toast.show{transform:translateY(0)}
+.toast-ico{width:32px;height:32px;min-width:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.toast.success .toast-ico{background:rgba(240,98,146,.12);color:var(--p1)}
+.toast.error .toast-ico{background:rgba(255,60,60,.12);color:#f55}
+.toast-ttl{font-weight:700;font-size:.8rem;margin-bottom:1px}
+.toast-msg{font-size:.7rem;color:rgba(251,189,201,.62)}
+
+/* CHAT */
+.chat-bubble{position:fixed;bottom:24px;right:24px;z-index:888}
+.chat-btn{width:48px;height:48px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 20px rgba(233,30,140,.4);border:none;transition:all .3s}
+.chat-btn:hover{transform:scale(1.08)}
+.chat-online{position:absolute;top:4px;right:4px;width:9px;height:9px;background:#22c55e;border-radius:50%;border:2px solid var(--bg)}
+.chat-popup{position:absolute;bottom:58px;right:0;width:265px;background:var(--bg3);border:1px solid rgba(240,98,146,.18);border-radius:var(--rl);padding:15px;box-shadow:0 16px 48px rgba(0,0,0,.5);display:none}
+.chat-popup.open{display:block;animation:popIn .28s var(--ease)}
+.chat-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.chat-hdr h4{font-size:.86rem;font-weight:700}
+.chat-hdr p{font-size:.7rem;color:rgba(251,189,201,.55);margin-top:2px}
+.chat-x{background:none;border:none;color:rgba(200,160,180,.45);cursor:pointer;font-size:.78rem;transition:color .3s}
+.chat-x:hover{color:var(--p1)}
+.chat-msgs{display:flex;flex-direction:column;gap:7px;max-height:115px;overflow-y:auto;margin-bottom:10px}
+.chat-msg{font-size:.73rem;padding:6px 10px;border-radius:8px;max-width:205px;line-height:1.5}
+.chat-msg.bot{background:var(--bg4);color:rgba(230,210,220,.88);align-self:flex-start}
+.chat-msg.usr{background:var(--gd);color:#fff;align-self:flex-end}
+.chat-iw{display:flex;gap:6px}
+.chat-iw input{flex:1;background:var(--bg4);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:8px 11px;font-size:.76rem;color:#fff;outline:none;font-family:'Inter',sans-serif}
+.chat-iw input::placeholder{color:rgba(180,140,160,.38)}
+.chat-iw input:focus{border-color:var(--p1)}
+.chat-snd{width:33px;height:33px;border-radius:8px;background:var(--gd);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .3s;flex-shrink:0}
+.chat-snd:hover{transform:scale(1.08)}
+
+/* BACK TOP */
+.back-top{position:fixed;bottom:24px;left:24px;width:38px;height:38px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;cursor:pointer;opacity:0;pointer-events:none;transition:all .3s;box-shadow:0 4px 16px rgba(233,30,140,.33);z-index:888;border:none}
+.back-top.on{opacity:1;pointer-events:all}
+.back-top:hover{transform:translateY(-3px)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .svc-7day{grid-column:span 2}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .d7-wrap{grid-template-columns:1fr}
+  .d7-right{border-left:none;border-top:1px solid rgba(240,98,146,.1)}
+  .impact-grid{grid-template-columns:repeat(2,1fr)}
+  .impact-item:nth-child(2){border-right:none}
+}
+@media(max-width:768px){
+  .sec{padding:68px 0}
+  .hero-grid,.about-grid,.why-grid,.booking-wrap{grid-template-columns:1fr;gap:36px}
+  .hero-visual{display:none}
+  .nav-links{display:none}
+  .hbg{display:flex}
+  .svc-grid,.why-cards,.faq-grid,.form-row,.bk-svc-grid,.time-grid{grid-template-columns:1fr}
+  .time-grid{grid-template-columns:repeat(3,1fr)}
+  .svc-7day{grid-column:span 1;grid-template-columns:1fr;gap:12px}
+  .why-big{grid-column:span 1}
+  .foot-grid{grid-template-columns:1fr;gap:20px}
+  .foot-btm{flex-direction:column;gap:8px;text-align:center}
+  .about-badge-abs{right:0;bottom:-10px}
+  .faq-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .how-grid::before{display:none}
+  .testi-card{flex:0 0 82%}
+  .impact-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  .hero-btns,.land-btns,.d7-ctas{flex-direction:column;align-items:stretch}
+  .hero-btns .btn,.land-btns .btn,.d7-ctas .btn{width:100%;justify-content:center}
+  .toast{left:12px;right:12px;bottom:12px}
+  .bk-steps .bk-sl{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div id="sp"></div>
+
+<!-- BG CANVAS -->
+<canvas id="bg-c"></canvas>
+
+<!-- CURSOR -->
+<div class="cur-ring" id="cR"></div>
+<div class="cur-dot" id="cD"></div>
+
+<!-- PAGE OVERLAY -->
+<div id="ov"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><div class="toast-ico"><i id="tIco" class="fas fa-check"></i></div><div><div class="toast-ttl" id="tT"></div><div class="toast-msg" id="tM"></div></div></div>
+
+<!-- BACK TOP -->
+<button class="back-top" id="btTop"><i class="fas fa-arrow-up"></i></button>
+
+<!-- SOCIAL PROOF NOTIFICATION -->
+<div class="sp-notif" id="spNotif">
+  <div class="sp-av" id="spAv">J</div>
+  <div><div class="sp-name" id="spName">Jane D.</div><div class="sp-action" id="spAct">just booked a discovery call</div></div>
+  <div class="sp-dot"></div>
+</div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-logo-wrap"><img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Logo%20Square.png" alt="BWS" crossorigin="anonymous" onerror="this.style.display='none'"/></div>
+  <div class="ld-txt">Best Work Solution</div>
+  <div class="ld-bar-track"><div class="ld-bar"></div></div>
+</div>
+
+<!-- CHAT -->
+<div class="chat-bubble">
+  <button class="chat-btn" id="chatBtn"><i class="fas fa-comment-dots"></i><span class="chat-online"></span></button>
+  <div class="chat-popup" id="chatPop">
+    <div class="chat-hdr"><div><h4>👋 Hi there!</h4><p>We reply in a few minutes.</p></div><button class="chat-x" id="chatX"><i class="fas fa-times"></i></button></div>
+    <div class="chat-msgs" id="chatMsgs"><div class="chat-msg bot">Hello! How can we help you today?</div></div>
+    <div class="chat-iw"><input type="text" id="chatIn" placeholder="Type a message…"/><button class="chat-snd" id="chatSnd"><i class="fas fa-paper-plane"></i></button></div>
+  </div>
+</div>
+
+<!-- MOBILE STICKY BAR -->
+<div class="mob-sticky" id="mobSticky">
+  <a href="#booking" class="btn btn-g ml">📞 Book a Call</a>
+  <button class="btn btn-p" id="mobSticky7d"><i class="fas fa-bolt"></i><span>7-Day Site</span></button>
+</div>
+
+<!-- ██ LANDING PAGE ██ -->
+<div id="pg-land">
+  <canvas id="lc"></canvas>
+  <canvas id="part-c"></canvas>
+  <div class="land-ui">
+    <div class="land-logo"><img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Logo%20Square.png" alt="BWS" crossorigin="anonymous" onerror="this.style.display='none'"/></div>
+    <div class="land-ey">Virtual Assistant Agency</div>
+    <h1 class="land-title">Best Work<br/><em>Solution</em></h1>
+    <p class="land-sub">Elite remote talent. Seamless support. Measurable growth — for ambitious businesses that refuse to settle.</p>
+    <div class="land-btns">
+      <button class="btn btn-p" id="enterBtn"><i class="fas fa-rocket"></i><span>Enter the Experience</span></button>
+      <button class="btn btn-g" id="learnBtn"><span>Learn More</span><i class="fas fa-arrow-down"></i></button>
+    </div>
+    <div class="land-stats">
+      <div><div class="ls-n">200+</div><div class="ls-l">Clients Served</div></div>
+      <div><div class="ls-n">98%</div><div class="ls-l">Satisfaction</div></div>
+      <div><div class="ls-n">5+</div><div class="ls-l">Years</div></div>
+      <div><div class="ls-n">500+</div><div class="ls-l">VAs Placed</div></div>
+    </div>
+    <div class="land-pills">
+      <div class="land-pill"><i class="fas fa-briefcase"></i>Admin VA</div>
+      <div class="land-pill"><i class="fas fa-hashtag"></i>Social Media</div>
+      <div class="land-pill"><i class="fas fa-headset"></i>Customer Service</div>
+      <div class="land-pill"><i class="fas fa-palette"></i>Web Design</div>
+      <div class="land-pill"><i class="fas fa-bolt"></i>7-Day Website · $999</div>
+      <div class="land-pill"><i class="fas fa-robot"></i>Automations</div>
+      <div class="land-pill"><i class="fas fa-filter"></i>Funnels</div>
+    </div>
+  </div>
+  <div class="land-hint"><div class="mouse-icon"><div class="mouse-dot"></div></div><span>Scroll to explore</span></div>
+</div>
+
+<!-- ██ 7-DAY AD PAGE ██ -->
+<div id="pg-7d">
+  <canvas id="c7d"></canvas>
+  <button class="d7-back" id="d7Back"><i class="fas fa-arrow-left"></i> Back</button>
+  <div class="d7-wrap">
+    <div class="d7-left">
+      <div class="d7-live"><span class="live-dot"></span>Limited Offer · Best Work Solution</div>
+      <h1 class="d7-headline">Your Dream Site.<br/>Live in <em>7 Days</em>.<br/>Just $999.</h1>
+      <p class="d7-desc">A fully custom website — beautiful UI, complete backend, deployed and live in one week. No templates, no shortcuts. Your vision, built properly, on time — guaranteed.</p>
+      <ul class="d7-feats">
+        <li><div class="d7-check"><i class="fas fa-check"></i></div>Custom UI/UX Design (your brand, your vision)</li>
+        <li><div class="d7-check"><i class="fas fa-check"></i></div>Full Frontend + Backend Development</li>
+        <li><div class="d7-check"><i class="fas fa-check"></i></div>Database Setup & Contact / Lead Forms</li>
+        <li><div class="d7-check"><i class="fas fa-check"></i></div>SEO-Ready + SSL Certificate + Deployment</li>
+        <li><div class="d7-check"><i class="fas fa-check"></i></div>100% Mobile Responsive + Speed Optimized</li>
+        <li><div class="d7-check"><i class="fas fa-check"></i></div>30-Day Post-Launch Support Included Free</li>
+      </ul>
+      <div class="d7-ctas">
+        <button class="btn btn-p" id="d7BookBtn"><i class="fas fa-calendar-check"></i><span>Book Your Spot Now</span></button>
+        <a href="https://wa.me/639772497868" class="btn btn-g" target="_blank"><i class="fab fa-whatsapp"></i><span>WhatsApp Us</span></a>
+      </div>
+    </div>
+    <div class="d7-right">
+      <!-- Price card -->
+      <div class="d7-price-card">
+        <div class="d7-was">Regular price: $2,499+</div>
+        <div class="d7-price"><sup>$</sup>999</div>
+        <div class="d7-price-note">One-time · All-inclusive · 7-day delivery</div>
+        <div class="d7-cd-lbl"><i class="fas fa-fire"></i> Offer expires in</div>
+        <div class="d7-cd">
+          <div class="cd-u"><span class="cd-n" id="cdD">00</span><div class="cd-l">Days</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-u"><span class="cd-n" id="cdH">00</span><div class="cd-l">Hrs</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-u"><span class="cd-n" id="cdM">00</span><div class="cd-l">Min</div></div>
+          <div class="cd-sep">:</div>
+          <div class="cd-u"><span class="cd-n" id="cdS">00</span><div class="cd-l">Sec</div></div>
+        </div>
+        <div class="d7-slots">
+          <div class="slot-dots"><div class="slot-d tk"></div><div class="slot-d tk"></div><div class="slot-d tk"></div><div class="slot-d av"></div><div class="slot-d av"></div></div>
+          <div class="slot-txt">Only <span>2 slots</span> remaining this month</div>
+        </div>
+      </div>
+      <!-- Compare table -->
+      <div class="d7-compare">
+        <div class="d7-compare-title">Why not DIY or a cheap builder?</div>
+        <div class="d7-cmp-row"><div class="d7-cmp-feat"></div><div class="d7-cmp-hdr">Others</div><div class="d7-cmp-hdr" style="color:var(--p2)">BWS</div></div>
+        <div class="d7-cmp-row"><div class="d7-cmp-feat">Custom Design</div><div class="d7-cmp-x"><i class="fas fa-xmark"></i></div><div class="d7-cmp-check"><i class="fas fa-check"></i></div></div>
+        <div class="d7-cmp-row"><div class="d7-cmp-feat">Backend Included</div><div class="d7-cmp-x"><i class="fas fa-xmark"></i></div><div class="d7-cmp-check"><i class="fas fa-check"></i></div></div>
+        <div class="d7-cmp-row"><div class="d7-cmp-feat">7-Day Delivery</div><div class="d7-cmp-x"><i class="fas fa-xmark"></i></div><div class="d7-cmp-check"><i class="fas fa-check"></i></div></div>
+        <div class="d7-cmp-row"><div class="d7-cmp-feat">30-Day Support</div><div class="d7-cmp-x"><i class="fas fa-xmark"></i></div><div class="d7-cmp-check"><i class="fas fa-check"></i></div></div>
+        <div class="d7-cmp-row"><div class="d7-cmp-feat">SEO + SSL</div><div class="d7-cmp-x"><i class="fas fa-xmark"></i></div><div class="d7-cmp-check"><i class="fas fa-check"></i></div></div>
+      </div>
+      <!-- Social proof -->
+      <div class="d7-sp">
+        <div class="d7-sp-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <div class="d7-sp-q">"They delivered my entire website in 6 days. Looks incredible and converts like crazy. Best investment I've made."</div>
+        <div class="d7-sp-a">— Mark D., SaaS Founder · USA</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ██ MAIN SITE ██ -->
+<div id="pg-main">
+<canvas id="pc"></canvas>
+
+<!-- NAVBAR -->
+<header>
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#home" class="nav-logo">
+          <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Logo%20Square.png" alt="BWS" class="nav-logo-img" crossorigin="anonymous" onerror="this.style.display='none'"/>
+          <div><div class="logo-n">Best Work Solution</div><div class="logo-s">Virtual Assistant Agency</div></div>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#about" class="nl">About</a></li>
+          <li><a href="#services" class="nl">Services</a></li>
+          <li><a href="#why-us" class="nl">Why Us</a></li>
+          <li><a href="#testimonials" class="nl">Reviews</a></li>
+          <li><a href="#booking" class="nl">Book a Call</a></li>
+          <li><a href="#faq" class="nl">FAQ</a></li>
+          <li><a href="#" class="nl nav-cta" id="nav7d"><i class="fas fa-bolt"></i> 7-Day Website</a></li>
+        </ul>
+        <button class="hbg" id="hamBtn"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mob-menu" id="mobMenu">
+    <button class="mob-close" id="mobClose"><i class="fas fa-times"></i></button>
+    <a href="#about" class="ml">About</a>
+    <a href="#services" class="ml">Services</a>
+    <a href="#why-us" class="ml">Why Us</a>
+    <a href="#testimonials" class="ml">Reviews</a>
+    <a href="#booking" class="ml">Book a Call</a>
+    <a href="#faq" class="ml">FAQ</a>
+    <a href="#" id="mob7d" style="color:var(--p2)"><i class="fas fa-bolt"></i> 7-Day Website</a>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="sec hero" id="home">
+  <canvas id="hc"></canvas>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="rvl">
+        <div class="hero-ey"><div class="ln"></div><span>Elite Virtual Assistant Agency</span></div>
+        <h1 class="hero-title">Grow Your Business With<br/><em id="typeEl">World-Class</em> Talent</h1>
+        <div class="promo-strip" id="promo7d">
+          <div class="promo-icon"><i class="fas fa-bolt"></i></div>
+          <div class="promo-txt"><strong>🔥 7-Day Website — $999 · 2 Slots Left</strong><span>Full custom site, frontend + backend. Live in a week.</span></div>
+          <i class="fas fa-chevron-right" style="color:var(--p1);font-size:.7rem"></i>
+        </div>
+        <p class="hero-desc">We connect ambitious businesses with highly trained virtual assistants — so you focus on what matters most while we handle the rest.</p>
+        <div class="hero-btns">
+          <a href="#booking" class="btn btn-p ripple-btn"><i class="fas fa-rocket"></i><span>Hire a VA Today</span></a>
+          <a href="#services" class="btn btn-g"><span>Explore Services</span><i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-n" data-target="200">0+</div><div class="stat-l">Clients Served</div></div>
+          <div><div class="stat-n" data-target="98">0%</div><div class="stat-l">Satisfaction Rate</div></div>
+          <div><div class="stat-n" data-target="500">0+</div><div class="stat-l">VAs Placed</div></div>
+        </div>
+      </div>
+      <div class="hero-visual rvr">
+        <div class="hero-tilt" id="heroTilt">
+          <div class="hero-card">
+            <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Jave_s%20Picture.png" alt="Jave — Founder" crossorigin="anonymous" onerror="this.parentElement.style.minHeight='380px'"/>
+            <div class="hero-tag"><div class="hero-tag-name">Jave</div><div class="hero-tag-role">Founder & CEO · BWS</div></div>
+          </div>
+        </div>
+        <div class="fp fp1"><i class="fas fa-shield-halved"></i> Vetted Professionals</div>
+        <div class="fp fp2"><i class="fas fa-star"></i> 5-Star Rated Agency</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT STRIP -->
+<div class="impact-strip">
+  <div class="container">
+    <div class="impact-grid">
+      <div class="impact-item rv"><div class="impact-n" data-target="200">0+</div><div class="impact-l">Happy Clients</div></div>
+      <div class="impact-item rv d1"><div class="impact-n" data-target="500">0+</div><div class="impact-l">VAs Placed Worldwide</div></div>
+      <div class="impact-item rv d2"><div class="impact-n" data-target="98">0%</div><div class="impact-l">Client Satisfaction Rate</div></div>
+      <div class="impact-item rv d3"><div class="impact-n" data-target="5">0+</div><div class="impact-l">Years of Excellence</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker" id="tickerBar">
+  <div class="tick-t">
+    <div class="tick-i" data-go="services"><i class="fas fa-briefcase"></i>Administrative Support</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-hashtag"></i>Social Media Management</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-headset"></i>Customer Service</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-calendar-check"></i>Calendar & Email</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-store"></i>E-Commerce Support</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-calculator"></i>Bookkeeping</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-palette"></i>Web Design</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="7day" style="color:var(--p2)"><i class="fas fa-bolt"></i>7-Day Website · $999</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-briefcase"></i>Administrative Support</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-hashtag"></i>Social Media Management</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-headset"></i>Customer Service</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-calendar-check"></i>Calendar & Email</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-store"></i>E-Commerce Support</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-calculator"></i>Bookkeeping</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="services"><i class="fas fa-palette"></i>Web Design</div><div class="tick-dot"></div>
+    <div class="tick-i" data-go="7day" style="color:var(--p2)"><i class="fas fa-bolt"></i>7-Day Website · $999</div><div class="tick-dot"></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about" style="background:var(--bg2)">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-w rvl">
+        <div class="about-img"><img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Jave_s%20Picture.png" alt="Jave" crossorigin="anonymous" onerror="this.style.display='none'"/></div>
+        <div class="about-badge-abs"><div class="abn">500+</div><div class="abt">VAs Placed Worldwide</div></div>
+      </div>
+      <div class="rvr">
+        <div class="badge"><i class="fas fa-sparkles"></i> Our Story</div>
+        <h2 class="sec-title">More Than an Agency.<br/><span class="gdt">A Career Partner.</span></h2>
+        <p class="sec-sub">Best Work Solution was built on one belief: talented people deserve meaningful opportunities, and businesses deserve exceptional support. We bridge that gap every single day.</p>
+        <p class="sec-sub" style="margin-top:11px">From day one, our founder set out to build not just a staffing agency, but a community where every VA thrives and every client gets seamless, professional results.</p>
+        <div class="pillars">
+          <div class="pillar"><div class="pillar-icon"><i class="fas fa-gem"></i></div><div><h4>Handpicked Talent</h4><p>Every VA undergoes rigorous screening and training before joining our roster.</p></div></div>
+          <div class="pillar"><div class="pillar-icon"><i class="fas fa-handshake"></i></div><div><h4>Dedicated Partnership</h4><p>We work alongside you — not just for you. Your success is our success.</p></div></div>
+          <div class="pillar"><div class="pillar-icon"><i class="fas fa-globe"></i></div><div><h4>Global Reach, Local Care</h4><p>Worldwide clients, boutique-agency personal touch.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec" id="how">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="badge rv"><i class="fas fa-route"></i> The Process</div>
+      <h2 class="sec-title rv d1">Getting Started is <span class="gdt">Simple</span></h2>
+      <p class="sec-sub rv d2" style="margin:0 auto">From discovery to deployment — we make it completely effortless.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-card rv d1"><div class="how-num">01</div><div class="how-icon"><i class="fas fa-comments"></i></div><h3>Discovery Call</h3><p>Book a free 30-min call. Tell us your goals, challenges, and what you need most. We listen first, then recommend.</p></div>
+      <div class="how-card rv d2"><div class="how-num">02</div><div class="how-icon"><i class="fas fa-user-check"></i></div><h3>Match & Onboard</h3><p>Within 48–72 hours, we match you with a pre-vetted VA perfectly aligned to your needs and workflow.</p></div>
+      <div class="how-card rv d3"><div class="how-num">03</div><div class="how-icon"><i class="fas fa-chart-line"></i></div><h3>Scale & Grow</h3><p>Your VA dives in, your operations improve, and you get your time back. We monitor performance throughout.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" id="services" style="background:var(--bg2)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px">
+      <div class="badge rv"><i class="fas fa-layer-group"></i> What We Offer</div>
+      <h2 class="sec-title rv d1">Comprehensive VA Services<br/><span class="gdt">Tailored to Your Needs</span></h2>
+      <p class="sec-sub rv d2" style="margin:0 auto">From admin ops to digital presence — trained, tested, and ready to make your business thrive.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-div rv"><span>Core VA Services</span></div>
+      <div class="svc-card rv d1"><div class="svc-n">01</div><div class="svc-inner"><div class="svc-icon"><i class="fas fa-briefcase"></i></div><h3>Administrative & Executive VA</h3><p>Streamline operations with a dedicated assistant managing your daily workflow with precision.</p><div class="svc-tags"><span class="svc-tag">Scheduling</span><span class="svc-tag">Reporting</span><span class="svc-tag">Research</span><span class="svc-tag">Document Prep</span></div></div></div>
+      <div class="svc-card rv d2"><div class="svc-n">02</div><div class="svc-inner"><div class="svc-icon"><i class="fas fa-hashtag"></i></div><h3>Social Media Management</h3><p>Grow your online presence with strategic content creation and performance-driven campaigns.</p><div class="svc-tags"><span class="svc-tag">Content Creation</span><span class="svc-tag">Scheduling</span><span class="svc-tag">Analytics</span><span class="svc-tag">Engagement</span></div></div></div>
+      <div class="svc-card rv d3"><div class="svc-n">03</div><div class="svc-inner"><div class="svc-icon"><i class="fas fa-headset"></i></div><h3>Customer Service & Support</h3><p>Deliver exceptional experiences with trained specialists representing your brand at every touchpoint.</p><div class="svc-tags"><span class="svc-tag">Live Chat</span><span class="svc-tag">Email Support</span><span class="svc-tag">Ticketing</span><span class="svc-tag">CRM</span></div></div></div>
+      <div class="svc-card rv d1"><div class="svc-n">04</div><div class="svc-inner"><div class="svc-icon"><i class="fas fa-calendar-check"></i></div><h3>Email & Calendar Management</h3><p>Never miss a meeting again. Your VA keeps your inbox and schedule under complete control.</p><div class="svc-tags"><span class="svc-tag">Inbox Zero</span><span class="svc-tag">Meetings</span><span class="svc-tag">Follow-ups</span><span class="svc-tag">Travel Planning</span></div></div></div>
+      <div class="svc-card rv d2"><div class="svc-n">05</div><div class="svc-inner"><div class="svc-icon"><i class="fas fa-store"></i></div><h3>E-Commerce Support</h3><p>Manage your online store efficiently — listings, orders, inquiries, and inventory with ease.</p><div class="svc-tags"><span class="svc-tag">Product Listings</span><span class="svc-tag">Order Management</span><span class="svc-tag">Shopify</span><span class="svc-tag">Amazon</span></div></div></div>
+      <div class="svc-card rv d3"><div class="svc-n">06</div><div class="svc-inner"><div class="svc-icon"><i class="fas fa-calculator"></i></div><h3>Bookkeeping & Finance</h3><p>Keep financials in order — from expense tracking to invoicing and reconciliation.</p><div class="svc-tags"><span class="svc-tag">QuickBooks</span><span class="svc-tag">Invoicing</span><span class="svc-tag">Reconciliation</span><span class="svc-tag">Payroll</span></div></div></div>
+      <div class="svc-div rv" style="margin-top:12px"><span>Digital & Tech Services</span></div>
+      <div class="svc-card rv d1"><div class="svc-n">07</div><div class="svc-inner"><div class="svc-icon"><i class="fas fa-palette"></i></div><h3>Web Design</h3><p>Beautiful, conversion-focused websites that turn visitors into clients — fully responsive and on-brand.</p><div class="svc-tags"><span class="svc-tag">WordPress</span><span class="svc-tag">Wix</span><span class="svc-tag">UI/UX</span><span class="svc-tag">Responsive</span></div></div></div>
+      <div class="svc-card rv d2"><div class="svc-n">08</div><div class="svc-inner"><div class="svc-icon"><i class="fas fa-filter"></i></div><h3>Funnel Creation</h3><p>High-converting sales funnels designed and built to guide prospects from curiosity to purchase.</p><div class="svc-tags"><span class="svc-tag">ClickFunnels</span><span class="svc-tag">GoHighLevel</span><span class="svc-tag">Lead Capture</span><span class="svc-tag">Upsells</span></div></div></div>
+      <div class="svc-card rv d3"><div class="svc-n">09</div><div class="svc-inner"><div class="svc-icon"><i class="fas fa-robot"></i></div><h3>Automations</h3><p>Let your business run on autopilot with smart workflows that save you hours every single week.</p><div class="svc-tags"><span class="svc-tag">Zapier</span><span class="svc-tag">Make</span><span class="svc-tag">CRM Automation</span><span class="svc-tag">Email Flows</span></div></div></div>
+      <div class="svc-div rv" style="margin-top:12px"><span>Featured Offer</span></div>
+      <div class="svc-card svc-7day rv" id="svc7d">
+        <div class="svc-inner">
+          <div class="svc-icon"><i class="fas fa-bolt"></i></div>
+          <h3 style="font-size:1.18rem;margin-bottom:6px">The 7-Day Website</h3>
+          <p style="margin-bottom:11px">Full custom website — frontend + backend — designed, built, and deployed live within 7 days. SSL, hosting, SEO, and 30-day support included.</p>
+          <div class="svc-tags"><span class="svc-tag">Frontend</span><span class="svc-tag">Backend</span><span class="svc-tag">Database</span><span class="svc-tag">SEO</span><span class="svc-tag">SSL</span><span class="svc-tag">30-Day Support</span></div>
+        </div>
+        <div style="text-align:center;flex-shrink:0">
+          <div class="s7p">$999</div>
+          <div class="btn btn-p" style="margin-top:9px;pointer-events:none;font-size:.78rem"><i class="fas fa-arrow-right"></i><span>Learn More</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="sec" id="why-us">
+  <div class="container">
+    <div class="why-grid">
+      <div>
+        <div class="badge rv"><i class="fas fa-award"></i> Why Choose Us</div>
+        <h2 class="sec-title rv d1">The BWS <span class="gdt">Difference</span></h2>
+        <p class="sec-sub rv d2">We don't just fill positions — we build long-term partnerships on trust, quality, and measurable results.</p>
+        <div class="prog-bars rv d3">
+          <div><div class="prog-meta"><span class="prog-name">Client Satisfaction</span><span class="prog-pct">98%</span></div><div class="prog-track"><div class="prog-fill" style="width:98%"></div></div></div>
+          <div><div class="prog-meta"><span class="prog-name">VA Placement Success</span><span class="prog-pct">96%</span></div><div class="prog-track"><div class="prog-fill" style="width:96%"></div></div></div>
+          <div><div class="prog-meta"><span class="prog-name">On-Time Delivery</span><span class="prog-pct">99%</span></div><div class="prog-track"><div class="prog-fill" style="width:99%"></div></div></div>
+          <div><div class="prog-meta"><span class="prog-name">VA Retention Rate</span><span class="prog-pct">92%</span></div><div class="prog-track"><div class="prog-fill" style="width:92%"></div></div></div>
+        </div>
+      </div>
+      <div class="why-cards">
+        <div class="why-card rv d1"><div class="why-icon" style="background:rgba(240,98,146,.08);border:1px solid rgba(240,98,146,.18);color:var(--p1)"><i class="fas fa-magnifying-glass-chart"></i></div><h4>Rigorous Vetting</h4><p>All VAs pass skills assessments, background checks, and interviews before placement.</p></div>
+        <div class="why-card rv d2"><div class="why-icon" style="background:rgba(194,24,91,.08);border:1px solid rgba(194,24,91,.18);color:#e07090"><i class="fas fa-clock"></i></div><h4>Fast Turnaround</h4><p>Get matched with your ideal VA within 48–72 hours. No long waiting times.</p></div>
+        <div class="why-card rv d3"><div class="why-icon" style="background:rgba(240,98,146,.08);border:1px solid rgba(240,98,146,.18);color:var(--p1)"><i class="fas fa-shield-halved"></i></div><h4>Fully Managed</h4><p>We handle onboarding, training, and ongoing performance management.</p></div>
+        <div class="why-card rv d4"><div class="why-icon" style="background:rgba(194,24,91,.08);border:1px solid rgba(194,24,91,.18);color:#e07090"><i class="fas fa-coins"></i></div><h4>Cost-Effective</h4><p>Save up to 70% on hiring costs vs. full-time in-house employees.</p></div>
+        <div class="why-card why-big rv d5"><div class="why-icon" style="background:var(--gd);color:#fff;box-shadow:0 4px 16px rgba(233,30,140,.28)"><i class="fas fa-trophy"></i></div><h4>Award-Winning Support</h4><p>Dedicated account managers available around the clock — long after placement.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec" id="testimonials" style="background:var(--bg2)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:46px">
+      <div class="badge rv"><i class="fas fa-heart"></i> Client Love</div>
+      <h2 class="sec-title rv d1">What Our Clients <span class="gdt">Are Saying</span></h2>
+      <p class="sec-sub rv d2" style="margin:0 auto">Real results from real businesses that trusted Best Work Solution.</p>
+    </div>
+    <div class="testi-slider rv">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card"><div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testi-text">"Hiring through Best Work Solution was the best business decision I made this year. My VA handles everything and I finally have time to focus on growth."</p><div class="testi-author"><div class="testi-av">S</div><div><div class="testi-name">Sarah M.</div><div class="testi-role">E-Commerce Founder, USA</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testi-text">"The funnel they built increased my conversions by 3x in the first month. Their digital services are top-tier and the team is incredibly responsive."</p><div class="testi-author"><div class="testi-av">J</div><div><div class="testi-name">James T.</div><div class="testi-role">Business Coach, UK</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testi-text">"From day one, my VA felt like a true team member. Seamless onboarding and I'm saving 20+ hours a week. My clients are happier than ever."</p><div class="testi-author"><div class="testi-av">A</div><div><div class="testi-name">Angela R.</div><div class="testi-role">Real Estate Agent, Canada</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testi-text">"They delivered my 7-Day Website in 6 days. Professional, beautiful, and fully functional. Worth every penny and more."</p><div class="testi-author"><div class="testi-av">M</div><div><div class="testi-name">Mark D.</div><div class="testi-role">SaaS Founder, USA</div></div></div></div>
+        <div class="testi-card"><div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="testi-text">"I was skeptical at first but BWS exceeded every expectation. My social media following tripled in 3 months with their VA managing it."</p><div class="testi-author"><div class="testi-av">L</div><div><div class="testi-name">Lisa K.</div><div class="testi-role">Life Coach, Australia</div></div></div></div>
+      </div>
+    </div>
+    <div class="testi-dots" id="testiDots">
+      <div class="testi-dot active" data-i="0"></div>
+      <div class="testi-dot" data-i="1"></div>
+      <div class="testi-dot" data-i="2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="sec booking-sec" id="booking">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:50px">
+      <div class="badge rv"><i class="fas fa-calendar-star"></i> Let's Connect</div>
+      <h2 class="sec-title rv d1">Book Your Free <span class="gdt">Discovery Call</span></h2>
+      <p class="sec-sub rv d2" style="margin:0 auto">Select your service, pick a date and time, and we'll confirm your booking personally within hours.</p>
+    </div>
+    <div class="booking-wrap">
+      <div class="rvl">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.72rem;font-weight:700;line-height:1.18;margin-bottom:9px">We'd love to<br/>hear from you.</h2>
+        <p style="color:rgba(251,189,201,.62);font-size:.88rem;line-height:1.8">Book a free discovery call. Our team responds and confirms within a few hours on business days.</p>
+        <div class="bk-contact">
+          <div class="bk-row"><div class="bk-icon"><i class="fas fa-envelope"></i></div><div><div class="bk-lbl">Email</div><div class="bk-val">bestworkssolutions@gmail.com</div></div></div>
+          <div class="bk-row"><div class="bk-icon"><i class="fas fa-phone"></i></div><div><div class="bk-lbl">Phone / WhatsApp</div><div class="bk-val">+63 977 249 7868</div></div></div>
+          <div class="bk-row"><div class="bk-icon"><i class="fas fa-clock"></i></div><div><div class="bk-lbl">Response Time</div><div class="bk-val">Within a few hours (Mon–Fri)</div></div></div>
+        </div>
+        <div class="socials">
+          <a href="https://www.facebook.com/bestworkssolutions" class="soc-l" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/bestworks_solutions/" class="soc-l" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/best-works-solutions/" class="soc-l" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/639772497868" class="soc-l" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="rvr">
+        <div class="bk-card">
+          <!-- Steps -->
+          <div class="bk-steps" id="bkSteps">
+            <div class="bk-step active" data-s="1"><div class="bk-sn">1</div><div class="bk-sl">Service</div></div>
+            <div class="bk-line"></div>
+            <div class="bk-step" data-s="2"><div class="bk-sn">2</div><div class="bk-sl">Date</div></div>
+            <div class="bk-line"></div>
+            <div class="bk-step" data-s="3"><div class="bk-sn">3</div><div class="bk-sl">Time</div></div>
+            <div class="bk-line"></div>
+            <div class="bk-step" data-s="4"><div class="bk-sn">4</div><div class="bk-sl">Details</div></div>
+          </div>
+          <!-- Panel 1 -->
+          <div class="bk-panel active" id="bkP1">
+            <div class="bk-ptitle">What service do you need?</div>
+            <div class="bk-psub">Select one to get started. You can discuss more on the call.</div>
+            <div class="bk-svc-grid">
+              <div class="bk-svc-pill" data-svc="Admin & Executive VA"><i class="fas fa-briefcase"></i>Admin & Executive VA</div>
+              <div class="bk-svc-pill" data-svc="Social Media Management"><i class="fas fa-hashtag"></i>Social Media</div>
+              <div class="bk-svc-pill" data-svc="Customer Service"><i class="fas fa-headset"></i>Customer Service</div>
+              <div class="bk-svc-pill" data-svc="Email & Calendar Mgmt"><i class="fas fa-calendar-check"></i>Email & Calendar</div>
+              <div class="bk-svc-pill" data-svc="E-Commerce Support"><i class="fas fa-store"></i>E-Commerce</div>
+              <div class="bk-svc-pill" data-svc="Bookkeeping & Finance"><i class="fas fa-calculator"></i>Bookkeeping</div>
+              <div class="bk-svc-pill" data-svc="Web Design"><i class="fas fa-palette"></i>Web Design</div>
+              <div class="bk-svc-pill" data-svc="Funnel Creation"><i class="fas fa-filter"></i>Funnel Creation</div>
+              <div class="bk-svc-pill" data-svc="Automations"><i class="fas fa-robot"></i>Automations</div>
+              <div class="bk-svc-pill" data-svc="The 7-Day Website ($999)"><i class="fas fa-bolt"></i>7-Day Website</div>
+            </div>
+            <div class="bk-nav-r"><button class="btn btn-p btn-sm" id="bkN1" disabled>Next <i class="fas fa-arrow-right"></i></button></div>
+          </div>
+          <!-- Panel 2: Calendar -->
+          <div class="bk-panel" id="bkP2">
+            <div class="bk-ptitle">Pick a Date</div>
+            <div class="bk-psub">Discovery calls run 30 minutes. Available Mon–Sat.<span class="bk-tz-note" id="bkP2Tz"></span></div>
+            <div class="cal-hdr">
+              <button class="cal-nav" id="calPrev"><i class="fas fa-chevron-left"></i></button>
+              <div class="cal-month" id="calMonth"></div>
+              <button class="cal-nav" id="calNext"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+            <div class="bk-nav">
+              <button class="btn btn-g btn-sm" id="bkB2"><i class="fas fa-arrow-left"></i> Back</button>
+              <button class="btn btn-p btn-sm" id="bkN2" disabled>Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          <!-- Panel 3: Time -->
+          <div class="bk-panel" id="bkP3">
+            <div class="bk-ptitle">Choose a Time Slot</div>
+            <div class="bk-psub" id="bkP3Sub">Available times for your selected date.</div>
+            <div class="time-grid" id="timeGrid"></div>
+            <div class="bk-nav">
+              <button class="btn btn-g btn-sm" id="bkB3"><i class="fas fa-arrow-left"></i> Back</button>
+              <button class="btn btn-p btn-sm" id="bkN3" disabled>Next <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+          <!-- Panel 4: Details -->
+          <div class="bk-panel" id="bkP4">
+            <div class="bk-ptitle">Your Details</div>
+            <div class="bk-psub">Almost there! We save your request instantly and confirm by email or WhatsApp.</div>
+            <div class="form-row">
+              <div class="form-group"><label>First Name</label><input type="text" id="bkFn" placeholder="Jane" required/></div>
+              <div class="form-group"><label>Last Name</label><input type="text" id="bkLn" placeholder="Doe" required/></div>
+            </div>
+            <div class="form-group"><label>Email Address</label><input type="email" id="bkEm" placeholder="jane@company.com" required/></div>
+            <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" id="bkPh" placeholder="+1 555 0100"/></div>
+            <div class="form-group"><label>Primary goal (optional)</label><input type="text" id="bkGoal" placeholder="e.g. hire VA, automate ops, new website…" maxlength="500"/></div>
+            <div class="form-row">
+              <div class="form-group"><label>Urgency</label><select id="bkUrgency"><option value="">Select…</option><option value="ASAP">ASAP</option><option value="This month">This month</option><option value="Next quarter">Next quarter</option><option value="Just exploring">Just exploring</option></select></div>
+              <div class="form-group"><label>Budget range (optional)</label><select id="bkBudget"><option value="">Select…</option><option value="Under $500/mo">Under $500/mo</option><option value="$500–$2k/mo">$500–$2k/mo</option><option value="$2k+/mo">$2k+/mo</option><option value="Project-based">Project-based</option></select></div>
+            </div>
+            <div class="form-group"><label>Tools / stack (optional)</label><input type="text" id="bkTools" placeholder="Notion, GoHighLevel, Shopify…" maxlength="500"/></div>
+            <div class="form-group"><label>Notes (optional)</label><textarea id="bkNote" placeholder="Anything you'd like us to know before the call…"></textarea></div>
+            <label class="bk-consent"><input type="checkbox" id="bkConsent"/><span>I agree Best Work Solution may contact me about this request by email or WhatsApp.</span></label>
+            <div class="bk-hp-wrap" aria-hidden="true"><label>Company website</label><input type="text" id="bkHp" name="company_website" tabindex="-1" autocomplete="off"/></div>
+            <p class="bk-submit-err" id="bkSubmitErr"></p>
+            <div class="bk-nav">
+              <button class="btn btn-g btn-sm" id="bkB4"><i class="fas fa-arrow-left"></i> Back</button>
+              <button class="btn btn-p btn-sm" id="bkSubmit"><i class="fas fa-calendar-check"></i> Confirm Booking</button>
+            </div>
+          </div>
+          <!-- Panel 5: Confirmed -->
+          <div class="bk-panel" id="bkP5">
+            <div class="bk-confirm">
+              <div class="bk-check-w"><i class="fas fa-check"></i></div>
+              <h3 style="font-family:'Playfair Display',serif;font-size:1.28rem;font-weight:700;margin-bottom:5px">You're Booked! 🎉</h3>
+              <p style="font-size:.8rem;color:rgba(251,189,201,.6);margin-bottom:4px">Your reference number</p>
+              <div class="bk-ref" id="bkRef">BWS-000000</div>
+              <p style="font-size:.78rem;color:rgba(251,189,201,.58);margin-bottom:10px" id="bkConfirmMsg">Your booking is saved. Our team will reach out to confirm your slot. If email notifications are enabled on the server, you will also receive a receipt in your inbox.</p>
+              <div class="bk-summary" id="bkSummary"></div>
+              <div class="bk-confirm-btns">
+                <button class="btn btn-p btn-sm" id="bkCal"><i class="fas fa-calendar-plus"></i> Add to Calendar</button>
+                <a href="https://wa.me/639772497868" class="btn btn-g btn-sm" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <button class="btn btn-g btn-sm" id="bkNew">New Booking</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:46px">
+      <div class="badge rv"><i class="fas fa-circle-question"></i> FAQ</div>
+      <h2 class="sec-title rv d1">Frequently Asked <span class="gdt">Questions</span></h2>
+      <p class="sec-sub rv d2" style="margin:0 auto">Everything you need to know before getting started.</p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item rv d1"><div class="faq-q">How quickly can I get a VA?<div class="faq-ico"><i class="fas fa-plus"></i></div></div><div class="faq-a">Most clients are matched within 48–72 hours. We keep a pre-vetted roster ready to deploy quickly.</div></div>
+      <div class="faq-item rv d2"><div class="faq-q">What industries do you serve?<div class="faq-ico"><i class="fas fa-plus"></i></div></div><div class="faq-a">E-commerce, real estate, finance, healthcare, marketing, coaching, consulting, startups and more.</div></div>
+      <div class="faq-item rv d3"><div class="faq-q">Are your VAs trained and experienced?<div class="faq-ico"><i class="fas fa-plus"></i></div></div><div class="faq-a">Every VA passes multi-stage screening — skills tests, software proficiency checks, and professional interviews before joining.</div></div>
+      <div class="faq-item rv d4"><div class="faq-q">What if I'm not satisfied?<div class="faq-ico"><i class="fas fa-plus"></i></div></div><div class="faq-a">We offer a satisfaction guarantee. If you're unhappy with your VA, we'll find a replacement at no additional cost.</div></div>
+      <div class="faq-item rv d1"><div class="faq-q">What hours do VAs work?<div class="faq-ico"><i class="fas fa-plus"></i></div></div><div class="faq-a">Flexible — your time zone, part-time (20 hrs/wk), full-time (40 hrs/wk), or 24/7 shift coverage.</div></div>
+      <div class="faq-item rv d2"><div class="faq-q">How is billing handled?<div class="faq-ico"><i class="fas fa-plus"></i></div></div><div class="faq-a">Transparent monthly billing, no hidden fees. Packages scale up or down based on your needs.</div></div>
+      <div class="faq-item rv d3"><div class="faq-q">What's included in the 7-Day Website?<div class="faq-ico"><i class="fas fa-plus"></i></div></div><div class="faq-a">Custom UI/UX design, full frontend + backend development, database, SEO, SSL, deployment, and 30 days support — all for $999.</div></div>
+      <div class="faq-item rv d4"><div class="faq-q">What automation tools do you use?<div class="faq-ico"><i class="fas fa-plus"></i></div></div><div class="faq-a">Zapier, Make, GoHighLevel, ActiveCampaign and more — connecting your tools and eliminating manual work.</div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="https://file.garden/aSnj3w891nZRsSB1/bestworkportfolio/Logo%20Square.png" alt="BWS" class="foot-logo-img" crossorigin="anonymous" onerror="this.style.display='none'"/>
+        <span class="logo-n">Best Work Solution</span>
+        <span class="logo-s">Virtual Assistant Agency</span>
+        <p>Empowering businesses with world-class virtual assistant talent. Your growth is our mission.</p>
+        <div class="socials" style="margin-top:14px">
+          <a href="https://www.facebook.com/bestworkssolutions" class="soc-l" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/bestworks_solutions/" class="soc-l" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/best-works-solutions/" class="soc-l" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/639772497868" class="soc-l" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="foot-col"><h5>Company</h5><ul><li><a href="#about">About Us</a></li><li><a href="#services">Our Services</a></li><li><a href="#why-us">Why Choose Us</a></li><li><a href="#testimonials">Reviews</a></li><li><a href="#booking">Contact</a></li></ul></div>
+      <div class="foot-col"><h5>Services</h5><ul><li><a href="#services">Admin VA</a></li><li><a href="#services">Social Media</a></li><li><a href="#services">Customer Service</a></li><li><a href="#services">Web Design</a></li><li><a href="#" class="f7d">7-Day Website</a></li></ul></div>
+      <div class="foot-col"><h5>Contact</h5><ul><li><a href="mailto:bestworkssolutions@gmail.com">bestworkssolutions@gmail.com</a></li><li><a href="tel:+639772497868">+63 977 249 7868</a></li><li><a href="#booking">Book a Free Call</a></li><li><a href="https://wa.me/639772497868" target="_blank">WhatsApp Us</a></li></ul></div>
+    </div>
+    <div class="foot-btm">
+      <p class="foot-copy">&copy; <span id="yr"></span> <span>Best Work Solution</span>. All rights reserved.</p>
+      <div class="foot-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+</div><!-- #pg-main -->
+
+<script>
+/* ═══════════════════════════════════════
+   CANVAS: Global BG
+═══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('bg-c'),g=c.getContext('2d');
+  let W,H,t=0;
+  const B=[{x:.18,y:-.12,r:.7,col:'rgba(240,98,146,',s:.00016},{x:.82,y:.92,r:.65,col:'rgba(194,24,91,',s:.00012},{x:.48,y:.46,r:.5,col:'rgba(130,20,100,',s:.00009}];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+  (function loop(ts=0){
+    t=ts;g.fillStyle='rgba(8,5,14,1)';g.fillRect(0,0,W,H);
+    B.forEach((b,i)=>{
+      const ox=W*(b.x+Math.sin(t*b.s+i*2.1)*.17),oy=H*(b.y+Math.cos(t*b.s+i*1.7)*.13);
+      const r=Math.min(W,H)*b.r,gr=g.createRadialGradient(ox,oy,0,ox,oy,r);
+      gr.addColorStop(0,b.col+'0.1)');gr.addColorStop(1,b.col+'0)');
+      g.fillStyle=gr;g.fillRect(0,0,W,H);
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ═══════════════════════════════════════
+   CANVAS: Landing (mouse-reactive)
+═══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('lc'),g=c.getContext('2d');
+  let W,H,t=0,mx=.5,my=.5;
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+  document.addEventListener('mousemove',e=>{mx=e.clientX/innerWidth;my=e.clientY/innerHeight});
+  document.addEventListener('touchmove',e=>{mx=e.touches[0].clientX/innerWidth;my=e.touches[0].clientY/innerHeight},{passive:true});
+  const B=[{xb:.15,yb:.2,r:.75,col:'rgba(240,98,146,',s:.00018,mx:.28,my:.22},{xb:.85,yb:.8,r:.65,col:'rgba(194,24,91,',s:.00013,mx:.16,my:.19},{xb:.5,yb:.48,r:.5,col:'rgba(160,30,120,',s:.0001,mx:.22,my:.26}];
+  (function loop(ts=0){
+    t=ts;g.fillStyle='rgba(8,5,14,1)';g.fillRect(0,0,W,H);
+    B.forEach((b,i)=>{
+      const ox=W*(b.xb+Math.sin(t*b.s+i*2)*.15+(mx-.5)*b.mx);
+      const oy=H*(b.yb+Math.cos(t*b.s+i*1.8)*.11+(my-.5)*b.my);
+      const r=Math.min(W,H)*b.r,gr=g.createRadialGradient(ox,oy,0,ox,oy,r);
+      gr.addColorStop(0,b.col+'0.12)');gr.addColorStop(1,b.col+'0)');
+      g.fillStyle=gr;g.fillRect(0,0,W,H);
+    });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ═══════════════════════════════════════
+   CANVAS: Landing Particles
+═══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('part-c'),g=c.getContext('2d');
+  let W,H;
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+  const P=Array.from({length:90},()=>({x:Math.random()*4000,y:Math.random()*1500,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:.4+Math.random()*1.6,a:.07+Math.random()*.35}));
+  (function loop(){
+    g.clearRect(0,0,W,H);
+    P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;g.beginPath();g.arc(p.x,p.y,p.r,0,Math.PI*2);g.fillStyle=`rgba(240,98,146,${p.a})`;g.fill();});
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ═══════════════════════════════════════
+   CANVAS: Hero section
+═══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('hc'),g=c.getContext('2d');
+  let W,H;
+  function resize(){const p=c.closest('.hero')||document.body;W=c.width=p.offsetWidth;H=c.height=Math.max(p.offsetHeight,600)}
+  resize();window.addEventListener('resize',resize);
+  const P=Array.from({length:55},()=>({x:Math.random()*2000,y:Math.random()*900,vx:(Math.random()-.5)*.19,vy:(Math.random()-.5)*.19,r:.4+Math.random()*1.3,a:.06+Math.random()*.22}));
+  (function loop(){
+    g.clearRect(0,0,W,H);
+    P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;g.beginPath();g.arc(p.x,p.y,p.r,0,Math.PI*2);g.fillStyle=`rgba(240,98,146,${p.a})`;g.fill();});
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ═══════════════════════════════════════
+   CANVAS: Main site particles
+═══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('pc'),g=c.getContext('2d');
+  let W,H;
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+  const P=Array.from({length:65},()=>({x:Math.random()*3000,y:Math.random()*1200,vx:(Math.random()-.5)*.17,vy:(Math.random()-.5)*.17,r:.4+Math.random()*1.3,a:.04+Math.random()*.16}));
+  (function loop(){
+    g.clearRect(0,0,W,H);
+    P.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;g.beginPath();g.arc(p.x,p.y,p.r,0,Math.PI*2);g.fillStyle=`rgba(240,98,146,${p.a})`;g.fill();});
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ═══════════════════════════════════════
+   CANVAS: 7-Day page orb
+═══════════════════════════════════════ */
+(function(){
+  const c=document.getElementById('c7d'),g=c.getContext('2d');
+  let W,H,t=0;
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+  const P=Array.from({length:110},()=>({theta:Math.random()*Math.PI*2,phi:Math.acos(Math.random()*2-1),r:220+Math.random()*70,s:(.4+Math.random())*.0004,sz:.7+Math.random()*2.2,a:.12+Math.random()*.45}));
+  (function loop(ts=0){
+    t=ts;g.fillStyle='rgba(8,5,14,.15)';g.fillRect(0,0,W,H);
+    const cx=W/2,cy=H/2;
+    P.forEach(p=>{p.theta+=p.s;const x=cx+p.r*Math.sin(p.phi)*Math.cos(p.theta),y=cy+p.r*Math.sin(p.phi)*Math.sin(p.theta)*.5;g.beginPath();g.arc(x,y,p.sz,0,Math.PI*2);g.fillStyle=Math.random()<.6?`rgba(240,98,146,${p.a})`:`rgba(194,24,91,${p.a})`;g.fill();});
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ═══════════════════════════════════════
+   CURSOR
+═══════════════════════════════════════ */
+(function(){
+  const ring=document.getElementById('cR'),dot=document.getElementById('cD');
+  let cx=0,cy=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;dot.style.left=cx+'px';dot.style.top=cy+'px'});
+  (function loop(){rx+=(cx-rx)*.1;ry+=(cy-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+  const hover=()=>{ring.style.width='44px';ring.style.height='44px';ring.style.background='rgba(240,98,146,.08)';ring.style.borderColor='rgba(240,98,146,.8)'};
+  const unhover=()=>{ring.style.width='30px';ring.style.height='30px';ring.style.background='none';ring.style.borderColor='rgba(240,98,146,.5)'};
+  document.addEventListener('mouseover',e=>{if(e.target.closest('a,button,.svc-card,.testi-card,.promo-strip,.bk-svc-pill,.how-card,.why-card'))hover();else unhover()});
+})();
+
+/* ═══════════════════════════════════════
+   HERO TILT
+═══════════════════════════════════════ */
+(function(){
+  const tilt=document.getElementById('heroTilt');
+  if(!tilt)return;
+  const wrap=tilt.closest('.hero-visual');
+  if(!wrap)return;
+  wrap.addEventListener('mousemove',e=>{
+    const r=wrap.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width-.5)*18;
+    const y=-((e.clientY-r.top)/r.height-.5)*14;
+    tilt.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`;
+  });
+  wrap.addEventListener('mouseleave',()=>{tilt.style.transform='rotateY(0deg) rotateX(0deg)'});
+})();
+
+/* ═══════════════════════════════════════
+   RIPPLE
+═══════════════════════════════════════ */
+document.addEventListener('click',e=>{
+  const btn=e.target.closest('.btn-p');
+  if(!btn)return;
+  const r=document.createElement('span');
+  r.className='ripple';
+  const rect=btn.getBoundingClientRect();
+  const sz=Math.max(rect.width,rect.height);
+  r.style.cssText=`width:${sz}px;height:${sz}px;left:${e.clientX-rect.left-sz/2}px;top:${e.clientY-rect.top-sz/2}px`;
+  btn.appendChild(r);
+  setTimeout(()=>r.remove(),700);
+});
+
+/* ═══════════════════════════════════════
+   LOADER
+═══════════════════════════════════════ */
+setTimeout(()=>document.getElementById('loader').classList.add('out'),1400);
+
+/* ═══════════════════════════════════════
+   PAGE TRANSITION
+═══════════════════════════════════════ */
+const OV=document.getElementById('ov');
+function trans(cb){
+  OV.classList.add('in');
+  setTimeout(()=>{cb();setTimeout(()=>OV.classList.remove('in'),150)},380);
+}
+const pgLand=document.getElementById('pg-land');
+const pg7d=document.getElementById('pg-7d');
+const pgMain=document.getElementById('pg-main');
+
+let mainInited=false;
+function showMain(hash){
+  trans(()=>{
+    pgLand.classList.add('out');
+    pg7d.style.display='none';
+    pgMain.style.display='block';
+    document.body.style.overflow='auto';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      pgMain.classList.add('on');
+      if(!mainInited){mainInited=true;initReveal();initCounters();initProgBars();}
+      if(hash){setTimeout(()=>{const el=document.getElementById(hash);if(el)el.scrollIntoView({behavior:'smooth'})},350)}
+    }));
+  });
+}
+function open7d(e){
+  if(e){e.preventDefault();e.stopPropagation()}
+  trans(()=>{
+    pgLand.classList.add('out');
+    pgMain.style.display='none';
+    pg7d.style.display='block';
+    document.body.style.overflow='auto';
+    window.scrollTo(0,0);
+    startCountdown();
+  });
+}
+function close7d(){
+  trans(()=>{
+    pg7d.style.display='none';
+    pgMain.style.display='block';
+    document.body.style.overflow='auto';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{pgMain.classList.add('on');if(!mainInited){mainInited=true;initReveal();initCounters();initProgBars();}}));
+  });
+}
+
+/* ═══════════════════════════════════════
+   LANDING BUTTONS
+═══════════════════════════════════════ */
+document.getElementById('enterBtn').addEventListener('click',()=>showMain(null));
+document.getElementById('learnBtn').addEventListener('click',()=>showMain('about'));
+
+/* ═══════════════════════════════════════
+   7-DAY TRIGGERS
+═══════════════════════════════════════ */
+['nav7d','promo7d','svc7d','mob7d'].forEach(id=>{
+  const el=document.getElementById(id);if(el)el.addEventListener('click',open7d);
+});
+document.querySelectorAll('.f7d').forEach(el=>el.addEventListener('click',open7d));
+document.getElementById('d7Back').addEventListener('click',close7d);
+document.getElementById('d7BookBtn').addEventListener('click',()=>{
+  close7d();
+  setTimeout(()=>{const el=document.getElementById('booking');if(el)el.scrollIntoView({behavior:'smooth'})},500);
+});
+document.getElementById('mobSticky7d').addEventListener('click',open7d);
+
+/* ═══════════════════════════════════════
+   COUNTDOWN
+═══════════════════════════════════════ */
+function startCountdown(){
+  function update(){
+    const now=new Date(),end=new Date(now.getFullYear(),now.getMonth()+1,1,0,0,0);
+    let d=Math.floor((end-now)/1000);
+    const dy=Math.floor(d/86400);d%=86400;
+    const h=Math.floor(d/3600);d%=3600;
+    const m=Math.floor(d/60),s=d%60;
+    const f=n=>String(n).padStart(2,'0');
+    const dEl=document.getElementById('cdD'),hEl=document.getElementById('cdH'),mEl=document.getElementById('cdM'),sEl=document.getElementById('cdS');
+    if(dEl)dEl.textContent=f(dy);if(hEl)hEl.textContent=f(h);if(mEl)mEl.textContent=f(m);if(sEl)sEl.textContent=f(s);
+  }
+  update();clearInterval(window._cdInt);window._cdInt=setInterval(update,1000);
+}
+startCountdown();
+
+/* ═══════════════════════════════════════
+   SCROLL PROGRESS BAR
+═══════════════════════════════════════ */
+window.addEventListener('scroll',()=>{
+  const sp=document.getElementById('sp');
+  if(!sp)return;
+  const h=document.documentElement.scrollHeight-innerHeight;
+  sp.style.width=(h>0?window.scrollY/h*100:0)+'%';
+  // navbar scroll
+  document.getElementById('navbar').classList.toggle('sc',window.scrollY>40);
+  document.getElementById('btTop').classList.toggle('on',window.scrollY>400);
+  // active nav
+  let cur='';
+  document.querySelectorAll('section[id]').forEach(s=>{if(window.scrollY>=s.offsetTop-130)cur=s.id});
+  document.querySelectorAll('.nl').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+  // hide mobile sticky when near top
+  const ms=document.getElementById('mobSticky');
+  if(ms)ms.style.transform=window.scrollY>300?'none':'translateY(100%)';
+});
+document.getElementById('mobSticky').style.transform='translateY(100%)';
+
+/* ═══════════════════════════════════════
+   NAVBAR / SMOOTH SCROLL
+═══════════════════════════════════════ */
+document.getElementById('btTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.querySelector('.nav-logo').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.querySelectorAll('.nl,.ml').forEach(a=>{
+  const h=a.getAttribute('href');
+  if(h&&h.startsWith('#')&&h.length>1){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      document.getElementById('mobMenu').classList.remove('open');
+      const el=document.getElementById(h.slice(1));if(el)el.scrollIntoView({behavior:'smooth'});
+    });
+  }
+});
+document.querySelectorAll('footer a').forEach(a=>{
+  const h=a.getAttribute('href');
+  if(h&&h.startsWith('#')&&h.length>1){
+    a.addEventListener('click',e=>{e.preventDefault();const el=document.getElementById(h.slice(1));if(el)el.scrollIntoView({behavior:'smooth'})});
+  }
+});
+
+/* MOBILE MENU */
+document.getElementById('hamBtn').addEventListener('click',()=>document.getElementById('mobMenu').classList.add('open'));
+document.getElementById('mobClose').addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open'));
+document.getElementById('mob7d').addEventListener('click',e=>{e.preventDefault();document.getElementById('mobMenu').classList.remove('open');setTimeout(()=>open7d(),100)});
+
+/* TICKER */
+document.getElementById('tickerBar').addEventListener('click',e=>{
+  const item=e.target.closest('.tick-i');if(!item)return;
+  if(item.dataset.go==='7day')open7d(e);
+  else{const el=document.getElementById(item.dataset.go);if(el)el.scrollIntoView({behavior:'smooth'})}
+});
+document.querySelectorAll('.ml').forEach(a=>{
+  a.addEventListener('click',()=>document.getElementById('mobMenu').classList.remove('open'));
+});
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+function initReveal(){
+  const revealEls=[...document.querySelectorAll('.rv,.rvl,.rvr')];
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.classList.add('on');
+        obs.unobserve(en.target);
+      }
+    });
+  },{threshold:.1});
+  revealEls.forEach(el=>obs.observe(el));
+}
+
+/* ═══════════════════════════════════════
+   PROGRESS BARS
+═══════════════════════════════════════ */
+function initProgBars(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{if(en.isIntersecting)en.target.querySelectorAll('.prog-fill').forEach(f=>f.classList.add('on'))});
+  },{threshold:.3});
+  document.querySelectorAll('.prog-bars').forEach(el=>obs.observe(el));
+}
+
+/* ═══════════════════════════════════════
+   COUNTERS
+═══════════════════════════════════════ */
+function initCounters(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(!en.isIntersecting)return;
+      const el=en.target,target=+el.dataset.target;
+      const isP=target===98,isSmall=target<=10;
+      let start=0;const dur=1800,step=16,inc=target/(dur/step);
+      const iv=setInterval(()=>{
+        start=Math.min(start+inc,target);
+        el.textContent=Math.floor(start)+(isP?'%':'+');
+        if(start>=target)clearInterval(iv);
+      },step);
+      obs.unobserve(el);
+    });
+  },{threshold:.5});
+  document.querySelectorAll('[data-target]').forEach(el=>obs.observe(el));
+}
+
+/* ═══════════════════════════════════════
+   TYPEWRITER
+═══════════════════════════════════════ */
+(function(){
+  const el=document.getElementById('typeEl');if(!el)return;
+  const W=['World-Class','Elite','Exceptional','Dedicated','Top-Tier'];
+  let wi=0,ci=0,del=false;
+  function type(){
+    const w=W[wi];
+    if(!del){el.textContent=w.slice(0,++ci);if(ci===w.length){del=true;setTimeout(type,1900);return}}
+    else{el.textContent=w.slice(0,--ci);if(ci===0){del=false;wi=(wi+1)%W.length;setTimeout(type,300);return}}
+    setTimeout(type,del?52:72);
+  }
+  setTimeout(type,1000);
+})();
+
+/* ═══════════════════════════════════════
+   TESTIMONIALS SLIDER
+═══════════════════════════════════════ */
+(function(){
+  const track=document.getElementById('testiTrack');
+  const dots=document.querySelectorAll('.testi-dot');
+  if(!track)return;
+  let cur=0;const total=3;
+  function go(i){
+    cur=i;
+    const cards=track.querySelectorAll('.testi-card');
+    if(!cards.length)return;
+    const w=cards[0].offsetWidth+18;
+    track.style.transform=`translateX(-${cur*w}px)`;
+    dots.forEach((d,j)=>d.classList.toggle('active',j===cur));
+  }
+  dots.forEach(d=>d.addEventListener('click',()=>go(+d.dataset.i)));
+  let autoSlide=setInterval(()=>go((cur+1)%total),4500);
+  track.parentElement.addEventListener('mouseenter',()=>clearInterval(autoSlide));
+  track.parentElement.addEventListener('mouseleave',()=>{autoSlide=setInterval(()=>go((cur+1)%total),4500)});
+  window.addEventListener('resize',()=>go(cur));
+})();
+
+/* ═══════════════════════════════════════
+   FAQ
+═══════════════════════════════════════ */
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',function(){
+    const item=this.closest('.faq-item'),isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+
+/* ═══════════════════════════════════════
+   SOCIAL PROOF NOTIFICATIONS
+═══════════════════════════════════════ */
+(function(){
+  const proofs=[
+    {av:'S',name:'Sarah M.',action:'just booked a discovery call'},
+    {av:'J',name:'James T.',action:'hired a Social Media VA'},
+    {av:'A',name:'Angela R.',action:'claimed the 7-Day Website'},
+    {av:'M',name:'Mark D.',action:'booked an Automation session'},
+    {av:'L',name:'Lisa K.',action:'just booked a discovery call'},
+    {av:'R',name:'Rachel B.',action:'hired an E-Commerce VA'},
+  ];
+  let idx=0;
+  function show(){
+    const p=proofs[idx%proofs.length];idx++;
+    const n=document.getElementById('spNotif');
+    document.getElementById('spAv').textContent=p.av;
+    document.getElementById('spName').textContent=p.name;
+    document.getElementById('spAct').textContent=p.action;
+    n.classList.add('show');
+    setTimeout(()=>n.classList.remove('show'),4200);
+  }
+  setTimeout(()=>{show();setInterval(show,12000)},8000);
+})();
+
+/* ═══════════════════════════════════════
+   BOOKING WIZARD
+═══════════════════════════════════════ */
+const BK={step:1,service:'',year:new Date().getFullYear(),month:new Date().getMonth(),date:null,time:'',ref:'',scheduledAtUtc:''};
+const BK_CLIENT_TZ=(typeof Intl!=='undefined'&&Intl.DateTimeFormat)?Intl.DateTimeFormat().resolvedOptions().timeZone:'UTC';
+(function(){const el=document.getElementById('bkP2Tz');if(el)el.innerHTML='<br/><span class="bk-tz-note">Your device timezone: <strong>'+BK_CLIENT_TZ+'</strong>. Time slots are listed in <strong>Asia/Manila</strong> (PH office hours).</span>';})();
+const UNAVAIL=['10:00 AM','2:00 PM'];
+const TIMES=['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM'];
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const WDAYS=['Su','Mo','Tu','We','Th','Fr','Sa'];
+
+function bkGo(s){
+  BK.step=s;
+  document.querySelectorAll('#bkSteps .bk-step').forEach((el,i)=>{
+    el.classList.remove('active','done');
+    if(i+1<s)el.classList.add('done');
+    if(i+1===s)el.classList.add('active');
+  });
+  document.querySelectorAll('#bkSteps .bk-line').forEach((el,i)=>{
+    el.style.background=i+1<s?'rgba(240,98,146,.38)':'rgba(240,98,146,.13)';
+  });
+  document.querySelectorAll('.bk-panel').forEach(p=>p.classList.remove('active'));
+  const panel=document.getElementById('bkP'+s);
+  if(panel)panel.classList.add('active');
+  if(s===2)renderCal();
+  if(s===3)renderTimes();
+}
+
+document.querySelectorAll('.bk-svc-pill').forEach(pill=>{
+  pill.addEventListener('click',function(){
+    document.querySelectorAll('.bk-svc-pill').forEach(p=>p.classList.remove('sel'));
+    this.classList.add('sel');BK.service=this.dataset.svc;
+    document.getElementById('bkN1').disabled=false;
+  });
+});
+document.getElementById('bkN1').addEventListener('click',()=>bkGo(2));
+
+function renderCal(){
+  const g=document.getElementById('calGrid');
+  document.getElementById('calMonth').textContent=MONTHS[BK.month]+' '+BK.year;
+  g.innerHTML='';
+  WDAYS.forEach(d=>{const h=document.createElement('div');h.className='cal-dh';h.textContent=d;g.appendChild(h)});
+  const first=new Date(BK.year,BK.month,1).getDay();
+  const days=new Date(BK.year,BK.month+1,0).getDate();
+  const today=new Date();today.setHours(0,0,0,0);
+  for(let i=0;i<first;i++){const e=document.createElement('div');e.className='cal-d';g.appendChild(e)}
+  for(let d=1;d<=days;d++){
+    const e=document.createElement('div');
+    const date=new Date(BK.year,BK.month,d);
+    const isPast=date<today,isSun=date.getDay()===0;
+    const selD=BK.date;
+    const isSel=selD&&selD.getDate()===d&&selD.getMonth()===BK.month&&selD.getFullYear()===BK.year;
+    const isTdy=date.getTime()===today.getTime();
+    e.textContent=d;
+    if((isPast&&!isTdy)||isSun){e.className='cal-d dis';}
+    else{
+      e.className='cal-d avail'+(isTdy?' today':'')+(isSel?' sel':'');
+      e.addEventListener('click',()=>{BK.date=new Date(BK.year,BK.month,d);BK.time='';renderCal();document.getElementById('bkN2').disabled=false});
+    }
+    g.appendChild(e);
+  }
+}
+document.getElementById('calPrev').addEventListener('click',()=>{BK.month--;if(BK.month<0){BK.month=11;BK.year--}renderCal()});
+document.getElementById('calNext').addEventListener('click',()=>{BK.month++;if(BK.month>11){BK.month=0;BK.year++}renderCal()});
+document.getElementById('bkB2').addEventListener('click',()=>bkGo(1));
+document.getElementById('bkN2').addEventListener('click',()=>bkGo(3));
+
+function renderTimes(){
+  const g=document.getElementById('timeGrid');g.innerHTML='';
+  if(BK.date){
+    const opts={weekday:'long',month:'long',day:'numeric'};
+    document.getElementById('bkP3Sub').innerHTML='Available times — '+BK.date.toLocaleDateString('en-US',opts)+'<br/><span class="bk-tz-note">Slots are <strong>Asia/Manila</strong> local time. Your timezone: <strong>'+BK_CLIENT_TZ+'</strong>.</span>';
+  }
+  TIMES.forEach(t=>{
+    const e=document.createElement('div');
+    const un=UNAVAIL.includes(t),sel=BK.time===t;
+    e.className='time-pill'+(un?' unavail':'')+(sel?' sel':'');
+    e.textContent=t;
+    if(!un)e.addEventListener('click',()=>{BK.time=t;renderTimes();document.getElementById('bkN3').disabled=false});
+    g.appendChild(e);
+  });
+}
+document.getElementById('bkB3').addEventListener('click',()=>bkGo(2));
+document.getElementById('bkN3').addEventListener('click',()=>bkGo(4));
+document.getElementById('bkB4').addEventListener('click',()=>bkGo(3));
+
+function pad2(n){return String(n).padStart(2,'0')}
+function bookingDateISO(d){
+  return d.getFullYear()+'-'+pad2(d.getMonth()+1)+'-'+pad2(d.getDate());
+}
+function applyBookingSuccess(booking,emailStatus){
+  BK.ref=booking.ref;
+  BK.scheduledAtUtc=booking.scheduledAtUtc||'';
+  document.getElementById('bkRef').textContent=BK.ref;
+  const dStr=BK.date?BK.date.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}):'—';
+  const goal=document.getElementById('bkGoal').value.trim();
+  const urg=document.getElementById('bkUrgency').value.trim();
+  const tools=document.getElementById('bkTools').value.trim();
+  const bud=document.getElementById('bkBudget').value.trim();
+  let extra='';
+  if(goal)extra+=`<div class="bk-sum-row"><span class="bk-sum-l">Goal</span><span class="bk-sum-v">${goal.replace(/</g,'&lt;')}</span></div>`;
+  if(urg)extra+=`<div class="bk-sum-row"><span class="bk-sum-l">Urgency</span><span class="bk-sum-v">${urg.replace(/</g,'&lt;')}</span></div>`;
+  if(tools)extra+=`<div class="bk-sum-row"><span class="bk-sum-l">Tools</span><span class="bk-sum-v">${tools.replace(/</g,'&lt;')}</span></div>`;
+  if(bud)extra+=`<div class="bk-sum-row"><span class="bk-sum-l">Budget</span><span class="bk-sum-v">${bud.replace(/</g,'&lt;')}</span></div>`;
+  document.getElementById('bkSummary').innerHTML=
+    `<div class="bk-sum-row"><span class="bk-sum-l">Service</span><span class="bk-sum-v">${BK.service}</span></div>`+
+    `<div class="bk-sum-row"><span class="bk-sum-l">Date</span><span class="bk-sum-v">${dStr}</span></div>`+
+    `<div class="bk-sum-row"><span class="bk-sum-l">Time</span><span class="bk-sum-v">${BK.time} (Asia/Manila)</span></div>`+
+    `<div class="bk-sum-row"><span class="bk-sum-l">Your TZ</span><span class="bk-sum-v">${BK_CLIENT_TZ}</span></div>`+
+    extra+
+    `<div class="bk-sum-row"><span class="bk-sum-l">Name</span><span class="bk-sum-v">${booking.firstName} ${booking.lastName}</span></div>`+
+    `<div class="bk-sum-row"><span class="bk-sum-l">Email</span><span class="bk-sum-v">${booking.email}</span></div>`;
+  const msgEl=document.getElementById('bkConfirmMsg');
+  if(emailStatus&&emailStatus.prospect==='sent')msgEl.textContent='We saved your booking and sent a receipt to your email. Our team will confirm your slot soon.';
+  else if(emailStatus&&emailStatus.error)msgEl.textContent='Your booking was saved. We could not send automated email just now — our team will still confirm by email or WhatsApp.';
+  else msgEl.textContent='Your booking was saved on our server. Our team will confirm by email or WhatsApp. (Enable Resend on the server for instant receipt emails.)';
+}
+function legacyMailtoBooking(fn,ln,em,ph,note,ref){
+  const dStr=BK.date?BK.date.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}):'—';
+  const goal=document.getElementById('bkGoal').value.trim();
+  const urg=document.getElementById('bkUrgency').value.trim();
+  const tools=document.getElementById('bkTools').value.trim();
+  const bud=document.getElementById('bkBudget').value.trim();
+  const sub=encodeURIComponent(`[BWS Booking] ${BK.service} — ${dStr} @ ${BK.time} | Ref: ${ref}`);
+  const body=encodeURIComponent(`NEW BOOKING (fallback — server unreachable)\n\nRef: ${ref}\nService: ${BK.service}\nDate: ${dStr}\nTime: ${BK.time} (Asia/Manila)\nClient TZ: ${BK_CLIENT_TZ}\n\nClient: ${fn} ${ln}\nEmail: ${em}\nPhone: ${ph||'N/A'}\nGoal: ${goal||'—'}\nUrgency: ${urg||'—'}\nTools: ${tools||'—'}\nBudget: ${bud||'—'}\nNotes: ${note||'None'}\n\n--- bestworksolution ---`);
+  const link=document.createElement('a');
+  link.href=`mailto:bestworkssolutions@gmail.com?subject=${sub}&body=${body}`;
+  link.style.display='none';document.body.appendChild(link);link.click();document.body.removeChild(link);
+}
+document.getElementById('bkSubmit').addEventListener('click',async()=>{
+  const errEl=document.getElementById('bkSubmitErr');
+  errEl.classList.remove('show');errEl.textContent='';
+  const fn=document.getElementById('bkFn').value.trim();
+  const ln=document.getElementById('bkLn').value.trim();
+  const em=document.getElementById('bkEm').value.trim();
+  if(!document.getElementById('bkConsent').checked){showToast('error','Consent required','Please accept contact consent to continue.');return}
+  if(!fn||!ln||!em){showToast('error','Missing Info','Please enter your name and email.');return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){showToast('error','Invalid Email','Please check your email address.');return}
+  if(!BK.service||!BK.date||!BK.time){showToast('error','Incomplete','Please go back and select service, date, and time.');return}
+  const btn=document.getElementById('bkSubmit');
+  const prevHtml=btn.innerHTML;
+  btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Sending…';
+  const scheduledDate=bookingDateISO(BK.date);
+  const payload={
+    service:BK.service,
+    scheduledDate,
+    scheduledTime:BK.time,
+    clientTimezone:BK_CLIENT_TZ,
+    firstName:fn,
+    lastName:ln,
+    email:em,
+    phone:document.getElementById('bkPh').value.trim(),
+    notes:document.getElementById('bkNote').value.trim(),
+    goal:document.getElementById('bkGoal').value.trim(),
+    urgency:document.getElementById('bkUrgency').value,
+    tools:document.getElementById('bkTools').value.trim(),
+    budgetRange:document.getElementById('bkBudget').value,
+    consent:true,
+    company_website:document.getElementById('bkHp').value.trim()
+  };
+  const idemKey=(typeof crypto!=='undefined'&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();
+  try{
+    const r=await fetch('/api/bookings',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Idempotency-Key':idemKey},
+      body:JSON.stringify(payload)
+    });
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok){
+      const msg=j.error||('Error '+r.status);
+      errEl.textContent=msg;errEl.classList.add('show');
+      showToast('error','Booking failed',msg);
+      btn.disabled=false;btn.innerHTML=prevHtml;
+      return;
+    }
+    const booking=j.booking;
+    applyBookingSuccess(booking,j.emailStatus||{});
+    bkGo(5);
+    showToast('success','Booking received!','Reference '+booking.ref);
+  }catch(e){
+    const ref='BWS-'+Math.random().toString(36).slice(2,8).toUpperCase();
+    BK.ref=ref;BK.scheduledAtUtc='';
+    document.getElementById('bkRef').textContent=ref;
+    legacyMailtoBooking(fn,ln,em,document.getElementById('bkPh').value.trim(),document.getElementById('bkNote').value.trim(),ref);
+    const dStr=BK.date?BK.date.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}):'—';
+    const goal=document.getElementById('bkGoal').value.trim();
+    const urg=document.getElementById('bkUrgency').value.trim();
+    let extra='';
+    if(goal)extra+=`<div class="bk-sum-row"><span class="bk-sum-l">Goal</span><span class="bk-sum-v">${goal.replace(/</g,'&lt;')}</span></div>`;
+    if(urg)extra+=`<div class="bk-sum-row"><span class="bk-sum-l">Urgency</span><span class="bk-sum-v">${urg.replace(/</g,'&lt;')}</span></div>`;
+    document.getElementById('bkSummary').innerHTML=
+      `<div class="bk-sum-row"><span class="bk-sum-l">Service</span><span class="bk-sum-v">${BK.service}</span></div>`+
+      `<div class="bk-sum-row"><span class="bk-sum-l">Date</span><span class="bk-sum-v">${dStr}</span></div>`+
+      `<div class="bk-sum-row"><span class="bk-sum-l">Time</span><span class="bk-sum-v">${BK.time} (Asia/Manila)</span></div>`+
+      extra+
+      `<div class="bk-sum-row"><span class="bk-sum-l">Name</span><span class="bk-sum-v">${fn} ${ln}</span></div>`+
+      `<div class="bk-sum-row"><span class="bk-sum-l">Email</span><span class="bk-sum-v">${em}</span></div>`+
+      `<div class="bk-sum-row"><span class="bk-sum-l">Note</span><span class="bk-sum-v">Saved locally only — please send the email draft that opened.</span></div>`;
+    document.getElementById('bkConfirmMsg').textContent='We could not reach the booking server. Your email app should open with a draft to our team — please send it so we receive your request.';
+    bkGo(5);
+    showToast('error','Offline fallback','Email draft opened — please send it to complete your request.');
+  }finally{
+    btn.disabled=false;btn.innerHTML=prevHtml;
+  }
+});
+
+document.getElementById('bkCal').addEventListener('click',()=>{
+  if(!BK.date||!BK.time)return;
+  let ds;
+  if(BK.scheduledAtUtc){
+    const d=new Date(BK.scheduledAtUtc);
+    if(!Number.isNaN(d.getTime())){
+      const pad=n=>String(n).padStart(2,'0');
+      ds=`${d.getUTCFullYear()}${pad(d.getUTCMonth()+1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
+    }
+  }
+  if(!ds){
+    const [hm,ampm]=BK.time.split(' ');let [hr,mn]=hm.split(':').map(Number);
+    if(ampm==='PM'&&hr!==12)hr+=12;if(ampm==='AM'&&hr===12)hr=0;
+    const pad=n=>String(n).padStart(2,'0');
+    const y=BK.date.getFullYear(),mo=BK.date.getMonth()+1,da=BK.date.getDate();
+    ds=`${y}${pad(mo)}${pad(da)}T${pad(hr)}${pad(mn)}00`;
+  }
+  const dtLine=BK.scheduledAtUtc&&ds.endsWith('Z')?`DTSTART:${ds}`:`DTSTART;TZID=Asia/Manila:${ds}`;
+  const ics=`BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//BWS//EN\nBEGIN:VEVENT\nSUMMARY:Discovery Call — Best Work Solution\n${dtLine}\nDURATION:PT30M\nDESCRIPTION:Service: ${BK.service}\\nRef: ${BK.ref}\\nContact: bestworkssolutions@gmail.com\nORGANIZER:mailto:bestworkssolutions@gmail.com\nEND:VEVENT\nEND:VCALENDAR`;
+  const blob=new Blob([ics],{type:'text/calendar'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='bws-discovery-call.ics';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('success','Calendar File Downloaded','Import it into any calendar app.');
+});
+
+document.getElementById('bkNew').addEventListener('click',()=>{
+  BK.step=1;BK.service='';BK.date=null;BK.time='';BK.ref='';BK.scheduledAtUtc='';
+  document.querySelectorAll('.bk-svc-pill').forEach(p=>p.classList.remove('sel'));
+  document.getElementById('bkN1').disabled=true;
+  document.getElementById('bkN2').disabled=true;
+  document.getElementById('bkN3').disabled=true;
+  ['bkFn','bkLn','bkEm','bkPh','bkNote','bkGoal','bkTools','bkHp'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  const urg=document.getElementById('bkUrgency');if(urg)urg.selectedIndex=0;
+  const bud=document.getElementById('bkBudget');if(bud)bud.selectedIndex=0;
+  const c=document.getElementById('bkConsent');if(c)c.checked=false;
+  const se=document.getElementById('bkSubmitErr');if(se){se.textContent='';se.classList.remove('show')}
+  bkGo(1);
+});
+
+/* ═══════════════════════════════════════
+   CHAT
+═══════════════════════════════════════ */
+const chatPop=document.getElementById('chatPop');
+const chatMsgs=document.getElementById('chatMsgs');
+const chatIn=document.getElementById('chatIn');
+const BOTS=['Thanks for reaching out! A team member will reply shortly.','Great question — email us at bestworkssolutions@gmail.com for detailed info.','We\'d love to help! Feel free to book a free discovery call too.','Our team is available Mon–Fri and responds within 24 hours.','You can also WhatsApp us at +63 977 249 7868 for a quicker response!'];
+let bIdx=0;
+document.getElementById('chatBtn').addEventListener('click',()=>chatPop.classList.toggle('open'));
+document.getElementById('chatX').addEventListener('click',()=>chatPop.classList.remove('open'));
+function sendChat(){
+  const v=chatIn.value.trim();if(!v)return;
+  const u=document.createElement('div');u.className='chat-msg usr';u.textContent=v;chatMsgs.appendChild(u);
+  chatIn.value='';chatMsgs.scrollTop=chatMsgs.scrollHeight;
+  setTimeout(()=>{
+    const b=document.createElement('div');b.className='chat-msg bot';b.textContent=BOTS[bIdx%BOTS.length];
+    chatMsgs.appendChild(b);bIdx++;chatMsgs.scrollTop=chatMsgs.scrollHeight;
+  },750);
+}
+document.getElementById('chatSnd').addEventListener('click',sendChat);
+chatIn.addEventListener('keypress',e=>{if(e.key==='Enter')sendChat()});
+
+/* ═══════════════════════════════════════
+   TOAST
+═══════════════════════════════════════ */
+function showToast(type,title,msg){
+  const t=document.getElementById('toast');
+  document.getElementById('tIco').className=type==='success'?'fas fa-check':'fas fa-triangle-exclamation';
+  document.getElementById('tT').textContent=title;
+  document.getElementById('tM').textContent=msg;
+  t.className=`toast ${type} show`;
+  setTimeout(()=>t.classList.remove('show'),5000);
+}
+
+/* ═══════════════════════════════════════
+   MISC
+═══════════════════════════════════════ */
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

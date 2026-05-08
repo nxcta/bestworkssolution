@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BWS — Bookings admin</title>
   <style>
-    body { font-family: system-ui, sans-serif; margin: 24px; background: #0f0a14; color: #eee; }
+    body { font-family: system-ui, sans-serif; margin: 24px; background: #0f0a14; color: #eee; max-width: 1200px; }
     h1 { font-size: 1.25rem; }
+    .hint { font-size: 0.82rem; color: #b8a0b0; line-height: 1.5; margin: 10px 0 16px; }
     input[type="password"], input[type="text"] { width: min(420px, 100%); padding: 10px; border-radius: 8px; border: 1px solid #333; background: #1a1220; color: #fff; }
-    button { margin-top: 10px; padding: 10px 16px; border-radius: 8px; border: 0; background: #c2185b; color: #fff; cursor: pointer; }
+    button { margin-top: 10px; margin-right: 8px; padding: 10px 16px; border-radius: 8px; border: 0; background: #c2185b; color: #fff; cursor: pointer; }
+    button.secondary { background: #3d2a45; border: 1px solid #5a4058; }
     a { color: #f48fb1; }
     table { border-collapse: collapse; width: 100%; margin-top: 20px; font-size: 0.82rem; }
     th, td { border: 1px solid #333; padding: 8px; text-align: left; vertical-align: top; }
@@ -18,42 +20,19 @@
 </head>
 <body>
   <h1>Best Work Solution — bookings</h1>
-  <p>Paste your <code>ADMIN_TOKEN</code> (same as server env). Never share this page publicly.</p>
-  <label for="tok">Admin token</label><br />
-  <input id="tok" type="password" autocomplete="off" placeholder="ADMIN_TOKEN" />
-  <button type="button" id="load">Load bookings</button>
-  <a id="csv" href="#" style="display:none;margin-left:12px">Download CSV</a>
+  <p class="hint">
+    Use your <strong>admin token</strong> in the field below (sent only in the <code>Authorization</code> header, never in the URL).
+    If the server has HTTP Basic enabled, your browser will ask for that username and password first.
+    Do not bookmark pages that contain the token in the address bar.
+  </p>
+  <label for="tok">Admin bearer token</label><br />
+  <input id="tok" type="password" autocomplete="off" placeholder="Paste ADMIN_TOKEN" />
+  <div>
+    <button type="button" id="load">Load bookings</button>
+    <button type="button" class="secondary" id="csvBtn" style="display:none">Download CSV</button>
+  </div>
   <div id="err" class="err"></div>
   <div id="out"></div>
-  <script>
-    const base = '';
-    document.getElementById('load').addEventListener('click', async () => {
-      const token = document.getElementById('tok').value.trim();
-      const err = document.getElementById('err');
-      const out = document.getElementById('out');
-      err.textContent = '';
-      out.innerHTML = '';
-      if (!token) { err.textContent = 'Enter token.'; return; }
-      try {
-        const r = await fetch(base + '/api/bookings/admin?token=' + encodeURIComponent(token));
-        const j = await r.json();
-        if (!r.ok) { err.textContent = j.error || r.statusText; return; }
-        const csv = document.getElementById('csv');
-        csv.href = base + '/api/bookings/export.csv?token=' + encodeURIComponent(token);
-        csv.style.display = 'inline';
-        const rows = j.bookings || [];
-        if (!rows.length) { out.textContent = 'No bookings yet.'; return; }
-        const cols = ['ref','createdAt','status','service','scheduledDate','scheduledTime','scheduledAtUtc','email','firstName','lastName','goal','urgency'];
-        let html = '<table><tr>' + cols.map(c => '<th>' + c + '</th>').join('') + '</tr>';
-        for (const b of rows) {
-          html += '<tr>' + cols.map(c => '<td>' + (b[c] == null ? '' : String(b[c]).replace(/</g,'&lt;')) + '</td>').join('') + '</tr>';
-        }
-        html += '</table>';
-        out.innerHTML = html;
-      } catch (e) {
-        err.textContent = String(e.message);
-      }
-    });
-  </script>
+  <script src="/admin/admin-bookings.js" defer></script>
 </body>
 </html>

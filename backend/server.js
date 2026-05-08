@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -19,20 +20,33 @@ if (fs.existsSync(ENV_PATH)) {
     if (!process.env[k]) process.env[k] = v;
   }
 }
+
 const DATA_DIR = path.join(__dirname, 'data');
 const BOOKINGS_FILE = path.join(DATA_DIR, 'bookings.jsonl');
 const IDEMPOTENCY_FILE = path.join(DATA_DIR, 'idempotency.json');
 
 const PORT = Number(process.env.PORT) || 3847;
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const IS_PROD = NODE_ENV === 'production';
 const BUSINESS_TZ = process.env.BUSINESS_TZ || 'Asia/Manila';
 const TEAM_NOTIFY_EMAIL = process.env.TEAM_NOTIFY_EMAIL || 'bestworkssolutions@gmail.com';
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 const RESEND_FROM = process.env.RESEND_FROM || '';
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || '';
+const ADMIN_BASIC_USER = process.env.ADMIN_BASIC_USER || '';
+const ADMIN_BASIC_PASS = process.env.ADMIN_BASIC_PASS || '';
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
 
 const RATE_WINDOW_MS = 15 * 60 * 1000;
 const RATE_MAX = 8;
 const ipHits = new Map();
+
+const ADMIN_RATE_WINDOW_MS = 15 * 60 * 1000;
+const ADMIN_RATE_MAX = 40;
+const adminIpHits = new Map();
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -56,7 +70,7 @@ function saveIdempotency(map) {
   fs.writeFileSync(IDEMPOTENCY_FILE, JSON.stringify(pruned), 'utf8');
 }
 
-function rateLimit(ip) {
+function rateLimitBooking(ip) {
   const now = Date.now();
   let arr = ipHits.get(ip) || [];
   arr = arr.filter((t) => now - t < RATE_WINDOW_MS);
@@ -66,6 +80,47 @@ function rateLimit(ip) {
   return true;
 }
 
+function rateLimitAdmin(ip) {
+  const now = Date.now();
+  let arr = adminIpHits.get(ip) || [];
+  arr = arr.filter((t) => now - t < ADMIN_RATE_WINDOW_MS);
+  if (arr.length >= ADMIN_RATE_MAX) return false;
+  arr.push(now);
+  adminIpHits.set(ip, arr);
+  return true;
+}
+
+/** Constant-length compare via SHA-256 (avoids length leaks from timingSafeEqual on raw strings). */
+function secretEquals(expected, received) {
+  if (typeof expected !== 'string' || typeof received !== 'string' || !expected.length) return false;
+  const a = crypto.createHash('sha256').update(expected, 'utf8').digest();
+  const b = crypto.createHash('sha256').update(received, 'utf8').digest();
+  return crypto.timingSafeEqual(a, b);
+}
+
+function parseBasicAuth(header) {
+  if (!header || typeof header !== 'string' || !header.startsWith('Basic ')) return null;
+  try {
+    const raw = Buffer.from(header.slice(6).trim(), 'base64').toString('utf8');
+    const i = raw.indexOf(':');
+    if (i < 0) return null;
+    return { user: raw.slice(0, i), pass: raw.slice(i + 1) };
+  } catch {
+    return null;
+  }
+}
+
+function optionalBasicAuth(req, res, next) {
+  if (!ADMIN_BASIC_USER || !ADMIN_BASIC_PASS) return next();
+  const creds = parseBasicAuth(req.headers.authorization);
+  if (!creds || !secretEquals(ADMIN_BASIC_USER, creds.user) || !secretEquals(ADMIN_BASIC_PASS, creds.pass)) {
+    res.setHeader('WWW-Authenticate', 'Basic realm="BWS Admin", charset="UTF-8"');
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(401).type('text/plain').send('Authentication required');
+  }
+  return next();
+}
+
 function parseTimeTo24(hm, ampm) {
   let [h, m] = hm.split(':').map(Number);
   if (ampm === 'PM' && h !== 12) h += 12;
@@ -73,7 +128,6 @@ function parseTimeTo24(hm, ampm) {
   return { h, m: m || 0 };
 }
 
-/** Build ISO instant for office wall-clock in Manila (+08:00). */
 function manilaWallToUtcIso(year, monthIndex, day, timeStr) {
   const parts = String(timeStr).trim().split(/\s+/);
   if (parts.length < 2) return null;
@@ -118,13 +172,38 @@ function escapeHtml(s) {
 }
 
 const app = express();
+app.disable('x-powered-by');
+app.set('trust proxy', 1);
+
 app.use(
-  cors({
-    origin: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Idempotency-Key'],
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: { policy: 'same-site' },
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+    hsts: IS_PROD ? { maxAge: 15552000, includeSubDomains: true, preload: false } : false,
   })
 );
+
+app.use(
+  cors({
+    origin(origin, cb) {
+      if (!ALLOWED_ORIGINS.length) {
+        if (IS_PROD) {
+          return cb(null, false);
+        }
+        return cb(null, true);
+      }
+      if (!origin) return cb(null, true);
+      if (ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
+      return cb(null, false);
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Idempotency-Key', 'Authorization', 'Accept'],
+    maxAge: 86400,
+  })
+);
+
 app.use(express.json({ limit: '128kb' }));
 
 const rootDir = path.join(__dirname, '..');
@@ -135,10 +214,41 @@ function clientIp(req) {
   return req.socket.remoteAddress || 'unknown';
 }
 
+function adminSecurityHeaders(_req, res, next) {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
+  next();
+}
+
+function requireBearerAdmin(req, res, next) {
+  if (!ADMIN_TOKEN) {
+    return res.status(503).json({ error: 'Admin access is not configured on this server.' });
+  }
+  const raw = (req.headers.authorization || '').replace(/^Bearer\s+/i, '').trim();
+  if (!raw || !secretEquals(ADMIN_TOKEN, raw)) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  return next();
+}
+
+function adminGate(req, res, next) {
+  const ip = clientIp(req);
+  if (!rateLimitAdmin(ip)) {
+    return res.status(429).json({ error: 'Too many admin requests. Try again later.' });
+  }
+  return next();
+}
+
+app.get('/api/health', (_req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.json({ ok: true, service: 'bws-booking-api', time: new Date().toISOString() });
+});
+
 app.post('/api/bookings', async (req, res) => {
   try {
     const ip = clientIp(req);
-    if (!rateLimit(ip)) {
+    if (!rateLimitBooking(ip)) {
       return res.status(429).json({ error: 'Too many requests. Try again later.' });
     }
 
@@ -265,11 +375,7 @@ app.post('/api/bookings', async (req, res) => {
 </ul>
 <p>Our team will confirm by email or WhatsApp within a few hours on business days.</p>
 <p>— Best Work Solution</p>`;
-        await sendResend(
-          em,
-          `We received your booking (${ref})`,
-          prospectHtml
-        );
+        await sendResend(em, `We received your booking (${ref})`, prospectHtml);
         emailStatus.prospect = 'sent';
 
         const teamHtml = `<pre style="font-family:system-ui,sans-serif">${escapeHtml(summaryLines)}</pre>`;
@@ -303,63 +409,85 @@ function readAllBookings() {
   return out;
 }
 
-function requireAdmin(req, res, next) {
-  const token = req.query.token || req.headers.authorization?.replace(/^Bearer\s+/i, '');
-  if (!ADMIN_TOKEN || token !== ADMIN_TOKEN) {
-    return res.status(401).json({ error: 'Unauthorized' });
+app.get(
+  '/api/bookings/admin',
+  optionalBasicAuth,
+  adminSecurityHeaders,
+  adminGate,
+  requireBearerAdmin,
+  (req, res) => {
+    const bookings = readAllBookings().reverse();
+    res.json({ count: bookings.length, bookings });
   }
-  next();
-}
+);
 
-app.get('/api/bookings/admin', requireAdmin, (req, res) => {
-  const bookings = readAllBookings().reverse();
-  res.json({ count: bookings.length, bookings });
-});
-
-app.get('/api/bookings/export.csv', requireAdmin, (req, res) => {
-  const rows = readAllBookings();
-  const headers = [
-    'ref',
-    'status',
-    'createdAt',
-    'service',
-    'scheduledDate',
-    'scheduledTime',
-    'scheduledAtUtc',
-    'clientTimezone',
-    'firstName',
-    'lastName',
-    'email',
-    'phone',
-    'goal',
-    'urgency',
-    'tools',
-    'budgetRange',
-    'notes',
-  ];
-  const esc = (v) => {
-    const s = v == null ? '' : String(v);
-    if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
-    return s;
-  };
-  const lines = [headers.join(',')];
-  for (const b of rows) {
-    lines.push(headers.map((h) => esc(b[h])).join(','));
+app.get(
+  '/api/bookings/export.csv',
+  optionalBasicAuth,
+  adminSecurityHeaders,
+  adminGate,
+  requireBearerAdmin,
+  (req, res) => {
+    const rows = readAllBookings();
+    const headers = [
+      'ref',
+      'status',
+      'createdAt',
+      'service',
+      'scheduledDate',
+      'scheduledTime',
+      'scheduledAtUtc',
+      'clientTimezone',
+      'firstName',
+      'lastName',
+      'email',
+      'phone',
+      'goal',
+      'urgency',
+      'tools',
+      'budgetRange',
+      'notes',
+    ];
+    const esc = (v) => {
+      const s = v == null ? '' : String(v);
+      if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+      return s;
+    };
+    const lines = [headers.join(',')];
+    for (const b of rows) {
+      lines.push(headers.map((h) => esc(b[h])).join(','));
+    }
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', 'attachment; filename="bws-bookings.csv"');
+    res.send(lines.join('\n'));
   }
-  res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-  res.setHeader('Content-Disposition', 'attachment; filename="bws-bookings.csv"');
-  res.send(lines.join('\n'));
-});
+);
 
-app.get('/admin/bookings.html', (req, res) => {
+app.get('/admin/bookings.html', optionalBasicAuth, adminSecurityHeaders, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin-bookings.html'));
 });
+
+app.use(
+  '/admin',
+  express.static(path.join(__dirname, 'public'), {
+    index: false,
+    dotfiles: 'deny',
+    fallthrough: true,
+  })
+);
 
 app.use(express.static(rootDir));
 
 ensureDataDir();
 app.listen(PORT, () => {
-  console.log(`BWS server http://localhost:${PORT}`);
-  console.log(`Open site: http://localhost:${PORT}/test/index.html`);
+  console.log(`BWS server listening on port ${PORT}`);
+  console.log(`Health: /api/health`);
+  console.log(`Admin UI: /admin/bookings.html`);
+  if (IS_PROD && !ALLOWED_ORIGINS.length) {
+    console.warn('WARN: ALLOWED_ORIGINS is empty in production — cross-origin booking POSTs will be blocked by the browser. Set ALLOWED_ORIGINS to your public site URL(s).');
+  }
   if (!ADMIN_TOKEN) console.warn('WARN: ADMIN_TOKEN not set — admin API disabled until configured.');
+  if (!ADMIN_BASIC_USER) {
+    console.warn('WARN: ADMIN_BASIC_USER / ADMIN_BASIC_PASS not set — enable them in production for an extra login wall.');
+  }
 });

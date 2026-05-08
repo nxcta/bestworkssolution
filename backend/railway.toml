@@ -1,0 +1,9 @@
+# In Railway: set the service Root Directory to `backend` (repo folder containing this file).
+
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/api/health"
+restartPolicyType = "on_failure"

@@ -3,43 +3,356 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BWS — Bookings admin</title>
+  <title>Best Work Solution — Bookings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: system-ui, sans-serif; margin: 24px; background: #0f0a14; color: #eee; max-width: 1200px; }
-    h1 { font-size: 1.25rem; }
-    .hint { font-size: 0.82rem; color: #b8a0b0; line-height: 1.5; margin: 10px 0 16px; }
-    input[type="password"], input[type="text"] { width: min(420px, 100%); padding: 10px; border-radius: 8px; border: 1px solid #333; background: #1a1220; color: #fff; }
-    button { margin-top: 10px; margin-right: 8px; padding: 10px 16px; border-radius: 8px; border: 0; background: #c2185b; color: #fff; cursor: pointer; }
-    button.secondary { background: #3d2a45; border: 1px solid #5a4058; }
-    a { color: #f48fb1; }
-    table { border-collapse: collapse; width: 100%; margin-top: 20px; font-size: 0.82rem; }
-    th, td { border: 1px solid #333; padding: 8px; text-align: left; vertical-align: top; }
-    th { background: #1a1220; }
-    .err { color: #f88; margin-top: 8px; }
+    :root {
+      --bg-deep: #12060f;
+      --bg-card: rgba(28, 12, 24, 0.72);
+      --line: rgba(240, 98, 146, 0.22);
+      --pink: #f06292;
+      --pink-hot: #e91e8c;
+      --pink-soft: #f8b4d0;
+      --text: #fff5f9;
+      --muted: rgba(255, 214, 228, 0.62);
+      --err: #ff8a9a;
+      --radius: 20px;
+      --shadow: 0 24px 64px rgba(233, 30, 140, 0.18);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--bg-deep);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse 120% 80% at 20% -10%, rgba(240, 98, 146, 0.35), transparent 55%),
+        radial-gradient(ellipse 90% 70% at 100% 30%, rgba(194, 24, 91, 0.22), transparent 50%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(255, 182, 213, 0.08), transparent 45%),
+        var(--bg-deep);
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    .hidden { display: none !important; }
+
+    /* Sign-in */
+    #view-login {
+      min-height: calc(100vh - 64px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sign-card {
+      width: min(440px, 100%);
+      padding: 40px 36px 36px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+    .sign-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--pink-soft);
+      margin-bottom: 14px;
+    }
+    .sign-badge span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 0 12px var(--pink);
+    }
+    .sign-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      background: linear-gradient(120deg, #fff, var(--pink-soft) 45%, var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .sign-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 26px;
+    }
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(8, 5, 14, 0.45);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input:focus {
+      border-color: rgba(240, 98, 146, 0.55);
+      box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.12);
+    }
+    .btn-primary {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 12px;
+      font: inherit;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--pink), var(--pink-hot));
+      box-shadow: 0 10px 32px rgba(233, 30, 140, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(233, 30, 140, 0.42);
+    }
+    .btn-primary:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .sign-foot {
+      margin-top: 18px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .sign-foot code {
+      font-size: 0.7rem;
+      background: rgba(240, 98, 146, 0.12);
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: var(--pink-soft);
+    }
+
+    /* Dashboard */
+    #view-dash .dash-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .dash-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .dash-brand h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+    }
+    .dash-brand p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .dash-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .pill-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(240, 98, 146, 0.1);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .pill-count strong {
+      color: var(--pink-soft);
+      font-size: 1rem;
+    }
+    .btn-ghost, .btn-outline {
+      padding: 10px 16px;
+      border-radius: 10px;
+      font: inherit;
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-ghost {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+    .btn-ghost:hover {
+      background: rgba(240, 98, 146, 0.12);
+      border-color: rgba(240, 98, 146, 0.35);
+    }
+    .btn-outline {
+      border: 1px solid rgba(240, 98, 146, 0.45);
+      background: transparent;
+      color: var(--pink-soft);
+    }
+    .btn-outline:hover {
+      background: rgba(240, 98, 146, 0.12);
+    }
+    .table-shell {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .table-scroll {
+      overflow-x: auto;
+      max-height: min(70vh, 640px);
+      overflow-y: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(240, 98, 146, 0.12);
+      vertical-align: top;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: rgba(18, 6, 15, 0.92);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      color: var(--pink-soft);
+      white-space: nowrap;
+    }
+    tr:hover td {
+      background: rgba(240, 98, 146, 0.06);
+    }
+    .err {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(255, 90, 120, 0.12);
+      border: 1px solid rgba(255, 90, 120, 0.28);
+      color: var(--err);
+      font-size: 0.85rem;
+    }
+    .empty-state {
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    @media (max-width: 640px) {
+      .sign-card { padding: 28px 22px; }
+      .dash-top { flex-direction: column; align-items: stretch; }
+      .dash-actions { justify-content: stretch; }
+      .dash-actions button { flex: 1; }
+    }
   </style>
 </head>
 <body>
-  <h1>Best Work Solution — bookings</h1>
-  <p class="hint">
-    Use your <strong>admin token</strong> in the field below (sent only in the <code>Authorization</code> header, never in the URL).
-    If the server has HTTP Basic enabled, your browser will ask for that username and password first.
-    Do not bookmark pages that contain the token in the address bar.
-  </p>
-  <label for="tok">Admin bearer token</label><br />
-  <input id="tok" type="password" autocomplete="off" placeholder="Paste ADMIN_TOKEN" />
-  <div>
-    <button type="button" id="load">Load bookings</button>
-    <button type="button" class="secondary" id="csvBtn" style="display:none">Download CSV</button>
+  <div class="bg" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <section id="view-login">
+      <div class="sign-card">
+        <div class="sign-badge"><span></span> Team access</div>
+        <h2 class="sign-title">Bookings dashboard</h2>
+        <p class="sign-sub">Sign in with your secure access token. Nothing is stored in the URL.</p>
+        <div class="field">
+          <label for="tok">Access token</label>
+          <input id="tok" type="password" autocomplete="off" placeholder="Paste your ADMIN_TOKEN" />
+        </div>
+        <button type="button" class="btn-primary" id="btnEnter">Enter dashboard</button>
+        <p class="sign-foot">
+          If your team enabled a browser login first, you may have already entered username and password for this site.
+          Your token is sent only in the <code>Authorization</code> header when loading data.
+        </p>
+        <div id="errLogin" class="err hidden"></div>
+      </div>
+    </section>
+
+    <section id="view-dash" class="hidden">
+      <div class="dash-top">
+        <div class="dash-brand">
+          <h1>Discovery bookings</h1>
+          <p>Best Work Solution — live requests from your website</p>
+        </div>
+        <div class="dash-actions">
+          <div class="pill-count">Total <strong id="countNum">0</strong></div>
+          <button type="button" class="btn-ghost" id="btnRefresh">Refresh</button>
+          <button type="button" class="btn-outline" id="btnCsv">Export CSV</button>
+          <button type="button" class="btn-ghost" id="btnSignOut">Sign out</button>
+        </div>
+      </div>
+      <div class="table-shell">
+        <div class="table-scroll" id="tableHost">
+          <div class="empty-state" id="emptyDash">Loading…</div>
+        </div>
+      </div>
+      <div id="errDash" class="err hidden"></div>
+    </section>
   </div>
-  <div id="err" class="err"></div>
-  <div id="out"></div>
+
   <script>
     (function () {
+      var STORAGE_KEY = "bws_admin_bearer_v1";
+      var viewLogin = document.getElementById("view-login");
+      var viewDash = document.getElementById("view-dash");
+      var tokInput = document.getElementById("tok");
+      var btnEnter = document.getElementById("btnEnter");
+      var errLogin = document.getElementById("errLogin");
+      var errDash = document.getElementById("errDash");
+      var tableHost = document.getElementById("tableHost");
+      var emptyDash = document.getElementById("emptyDash");
+      var countNum = document.getElementById("countNum");
+      var btnRefresh = document.getElementById("btnRefresh");
+      var btnCsv = document.getElementById("btnCsv");
+      var btnSignOut = document.getElementById("btnSignOut");
+
       function authHeaders(token) {
-        return {
-          Authorization: "Bearer " + token,
-          Accept: "application/json",
-        };
+        return { Authorization: "Bearer " + token, Accept: "application/json" };
       }
 
       function escapeCell(v) {
@@ -50,71 +363,87 @@
           .replace(/>/g, "&gt;");
       }
 
-      document.getElementById("load").addEventListener("click", async function () {
-        const token = document.getElementById("tok").value.trim();
-        const err = document.getElementById("err");
-        const out = document.getElementById("out");
-        const csvBtn = document.getElementById("csvBtn");
-        err.textContent = "";
-        out.innerHTML = "";
-        csvBtn.style.display = "none";
-        csvBtn.onclick = null;
+      function showLogin() {
+        viewDash.classList.add("hidden");
+        viewLogin.classList.remove("hidden");
+        errDash.classList.add("hidden");
+        errDash.textContent = "";
+      }
 
+      function showDash() {
+        viewLogin.classList.add("hidden");
+        viewDash.classList.remove("hidden");
+        errLogin.classList.add("hidden");
+        errLogin.textContent = "";
+      }
+
+      function getToken() {
+        var t = tokInput.value.trim();
+        if (t) return t;
+        try {
+          return sessionStorage.getItem(STORAGE_KEY) || "";
+        } catch (e) {
+          return "";
+        }
+      }
+
+      function saveToken(t) {
+        try {
+          sessionStorage.setItem(STORAGE_KEY, t);
+        } catch (e) {}
+      }
+
+      function clearToken() {
+        try {
+          sessionStorage.removeItem(STORAGE_KEY);
+        } catch (e) {}
+        tokInput.value = "";
+      }
+
+      async function loadBookings(silent) {
+        var token = getToken();
         if (!token) {
-          err.textContent = "Enter your admin token.";
+          showLogin();
           return;
         }
+        if (!silent) {
+          errDash.classList.add("hidden");
+          errDash.textContent = "";
+        }
+        if (!silent && viewDash.classList.contains("hidden")) {
+          btnEnter.disabled = true;
+        }
         try {
-          const r = await fetch("/api/bookings/admin", {
+          var r = await fetch("/api/bookings/admin", {
             method: "GET",
             credentials: "same-origin",
             headers: authHeaders(token),
           });
-          const j = await r.json().catch(function () {
+          var j = await r.json().catch(function () {
             return {};
           });
           if (!r.ok) {
-            err.textContent = j.error || r.statusText || "Request failed";
-            return;
-          }
-
-          csvBtn.style.display = "inline-block";
-          csvBtn.onclick = async function () {
-            err.textContent = "";
-            try {
-              const r2 = await fetch("/api/bookings/export.csv", {
-                method: "GET",
-                credentials: "same-origin",
-                headers: {
-                  Authorization: "Bearer " + token,
-                  Accept: "text/csv",
-                },
-              });
-              if (!r2.ok) {
-                const t = await r2.text();
-                err.textContent = t || r2.statusText;
-                return;
-              }
-              const blob = await r2.blob();
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url;
-              a.download = "bws-bookings.csv";
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              URL.revokeObjectURL(url);
-            } catch (e2) {
-              err.textContent = String(e2.message);
+            if (r.status === 401) {
+              clearToken();
+              showLogin();
+              errLogin.textContent = j.error || "Session expired or invalid token.";
+              errLogin.classList.remove("hidden");
+              return;
             }
-          };
-
-          const rows = j.bookings || [];
-          if (!rows.length) {
-            out.textContent = "No bookings yet.";
+            errDash.textContent = j.error || r.statusText || "Request failed";
+            errDash.classList.remove("hidden");
             return;
           }
-          const cols = [
+          showDash();
+          saveToken(token);
+          var rows = j.bookings || [];
+          countNum.textContent = String(rows.length);
+          if (!rows.length) {
+            tableHost.innerHTML =
+              '<div class="empty-state" id="emptyDash">No bookings yet. They will appear here when clients submit the form.</div>';
+            return;
+          }
+          var cols = [
             "ref",
             "createdAt",
             "status",
@@ -128,23 +457,95 @@
             "goal",
             "urgency",
           ];
-          let html = "<table><tr>";
-          for (let i = 0; i < cols.length; i++) html += "<th>" + escapeCell(cols[i]) + "</th>";
-          html += "</tr>";
-          for (let ri = 0; ri < rows.length; ri++) {
-            const b = rows[ri];
+          var html = "<table><thead><tr>";
+          for (var i = 0; i < cols.length; i++) {
+            html += "<th>" + escapeCell(cols[i]) + "</th>";
+          }
+          html += "</tr></thead><tbody>";
+          for (var ri = 0; ri < rows.length; ri++) {
+            var b = rows[ri];
             html += "<tr>";
-            for (let c = 0; c < cols.length; c++) {
+            for (var c = 0; c < cols.length; c++) {
               html += "<td>" + escapeCell(b[cols[c]]) + "</td>";
             }
             html += "</tr>";
           }
-          html += "</table>";
-          out.innerHTML = html;
+          html += "</tbody></table>";
+          tableHost.innerHTML = html;
         } catch (e) {
-          err.textContent = String(e.message);
+          errDash.textContent = String(e.message);
+          errDash.classList.remove("hidden");
+        } finally {
+          btnEnter.disabled = false;
         }
+      }
+
+      async function exportCsv() {
+        var token = getToken();
+        if (!token) return;
+        errDash.classList.add("hidden");
+        try {
+          var r2 = await fetch("/api/bookings/export.csv", {
+            method: "GET",
+            credentials: "same-origin",
+            headers: { Authorization: "Bearer " + token, Accept: "text/csv" },
+          });
+          if (!r2.ok) {
+            var t = await r2.text();
+            errDash.textContent = t || r2.statusText;
+            errDash.classList.remove("hidden");
+            return;
+          }
+          var blob = await r2.blob();
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "bws-bookings.csv";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        } catch (e2) {
+          errDash.textContent = String(e2.message);
+          errDash.classList.remove("hidden");
+        }
+      }
+
+      btnEnter.addEventListener("click", function () {
+        var token = tokInput.value.trim();
+        errLogin.classList.add("hidden");
+        errLogin.textContent = "";
+        if (!token) {
+          errLogin.textContent = "Enter your access token.";
+          errLogin.classList.remove("hidden");
+          return;
+        }
+        saveToken(token);
+        loadBookings(false);
       });
+
+      btnRefresh.addEventListener("click", function () {
+        loadBookings(false);
+      });
+      btnCsv.addEventListener("click", exportCsv);
+      btnSignOut.addEventListener("click", function () {
+        clearToken();
+        showLogin();
+        tableHost.innerHTML =
+          '<div class="empty-state">Sign in to view bookings.</div>';
+        countNum.textContent = "0";
+      });
+
+      (function init() {
+        try {
+          var saved = sessionStorage.getItem(STORAGE_KEY);
+          if (saved) {
+            tokInput.value = saved;
+            showDash();
+            loadBookings(true);
+          }
+        } catch (e) {}
+      })();
     })();
   </script>
 </body>

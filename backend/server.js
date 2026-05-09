@@ -110,7 +110,8 @@ function parseBasicAuth(header) {
   }
 }
 
-function optionalBasicAuth(req, res, next) {
+/** HTTP Basic: only for loading the admin HTML shell. API routes use Bearer token only (avoids browser auth popup on fetch). */
+function optionalBasicAuthAdminShell(req, res, next) {
   if (!ADMIN_BASIC_USER || !ADMIN_BASIC_PASS) return next();
   const creds = parseBasicAuth(req.headers.authorization);
   if (!creds || !secretEquals(ADMIN_BASIC_USER, creds.user) || !secretEquals(ADMIN_BASIC_PASS, creds.pass)) {
@@ -411,7 +412,6 @@ function readAllBookings() {
 
 app.get(
   '/api/bookings/admin',
-  optionalBasicAuth,
   adminSecurityHeaders,
   adminGate,
   requireBearerAdmin,
@@ -423,7 +423,6 @@ app.get(
 
 app.get(
   '/api/bookings/export.csv',
-  optionalBasicAuth,
   adminSecurityHeaders,
   adminGate,
   requireBearerAdmin,
@@ -463,12 +462,18 @@ app.get(
   }
 );
 
-app.get('/admin/bookings.html', optionalBasicAuth, adminSecurityHeaders, (req, res) => {
+app.get('/admin', optionalBasicAuthAdminShell, adminSecurityHeaders, (_req, res) => {
+  res.redirect(302, '/admin/bookings.html');
+});
+
+app.get('/admin/bookings.html', optionalBasicAuthAdminShell, adminSecurityHeaders, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin-bookings.html'));
 });
 
 app.use(
   '/admin',
+  optionalBasicAuthAdminShell,
+  adminSecurityHeaders,
   express.static(path.join(__dirname, 'public'), {
     index: false,
     dotfiles: 'deny',
@@ -488,6 +493,6 @@ app.listen(PORT, () => {
   }
   if (!ADMIN_TOKEN) console.warn('WARN: ADMIN_TOKEN not set — admin API disabled until configured.');
   if (!ADMIN_BASIC_USER) {
-    console.warn('WARN: ADMIN_BASIC_USER / ADMIN_BASIC_PASS not set — enable them in production for an extra login wall.');
+    console.warn('WARN: ADMIN_BASIC_USER / ADMIN_BASIC_PASS not set — optional first login wall for /admin pages only.');
   }
 });

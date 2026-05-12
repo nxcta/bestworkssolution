@@ -283,6 +283,107 @@
       color: var(--muted);
       font-size: 0.92rem;
     }
+    .dash-kpi-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .kpi-card {
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(240, 98, 146, 0.08);
+      padding: 12px 14px;
+    }
+    .kpi-card .lbl {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .kpi-card .val {
+      font-size: 1.28rem;
+      font-weight: 700;
+      color: var(--pink-soft);
+    }
+    .chart-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      padding: 18px 16px 12px;
+      margin-bottom: 20px;
+    }
+    .chart-card h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .chart-wrap {
+      height: min(260px, 42vh);
+      position: relative;
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .filter-row span.lbl {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-right: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+    .btn-filter {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-filter:hover {
+      border-color: rgba(240, 98, 146, 0.35);
+      background: rgba(240, 98, 146, 0.08);
+    }
+    .btn-filter.on {
+      border-color: rgba(240, 98, 146, 0.55);
+      background: rgba(240, 98, 146, 0.18);
+      color: var(--pink-soft);
+    }
+    td.src-cell {
+      white-space: nowrap;
+    }
+    .src-tag {
+      display: inline-flex;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .src-tag.web {
+      background: rgba(129, 199, 132, 0.15);
+      color: #c8f5cf;
+      border: 1px solid rgba(129, 199, 132, 0.38);
+    }
+    .src-tag.cal {
+      background: rgba(100, 181, 246, 0.14);
+      color: #cfe6ff;
+      border: 1px solid rgba(100, 181, 246, 0.38);
+    }
     @media (max-width: 640px) {
       .sign-card { padding: 28px 22px; }
       .dash-top { flex-direction: column; align-items: stretch; }
@@ -290,6 +391,7 @@
       .dash-actions button { flex: 1; }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
 <body>
   <div class="bg" aria-hidden="true"></div>
@@ -316,15 +418,39 @@
     <section id="view-dash" class="hidden">
       <div class="dash-top">
         <div class="dash-brand">
-          <h1>Discovery bookings</h1>
-          <p>Best Work Solution — live requests from your website</p>
+          <h1>Appointments hub</h1>
+          <p>Website wizard + Calendly — unified timeline</p>
         </div>
         <div class="dash-actions">
-          <div class="pill-count">Total <strong id="countNum">0</strong></div>
+          <div class="pill-count">
+            Showing <strong id="countNum">0</strong>
+            <span style="opacity: 0.75; font-weight: 500; font-size: 0.75rem"> / <span id="totalUnified">0</span> total</span>
+          </div>
           <button type="button" class="btn-ghost" id="btnRefresh">Refresh</button>
-          <button type="button" class="btn-outline" id="btnCsv">Export CSV</button>
+          <button type="button" class="btn-outline" id="btnCsv">Export unified CSV</button>
+          <button type="button" class="btn-ghost" id="btnCsvWebsite">Website CSV only</button>
           <button type="button" class="btn-ghost" id="btnSignOut">Sign out</button>
         </div>
+      </div>
+      <div class="dash-kpi-wrap">
+        <div class="kpi-card"><div class="lbl">All appointments</div><div class="val" id="kpiAll">—</div></div>
+        <div class="kpi-card"><div class="lbl">Website total</div><div class="val" id="kpiWebTot">—</div></div>
+        <div class="kpi-card"><div class="lbl">Calendly total</div><div class="val" id="kpiCalTot">—</div></div>
+        <div class="kpi-card"><div class="lbl">Website (7d)</div><div class="val" id="kpiWeb7">—</div></div>
+        <div class="kpi-card"><div class="lbl">Calendly (7d)</div><div class="val" id="kpiCal7">—</div></div>
+      </div>
+      <div class="chart-card">
+        <h2 id="chartTitle">Volume by day</h2>
+        <p style="font-size: 0.72rem; color: var(--muted); margin: -4px 0 10px; line-height: 1.45">
+          Counts use booking / webhook timestamps (UTC). Not revenue.
+        </p>
+        <div class="chart-wrap"><canvas id="metricsChart" aria-label="Appointment volume by day"></canvas></div>
+      </div>
+      <div class="filter-row">
+        <span class="lbl">Source</span>
+        <button type="button" class="btn-filter on" id="fltAll" data-src="">All</button>
+        <button type="button" class="btn-filter" id="fltWeb" data-src="website">Website</button>
+        <button type="button" class="btn-filter" id="fltCal" data-src="calendly">Calendly</button>
       </div>
       <div class="table-shell">
         <div class="table-scroll" id="tableHost">
@@ -338,6 +464,7 @@
   <script>
     (function () {
       var STORAGE_KEY = "bws_admin_bearer_v1";
+      var POLL_MS = 60000;
       var viewLogin = document.getElementById("view-login");
       var viewDash = document.getElementById("view-dash");
       var tokInput = document.getElementById("tok");
@@ -345,11 +472,19 @@
       var errLogin = document.getElementById("errLogin");
       var errDash = document.getElementById("errDash");
       var tableHost = document.getElementById("tableHost");
-      var emptyDash = document.getElementById("emptyDash");
       var countNum = document.getElementById("countNum");
+      var totalUnifiedEl = document.getElementById("totalUnified");
       var btnRefresh = document.getElementById("btnRefresh");
       var btnCsv = document.getElementById("btnCsv");
+      var btnCsvWebsite = document.getElementById("btnCsvWebsite");
       var btnSignOut = document.getElementById("btnSignOut");
+      var fltAll = document.getElementById("fltAll");
+      var fltWeb = document.getElementById("fltWeb");
+      var fltCal = document.getElementById("fltCal");
+
+      var currentSrc = "";
+      var metricsChartInst = null;
+      var pollTimer = null;
 
       function authHeaders(token) {
         return { Authorization: "Bearer " + token, Accept: "application/json" };
@@ -363,7 +498,22 @@
           .replace(/>/g, "&gt;");
       }
 
+      function stopPoll() {
+        if (pollTimer) {
+          clearInterval(pollTimer);
+          pollTimer = null;
+        }
+      }
+
+      function startPoll() {
+        stopPoll();
+        pollTimer = setInterval(function () {
+          loadBookings(true);
+        }, POLL_MS);
+      }
+
       function showLogin() {
+        stopPoll();
         viewDash.classList.add("hidden");
         viewLogin.classList.remove("hidden");
         errDash.classList.add("hidden");
@@ -400,6 +550,71 @@
         tokInput.value = "";
       }
 
+      function setFilterButtons() {
+        [fltAll, fltWeb, fltCal].forEach(function (b) {
+          b.classList.toggle("on", (b.getAttribute("data-src") || "") === currentSrc);
+        });
+      }
+
+      function renderKpis(metrics) {
+        var k = metrics && metrics.kpis ? metrics.kpis : {};
+        document.getElementById("kpiAll").textContent = k.appointmentsAll != null ? String(k.appointmentsAll) : "0";
+        document.getElementById("kpiWebTot").textContent = k.appointmentsWebsiteTotal != null ? String(k.appointmentsWebsiteTotal) : "0";
+        document.getElementById("kpiCalTot").textContent = k.appointmentsCalendlyTotal != null ? String(k.appointmentsCalendlyTotal) : "0";
+        document.getElementById("kpiWeb7").textContent = k.appointmentsLast7Website != null ? String(k.appointmentsLast7Website) : "0";
+        document.getElementById("kpiCal7").textContent = k.appointmentsLast7Calendly != null ? String(k.appointmentsLast7Calendly) : "0";
+      }
+
+      function renderChart(metrics) {
+        var canvas = document.getElementById("metricsChart");
+        var titleEl = document.getElementById("chartTitle");
+        if (!canvas || typeof Chart === "undefined") return;
+        var series = metrics && metrics.series ? metrics.series : [];
+        titleEl.textContent = "Volume by day · last " + series.length + " days (UTC)";
+        var labels = series.map(function (d) {
+          return d.date.slice(5);
+        });
+        var web = series.map(function (d) {
+          return d.website;
+        });
+        var cal = series.map(function (d) {
+          return d.calendly;
+        });
+        if (metricsChartInst) {
+          metricsChartInst.destroy();
+          metricsChartInst = null;
+        }
+        var fg = "rgba(255, 245, 249, 0.76)";
+        metricsChartInst = new Chart(canvas, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              { label: "Website", data: web, backgroundColor: "rgba(240, 98, 146, 0.88)", borderRadius: 4 },
+              { label: "Calendly", data: cal, backgroundColor: "rgba(100, 181, 246, 0.62)", borderRadius: 4 },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: { stacked: true, ticks: { color: fg, maxRotation: 0, autoSkip: true }, grid: { color: "rgba(240,98,146,0.08)" } },
+              y: { stacked: true, beginAtZero: true, ticks: { color: fg, precision: 0 }, grid: { color: "rgba(240,98,146,0.08)" } },
+            },
+            plugins: { legend: { labels: { color: fg } } },
+          },
+        });
+      }
+
+      function tdForCol(b, col) {
+        if (col === "source") {
+          var cls = b.source === "website" ? "src-tag web" : "src-tag cal";
+          var lab = b.source === "website" ? "Website" : "Calendly";
+          return '<td class="src-cell"><span class="' + cls + '">' + escapeCell(lab) + "</span></td>";
+        }
+        return "<td>" + escapeCell(b[col]) + "</td>";
+      }
+
       async function loadBookings(silent) {
         var token = getToken();
         if (!token) {
@@ -414,7 +629,8 @@
           btnEnter.disabled = true;
         }
         try {
-          var r = await fetch("/api/bookings/admin", {
+          var url = "/api/bookings/admin" + (currentSrc ? "?source=" + encodeURIComponent(currentSrc) : "");
+          var r = await fetch(url, {
             method: "GET",
             credentials: "same-origin",
             headers: authHeaders(token),
@@ -424,6 +640,7 @@
           });
           if (!r.ok) {
             if (r.status === 401) {
+              stopPoll();
               clearToken();
               showLogin();
               errLogin.textContent = j.error || "Session expired or invalid token.";
@@ -436,37 +653,52 @@
           }
           showDash();
           saveToken(token);
-          var rows = j.bookings || [];
+          startPoll();
+
+          var rows = Array.isArray(j.unified) ? j.unified : [];
           countNum.textContent = String(rows.length);
+          totalUnifiedEl.textContent = String(j.totalUnified != null ? j.totalUnified : rows.length);
+
+          var metrics = j.metrics || {};
+          renderKpis(metrics);
+          renderChart(metrics);
+
           if (!rows.length) {
-            tableHost.innerHTML =
-              '<div class="empty-state" id="emptyDash">No bookings yet. They will appear here when clients submit the form.</div>';
+            var emptyMsg =
+              currentSrc === "website"
+                ? "No website bookings in this filter."
+                : currentSrc === "calendly"
+                  ? "No Calendly events in this filter."
+                  : "No appointments yet. Website form submissions and Calendly webhooks appear here.";
+            tableHost.innerHTML = '<div class="empty-state" id="emptyDash">' + escapeCell(emptyMsg) + "</div>";
             return;
           }
+
           var cols = [
+            "source",
             "ref",
-            "createdAt",
             "status",
-            "service",
-            "scheduledDate",
-            "scheduledTime",
-            "scheduledAtUtc",
+            "webhookEventOrService",
+            "createdAt",
             "email",
             "firstName",
             "lastName",
-            "goal",
-            "urgency",
+            "scheduledDate",
+            "scheduledTime",
+            "scheduledAtUtc",
+            "phone",
+            "eventNote",
           ];
           var html = "<table><thead><tr>";
-          for (var i = 0; i < cols.length; i++) {
-            html += "<th>" + escapeCell(cols[i]) + "</th>";
+          for (var hi = 0; hi < cols.length; hi++) {
+            html += "<th>" + escapeCell(cols[hi]) + "</th>";
           }
           html += "</tr></thead><tbody>";
           for (var ri = 0; ri < rows.length; ri++) {
             var b = rows[ri];
             html += "<tr>";
             for (var c = 0; c < cols.length; c++) {
-              html += "<td>" + escapeCell(b[cols[c]]) + "</td>";
+              html += tdForCol(b, cols[c]);
             }
             html += "</tr>";
           }
@@ -480,12 +712,12 @@
         }
       }
 
-      async function exportCsv() {
+      async function exportCsv(path, filename) {
         var token = getToken();
         if (!token) return;
         errDash.classList.add("hidden");
         try {
-          var r2 = await fetch("/api/bookings/export.csv", {
+          var r2 = await fetch(path, {
             method: "GET",
             credentials: "same-origin",
             headers: { Authorization: "Bearer " + token, Accept: "text/csv" },
@@ -497,14 +729,14 @@
             return;
           }
           var blob = await r2.blob();
-          var url = URL.createObjectURL(blob);
+          var dl = URL.createObjectURL(blob);
           var a = document.createElement("a");
-          a.href = url;
-          a.download = "bws-bookings.csv";
+          a.href = dl;
+          a.download = filename;
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
-          URL.revokeObjectURL(url);
+          URL.revokeObjectURL(dl);
         } catch (e2) {
           errDash.textContent = String(e2.message);
           errDash.classList.remove("hidden");
@@ -527,14 +759,35 @@
       btnRefresh.addEventListener("click", function () {
         loadBookings(false);
       });
-      btnCsv.addEventListener("click", exportCsv);
+      btnCsv.addEventListener("click", function () {
+        exportCsv("/api/bookings/export.csv", "bws-appointments-unified.csv");
+      });
+      btnCsvWebsite.addEventListener("click", function () {
+        exportCsv("/api/bookings/export.csv?raw=website", "bws-bookings-website-only.csv");
+      });
       btnSignOut.addEventListener("click", function () {
+        stopPoll();
         clearToken();
         showLogin();
-        tableHost.innerHTML =
-          '<div class="empty-state">Sign in to view bookings.</div>';
+        tableHost.innerHTML = '<div class="empty-state">Sign in to view appointments.</div>';
         countNum.textContent = "0";
+        totalUnifiedEl.textContent = "0";
+        if (metricsChartInst) {
+          metricsChartInst.destroy();
+          metricsChartInst = null;
+        }
       });
+
+      function wireFilter(btn) {
+        btn.addEventListener("click", function () {
+          currentSrc = btn.getAttribute("data-src") || "";
+          setFilterButtons();
+          loadBookings(false);
+        });
+      }
+      wireFilter(fltAll);
+      wireFilter(fltWeb);
+      wireFilter(fltCal);
 
       (function init() {
         try {

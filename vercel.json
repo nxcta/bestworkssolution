@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://bestworkssolution.onrender.com/api/:path*"
+    }
+  ]
+}

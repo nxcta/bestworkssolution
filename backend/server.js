@@ -23,7 +23,17 @@ if (fs.existsSync(ENV_PATH)) {
 
 const DATA_DIR = path.join(__dirname, 'data');
 const BOOKINGS_FILE = path.join(DATA_DIR, 'bookings.jsonl');
+const CALENDLY_EVENTS_FILE = path.join(DATA_DIR, 'calendly_events.jsonl');
 const IDEMPOTENCY_FILE = path.join(DATA_DIR, 'idempotency.json');
+
+const CALENDLY_SIGNING_KEY = process.env.CALENDLY_WEBHOOK_SIGNING_KEY || '';
+const CALENDLY_SKIP_VERIFY = /^(1|true|yes|on)$/i.test(
+  String(process.env.CALENDLY_SKIP_VERIFY || '').trim(),
+);
+
+const WEBHOOK_WINDOW_MS = 10 * 60 * 1000;
+const WEBHOOK_MAX_PER_WINDOW = 200;
+const webhookIpHits = new Map();
 
 const PORT = Number(process.env.PORT) || 3847;
 const NODE_ENV = process.env.NODE_ENV || 'development';
@@ -88,6 +98,222 @@ function rateLimitAdmin(ip) {
   arr.push(now);
   adminIpHits.set(ip, arr);
   return true;
+}
+
+function rateLimitWebhook(ip) {
+  const now = Date.now();
+  let arr = webhookIpHits.get(ip) || [];
+  arr = arr.filter((t) => now - t < WEBHOOK_WINDOW_MS);
+  if (arr.length >= WEBHOOK_MAX_PER_WINDOW) return false;
+  arr.push(now);
+  webhookIpHits.set(ip, arr);
+  return true;
+}
+
+function verifyCalendlySignature(rawUtf8, headerVal) {
+  if (CALENDLY_SKIP_VERIFY) return true;
+  if (!CALENDLY_SIGNING_KEY || !headerVal || typeof headerVal !== 'string') return false;
+  let tToken;
+  let v1Sig;
+  for (const part of headerVal.split(',').map((p) => p.trim())) {
+    const eq = part.indexOf('=');
+    if (eq < 0) continue;
+    const k = part.slice(0, eq).trim();
+    const v = part.slice(eq + 1).trim();
+    if (k === 't') tToken = v;
+    if (k === 'v1') v1Sig = v;
+  }
+  if (!tToken || !v1Sig) return false;
+  const signingKey = CALENDLY_SIGNING_KEY.replace(/^whsec_/i, '');
+  try {
+    const expectedHex = crypto
+      .createHmac('sha256', signingKey)
+      .update(`${tToken}.${rawUtf8}`, 'utf8')
+      .digest('hex');
+    const a = Buffer.from(v1Sig.trim(), 'hex');
+    const b = Buffer.from(expectedHex, 'hex');
+    if (a.length !== b.length) return false;
+    return crypto.timingSafeEqual(a, b);
+  } catch {
+    return false;
+  }
+}
+
+function stableCalRef(inviteeUri) {
+  const h = crypto.createHash('sha256').update(inviteeUri || '', 'utf8').digest('hex').slice(0, 12).toUpperCase();
+  return `CAL-${h}`;
+}
+
+function normalizeCalendlyWebhook(bodyInput) {
+  let body =
+    typeof bodyInput === 'string'
+      ? (() => {
+          try {
+            return JSON.parse(bodyInput);
+          } catch {
+            return null;
+          }
+        })()
+      : bodyInput;
+  if (!body || typeof body !== 'object') return null;
+  const webhookEvent = String(body.event || '');
+  const p = body.payload || {};
+  const inviteeUri = String(p.uri || p.invitee?.uri || '');
+  const inviteeEmail = String(p.email || '').toLowerCase().trim();
+  const fullName = String(p.name || `${String(p.first_name || '').trim()} ${String(p.last_name || '').trim()}`.trim() || '').trim();
+  const se =
+    typeof p.scheduled_event === 'object' && p.scheduled_event !== null ? p.scheduled_event : {};
+  let scheduledStart =
+    typeof p.start_time !== 'undefined' ? p.start_time : se.start_time || se.starts_at || null;
+  let scheduledEnd = typeof p.end_time !== 'undefined' ? p.end_time : se.end_time || null;
+  const calendarEventUri =
+    typeof p.scheduled_event === 'string' ? p.scheduled_event : se.uri || p.event || null;
+  let firstName = String(p.first_name || '').trim();
+  let lastName = String(p.last_name || '').trim();
+  if (!firstName && fullName) {
+    const parts = fullName.split(/\s+/);
+    firstName = parts.shift() || '';
+    lastName = parts.join(' ');
+  }
+
+  const ref = inviteeUri ? stableCalRef(inviteeUri) : `CAL-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
+  const createdAt = body.created_at || p.created_at || new Date().toISOString();
+
+  let status = String(p.status || 'active').toLowerCase();
+  if (webhookEvent === 'invitee.canceled' || p.canceled === true || p.cancelled === true || p.active === false) {
+    status = 'canceled';
+  }
+
+  return {
+    source: 'calendly',
+    ref,
+    webhookEvent,
+    receivedAt: new Date().toISOString(),
+    createdAt: String(createdAt),
+    status,
+    inviteeUri,
+    inviteeEmail: inviteeEmail || null,
+    firstName: firstName || fullName.split(' ')[0] || null,
+    lastName: lastName || '',
+    timezone: String(p.timezone || '').slice(0, 80) || null,
+    scheduledStart: scheduledStart ? String(scheduledStart) : null,
+    scheduledEnd: scheduledEnd ? String(scheduledEnd) : null,
+    scheduledEventUri: calendarEventUri ? String(calendarEventUri) : null,
+    rescheduleUrl: p.reschedule_url ? String(p.reschedule_url) : null,
+    cancelUrl: p.cancel_url ? String(p.cancel_url) : null,
+  };
+}
+
+function readAllCalendlyRows() {
+  ensureDataDir();
+  if (!fs.existsSync(CALENDLY_EVENTS_FILE)) return [];
+  const lines = fs.readFileSync(CALENDLY_EVENTS_FILE, 'utf8').split('\n').filter(Boolean);
+  const out = [];
+  for (const line of lines) {
+    try {
+      out.push(JSON.parse(line));
+    } catch {
+      /* skip */
+    }
+  }
+  return out;
+}
+
+function mapWebsiteToUnified(row) {
+  return {
+    source: 'website',
+    ref: row.ref,
+    webhookEventOrService: row.service || 'website',
+    createdAt: row.createdAt,
+    status: row.status,
+    email: row.email,
+    firstName: row.firstName,
+    lastName: row.lastName,
+    scheduledDate: row.scheduledDate || null,
+    scheduledTime: row.scheduledTime || null,
+    scheduledAtUtc: row.scheduledAtUtc || null,
+    phone: row.phone,
+    inviteeUri: null,
+    eventNote: row.goal || row.notes || null,
+    rawWebhookEvent: null,
+  };
+}
+
+function mapCalendlyToUnified(row) {
+  return {
+    source: 'calendly',
+    ref: row.ref,
+    webhookEventOrService: row.webhookEvent,
+    createdAt: row.createdAt || row.receivedAt,
+    status: row.status,
+    email: row.inviteeEmail,
+    firstName: row.firstName,
+    lastName: row.lastName,
+    scheduledDate: row.scheduledStart ? String(row.scheduledStart).slice(0, 10) : null,
+    scheduledTime: row.scheduledStart ? String(row.scheduledStart).slice(11, 16) || null : null,
+    scheduledAtUtc: row.scheduledStart || null,
+    phone: null,
+    inviteeUri: row.inviteeUri,
+    eventNote: row.scheduledEventUri || null,
+    rawWebhookEvent: row.webhookEvent,
+  };
+}
+
+function buildUnifiedTimeline() {
+  const website = readAllBookings().map(mapWebsiteToUnified);
+  const cal = readAllCalendlyRows().map(mapCalendlyToUnified);
+  const merged = [...website, ...cal];
+  merged.sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+  return merged;
+}
+
+function aggregateMetrics(days) {
+  const unified = [...readAllBookings().map(mapWebsiteToUnified), ...readAllCalendlyRows().map(mapCalendlyToUnified)];
+  const byDayMap = {};
+  const dayKeys = [];
+  const now = new Date();
+  now.setUTCHours(0, 0, 0, 0);
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(now);
+    d.setUTCDate(d.getUTCDate() - i);
+    const k = d.toISOString().slice(0, 10);
+    dayKeys.push(k);
+    byDayMap[k] = { date: k, website: 0, calendly: 0 };
+  }
+  let tw = 0;
+  let tc = 0;
+  for (const r of unified) {
+    const iso = String(r.createdAt || '');
+    const day = iso.slice(0, 10);
+    if (byDayMap[day]) {
+      if (r.source === 'website') byDayMap[day].website += 1;
+      else byDayMap[day].calendly += 1;
+    }
+    if (r.source === 'website') tw += 1;
+    else tc += 1;
+  }
+  const series = dayKeys.map((k) => byDayMap[k]);
+  let w7 = 0;
+  let c7 = 0;
+  const cutoff = Date.now() - 7 * 86400000;
+  for (const r of unified) {
+    const t = Date.parse(String(r.createdAt || ''));
+    if (!Number.isNaN(t) && t >= cutoff) {
+      if (r.source === 'website') w7 += 1;
+      else c7 += 1;
+    }
+  }
+  return {
+    kpis: {
+      appointmentsWebsiteTotal: tw,
+      appointmentsCalendlyTotal: tc,
+      appointmentsAll: tw + tc,
+      appointmentsLast7Website: w7,
+      appointmentsLast7Calendly: c7,
+    },
+    series,
+    note: 'Appointments counts by created/received timestamp (UTC day). Revenue not included.',
+  };
 }
 
 /** Constant-length compare via SHA-256 (avoids length leaks from timingSafeEqual on raw strings). */
@@ -203,6 +429,57 @@ app.use(
     allowedHeaders: ['Content-Type', 'Idempotency-Key', 'Authorization', 'Accept'],
     maxAge: 86400,
   })
+);
+
+app.post(
+  '/webhooks/calendly',
+  express.raw({
+    limit: '512kb',
+    type: (req) => {
+      const ct = req.headers['content-type'];
+      return typeof ct === 'string' && ct.toLowerCase().includes('application/json');
+    },
+  }),
+  (req, res) => {
+    const ip = clientIp(req);
+    if (!rateLimitWebhook(ip)) {
+      return res.status(429).type('text/plain').send('Too many requests');
+    }
+    const sigHeader = req.headers['calendly-webhook-signature'];
+    let rawUtf8 =
+      Buffer.isBuffer(req.body) ? req.body.toString('utf8') : typeof req.body === 'string' ? req.body : '';
+    if (!rawUtf8.length) rawUtf8 = '{}';
+
+    if (!verifyCalendlySignature(rawUtf8, sigHeader)) {
+      console.warn('Calendly webhook rejected: bad signature');
+      return res.status(403).json({ ok: false, error: 'Invalid signature' });
+    }
+
+    let parsedBody;
+    try {
+      parsedBody = JSON.parse(rawUtf8);
+    } catch {
+      return res.status(400).json({ ok: false, error: 'Invalid JSON' });
+    }
+
+    const ev = String(parsedBody.event || '');
+    if (
+      ev !== 'invitee.created' &&
+      ev !== 'invitee.canceled'
+    ) {
+      return res.status(204).send();
+    }
+
+    const norm = normalizeCalendlyWebhook(parsedBody);
+    if (!norm) {
+      return res.status(400).json({ ok: false, error: 'Could not normalize' });
+    }
+    ensureDataDir();
+    fs.appendFileSync(CALENDLY_EVENTS_FILE, JSON.stringify(norm) + '\n', 'utf8');
+
+    console.log(`Calendly webhook stored: ${norm.webhookEvent} ${norm.ref}`);
+    return res.status(200).json({ ok: true, received: norm.webhookEvent, ref: norm.ref });
+  }
 );
 
 app.use(express.json({ limit: '128kb' }));
@@ -416,8 +693,30 @@ app.get(
   adminGate,
   requireBearerAdmin,
   (req, res) => {
-    const bookings = readAllBookings().reverse();
-    res.json({ count: bookings.length, bookings });
+    const unified = buildUnifiedTimeline();
+    const filt = String(req.query.source || '').toLowerCase();
+    let rows = unified;
+    if (filt === 'website') rows = unified.filter((r) => r.source === 'website');
+    if (filt === 'calendly') rows = unified.filter((r) => r.source === 'calendly');
+    const metricsDays = Math.min(Number(process.env.METRICS_DAYS) || 14, 90);
+    const metrics = aggregateMetrics(metricsDays);
+    res.json({
+      count: rows.length,
+      totalUnified: unified.length,
+      unified: rows,
+      metrics,
+    });
+  }
+);
+
+app.get(
+  '/api/admin/metrics',
+  adminSecurityHeaders,
+  adminGate,
+  requireBearerAdmin,
+  (_req, res) => {
+    const days = Math.min(Number(process.env.METRICS_DAYS) || 14, 90);
+    res.json(aggregateMetrics(days));
   }
 );
 
@@ -427,25 +726,56 @@ app.get(
   adminGate,
   requireBearerAdmin,
   (req, res) => {
-    const rows = readAllBookings();
+    const raw = String(req.query.raw || '').toLowerCase();
+    if (raw === 'website') {
+      const rows = readAllBookings();
+      const headers = [
+        'ref',
+        'status',
+        'createdAt',
+        'service',
+        'scheduledDate',
+        'scheduledTime',
+        'scheduledAtUtc',
+        'clientTimezone',
+        'firstName',
+        'lastName',
+        'email',
+        'phone',
+        'goal',
+        'urgency',
+        'tools',
+        'budgetRange',
+        'notes',
+      ];
+      const esc = (v) => {
+        const s = v == null ? '' : String(v);
+        if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+        return s;
+      };
+      const lines = [headers.join(',')];
+      for (const b of rows) {
+        lines.push(headers.map((h) => esc(b[h])).join(','));
+      }
+      res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+      res.setHeader('Content-Disposition', 'attachment; filename="bws-website-bookings.csv"');
+      return res.send(lines.join('\n'));
+    }
+
+    const unified = [...buildUnifiedTimeline()].reverse();
     const headers = [
+      'source',
       'ref',
-      'status',
       'createdAt',
-      'service',
-      'scheduledDate',
-      'scheduledTime',
-      'scheduledAtUtc',
-      'clientTimezone',
+      'status',
+      'detail',
+      'email',
       'firstName',
       'lastName',
-      'email',
+      'scheduledAtUtcOrComposite',
       'phone',
-      'goal',
-      'urgency',
-      'tools',
-      'budgetRange',
-      'notes',
+      'inviteeUri',
+      'notesOrEventUri',
     ];
     const esc = (v) => {
       const s = v == null ? '' : String(v);
@@ -453,11 +783,30 @@ app.get(
       return s;
     };
     const lines = [headers.join(',')];
-    for (const b of rows) {
-      lines.push(headers.map((h) => esc(b[h])).join(','));
+    for (const r of unified) {
+      const detail = r.webhookEventOrService || '';
+      const composite =
+        r.scheduledDate && r.scheduledTime
+          ? `${r.scheduledDate} ${r.scheduledTime}`
+          : r.scheduledAtUtc || '';
+      const rowObj = {
+        source: r.source,
+        ref: r.ref,
+        createdAt: r.createdAt,
+        status: r.status,
+        detail,
+        email: r.email || '',
+        firstName: r.firstName || '',
+        lastName: r.lastName || '',
+        scheduledAtUtcOrComposite: composite,
+        phone: r.phone || '',
+        inviteeUri: r.inviteeUri || '',
+        notesOrEventUri: r.eventNote || '',
+      };
+      lines.push(headers.map((h) => esc(rowObj[h])).join(','));
     }
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-    res.setHeader('Content-Disposition', 'attachment; filename="bws-bookings.csv"');
+    res.setHeader('Content-Disposition', 'attachment; filename="bws-appointments-unified.csv"');
     res.send(lines.join('\n'));
   }
 );

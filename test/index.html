@@ -345,6 +345,9 @@ a{text-decoration:none;color:inherit}img{max-width:100%;display:block}
 /* Booking wizard */
 .bk-card{background:var(--bg3);border:1px solid rgba(240,98,146,.14);border-radius:var(--rxl);padding:30px;overflow:hidden;position:relative}
 .bk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gd)}
+.bk-calendly-alt{margin-top:52px;text-align:center}
+.bk-cal-slot{max-width:920px;margin:24px auto 0;border-radius:var(--rxl);overflow:hidden;background:rgba(24,18,37,.85);border:1px solid rgba(240,98,146,.18);min-height:400px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.bk-cal-slot .calendly-inline-widget{min-width:320px;height:700px}
 .bk-steps{display:flex;align-items:center;margin-bottom:26px;gap:0}
 .bk-step{display:flex;align-items:center;flex:1}
 .bk-sn{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.73rem;font-weight:700;border:1.5px solid rgba(240,98,146,.22);color:rgba(200,160,180,.45);transition:all .35s;flex-shrink:0}
@@ -902,7 +905,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(240,98,146,.09);padding:5
     <div style="text-align:center;margin-bottom:50px">
       <div class="badge rv"><i class="fas fa-calendar-star"></i> Let's Connect</div>
       <h2 class="sec-title rv d1">Book Your Free <span class="gdt">Discovery Call</span></h2>
-      <p class="sec-sub rv d2" style="margin:0 auto">Select your service, pick a date and time, and we'll confirm your booking personally within hours.</p>
+      <p class="sec-sub rv d2" style="margin:0 auto">Use the guided flow below, or book the same 30‑minute slot through Calendly — we confirm every request personally.</p>
     </div>
     <div class="booking-wrap">
       <div class="rvl">
@@ -1019,6 +1022,12 @@ footer{background:var(--bg2);border-top:1px solid rgba(240,98,146,.09);padding:5
         </div>
       </div>
     </div>
+    <div class="bk-calendly-alt rv">
+      <div class="badge rv"><i class="fas fa-calendar-days"></i> Prefer Calendly?</div>
+      <h3 class="sec-title rv d1" style="font-size:clamp(1.22rem,2.4vw,1.78rem);margin-bottom:10px">Same call, <span class="gdt">your choice</span></h3>
+      <p class="sec-sub rv d2" style="margin:0 auto 20px;max-width:560px">Pick a time via Calendly if that is easier. Website and Calendly bookings both sync to our team dashboard.</p>
+      <div class="bk-cal-slot rv d3"><div class="calendly-inline-widget" id="bkCalEmbed" data-url="https://calendly.com/bestworkssolutions/30min" style="min-width:320px;width:100%;height:700px"></div></div>
+    </div>
   </div>
 </section>
 
@@ -1072,7 +1081,14 @@ footer{background:var(--bg2);border-top:1px solid rgba(240,98,146,.09);padding:5
 </footer>
 </div><!-- #pg-main -->
 
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <script>
+const BWS_API_BASE=(typeof window.__BWS_API_BASE__!=='undefined'&&window.__BWS_API_BASE__!=null)?String(window.__BWS_API_BASE__).replace(/\/$/,''):'';
+(function(){
+  var el=document.getElementById('bkCalEmbed');
+  if(el&&typeof window.__BWS_CALENDLY_URL__==='string'&&window.__BWS_CALENDLY_URL__.trim())
+    el.setAttribute('data-url',window.__BWS_CALENDLY_URL__.trim());
+})();
 /* ═══════════════════════════════════════
    CANVAS: Global BG
 ═══════════════════════════════════════ */
@@ -1659,7 +1675,7 @@ document.getElementById('bkSubmit').addEventListener('click',async()=>{
   };
   const idemKey=(typeof crypto!=='undefined'&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random();
   try{
-    const r=await fetch('/api/bookings',{
+    const r=await fetch(BWS_API_BASE+'/api/bookings',{
       method:'POST',
       headers:{'Content-Type':'application/json','Idempotency-Key':idemKey},
       body:JSON.stringify(payload)
